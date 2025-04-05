@@ -6,16 +6,16 @@ namespace Obligatorio.LogicaNegocio.Entidades
     public class Comentario : IEntity
     {
         public int Id { get; set; }
-        public Fecha Fecha { get; set; }
+        public DateTime Fecha { get; set; }
         public TextoComentario TextoComentario { get; set; }
         public Usuario Empleado { get; set; }
-        public string Envio { get; set; } // TODO: Cambiar cuando esté la clase Envio
+        public Envio Envio { get; set; }
 
         public Comentario(int id,
-                          Fecha fecha,
+                          DateTime fecha,
                           TextoComentario textoComentario,
                           Usuario empleado,
-                          string envio)
+                          Envio envio)
         {
             Id = id;
             Fecha = fecha;

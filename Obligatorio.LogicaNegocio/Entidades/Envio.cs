@@ -4,22 +4,26 @@ using Obligatorio.LogicaNegocio.VO;
 
 namespace Obligatorio.LogicaNegocio.Entidades
 {
-    public abstract class Envio: IEntity, IEquatable<Envio>
+    public abstract class Envio : IEntity, IEquatable<Envio>
     {
         public int Id { get; set; }
-        public string Empleado { get; set; } //TODO: Actualizar con Empleado
-        public string Cliente { get; set; } //TODO: Actualizar con Cliente
+        public Empleado Empleado { get; set; }
+        public Cliente Cliente { get; set; }
         public PesoPaquete PesoPaquete { get; set; }
         public NumeroTracking NumeroTracking { get; set; }
-        public List<string> ListaComentario { get; set; } // TODO: Actualizar con Comentario
+        public List<Comentario> ListaComentario { get; set; }
+        public DateTime FechaSalida { get; set; }
+        public DateTime FechaLlegada { get; set; }
+        public Estado Estado { get; set; }
 
-        public Envio(string empleado, string cliente, PesoPaquete pesoPaquete, NumeroTracking numeroTracking, List<string> listaComentario)
+        public Envio(Empleado empleado, Cliente cliente, PesoPaquete pesoPaquete, NumeroTracking numeroTracking, List<Comentario> listaComentario)
         {
             Empleado = empleado;
             Cliente = cliente;
             PesoPaquete = pesoPaquete;
             NumeroTracking = numeroTracking;
             ListaComentario = listaComentario;
+            FechaSalida = DateTime.Now;
         }
 
         public bool Equals(Envio? obj)

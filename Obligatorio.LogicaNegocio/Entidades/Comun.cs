@@ -7,10 +7,9 @@ namespace Obligatorio.LogicaNegocio.Entidades
     {
         public Agencia DireccionEnvio { get; set; }
 
-        //TODO: Actualizar empleado, cliente y comentarios
         public Comun(Agencia direccionEnvio,
-                       string empleado,
-                       string cliente,
+                       Empleado empleado,
+                       Cliente cliente,
                        PesoPaquete pesoPaquete,
                        NumeroTracking numeroTracking,
                        List<string> listaComentario) : base(empleado, cliente, pesoPaquete, numeroTracking, listaComentario)

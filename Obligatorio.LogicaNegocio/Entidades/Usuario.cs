@@ -7,7 +7,6 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public int Id { get; set; }
         public Nombre Nombre { get; set; }
         public Apellido Apellido { get; set; }
-        public Contrasena Contrasena { get; set; }
         public Telefono Telefono { get; set; }
         public Email Email { get; set; }
         public Cedula Cedula { get; set; }
@@ -15,7 +14,6 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public Usuario(int id,
                        Nombre nombre,
                        Apellido apellido,
-                       Contrasena contrasena,
                        Telefono telefono,
                        Email email,
                        Cedula cedula)
@@ -23,7 +21,6 @@ namespace Obligatorio.LogicaNegocio.Entidades
             Id = id;
             Nombre = nombre;
             Apellido = apellido;
-            Contrasena = contrasena;
             Telefono = telefono;
             Email = email;
             Cedula = cedula;
