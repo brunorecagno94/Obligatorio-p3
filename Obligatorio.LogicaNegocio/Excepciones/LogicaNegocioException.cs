@@ -1,4 +1,3 @@
-﻿
 namespace Obligatorio.LogicaNegocio.Excepciones
 {
     public class LogicaNegocioException : Exception
@@ -8,6 +7,7 @@ namespace Obligatorio.LogicaNegocio.Excepciones
         }
 
         public LogicaNegocioException(string? message) : base(message)
-    {
+        {
+        }
     }
 }
