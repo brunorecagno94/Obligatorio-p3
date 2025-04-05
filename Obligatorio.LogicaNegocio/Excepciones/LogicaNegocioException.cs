@@ -1,8 +1,13 @@
-﻿namespace Obligatorio.LogicaNegocio.Excepciones
+namespace Obligatorio.LogicaNegocio.Excepciones
 {
-    public class LogicaNegocioExpception : Exception
+    public class LogicaNegocioException : Exception
     {
-        public LogicaNegocioExpception() { }
-        public LogicaNegocioExpception(string? message) : base(message) { }
+        public LogicaNegocioException()
+        {
+        }
+
+        public LogicaNegocioException(string? message) : base(message)
+        {
+        }
     }
 }
