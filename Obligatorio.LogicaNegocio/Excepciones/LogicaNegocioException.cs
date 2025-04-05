@@ -8,7 +8,6 @@ namespace Obligatorio.LogicaNegocio.Excepciones
         }
 
         public LogicaNegocioException(string? message) : base(message)
-        {
-        }
+    {
     }
 }
