@@ -9,6 +9,19 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public Fecha Fecha { get; set; }
         public TextoComentario TextoComentario { get; set; }
         public Usuario Empleado { get; set; }
-        public string Envio { get; set; } // Cambiar cuando esté la clase Envio
+        public string Envio { get; set; } // TODO: Cambiar cuando esté la clase Envio
+
+        public Comentario(int id,
+                          Fecha fecha,
+                          TextoComentario textoComentario,
+                          Usuario empleado,
+                          string envio)
+        {
+            Id = id;
+            Fecha = fecha;
+            TextoComentario = textoComentario;
+            Empleado = empleado;
+            Envio = envio;
+        }
     }
 }
