@@ -8,6 +8,10 @@
 
   <ItemGroup>
     <Folder Include="Entidades\" />
+    <Folder Include="Excepciones\" />
+    <Folder Include="InterfacesDominio\" />
+    <Folder Include="InterfacesRepositorios\" />
+    <Folder Include="VO\" />
   </ItemGroup>
 
 </Project>
