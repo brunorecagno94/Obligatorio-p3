@@ -1,6 +1,6 @@
 ﻿namespace Obligatorio.LogicaNegocio.Excepciones
 {
-    internal class ApellidoException : LogicaNegocioException
+    public class ApellidoException : LogicaNegocioException
     {
         public ApellidoException()
         {
