@@ -15,6 +15,8 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public DateTime FechaSalida { get; set; }
         public DateTime FechaLlegada { get; set; }
         public Estado Estado { get; set; }
+        //public Estado Estado { get; set; } = Estado.EnProceso;
+
 
         public Envio(Empleado empleado, Cliente cliente, PesoPaquete pesoPaquete, NumeroTracking numeroTracking, List<Comentario> listaComentario)
         {
@@ -24,6 +26,7 @@ namespace Obligatorio.LogicaNegocio.Entidades
             NumeroTracking = numeroTracking;
             ListaComentario = listaComentario;
             FechaSalida = DateTime.Now;
+            //Estado = Estado.EnProceso;
         }
 
         public bool Equals(Envio? obj)

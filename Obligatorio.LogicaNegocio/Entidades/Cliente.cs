@@ -7,9 +7,10 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public Cliente(int id,
                        Nombre nombre,
                        Apellido apellido,
+                       Contrasena contrasena,
                        Telefono telefono,
                        Email email,
-                       Cedula cedula) : base(id, nombre, apellido, telefono, email, cedula)
+                       Cedula cedula) : base(id, nombre, apellido, contrasena,telefono, email, cedula)
         {
         }
     }

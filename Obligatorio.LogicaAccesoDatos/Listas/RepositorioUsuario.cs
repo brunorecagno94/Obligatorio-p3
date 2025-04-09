@@ -1,5 +1,4 @@
 ﻿using Obligatorio.LogicaNegocio.Entidades;
-using Obligatorio.LogicaNegocio.Excepciones;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
 
 namespace Obligatorio.LogicaAccesoDatos.Listas
@@ -24,12 +23,9 @@ namespace Obligatorio.LogicaAccesoDatos.Listas
             Usuario usuarioResult = null;
             foreach (var usuario in _usuarios)
             {
-                if (usuario is Usuario)
+                if (usuario.Id == id)
                 {
-                    if (usuario.Id == id)
-                    {
-                        usuarioResult = usuario;
-                    }
+                    usuarioResult = usuario;
                 }
             }
             return usuarioResult;
