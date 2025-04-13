@@ -1,3 +1,4 @@
+
 namespace Obligatorio.WebApp
 {
     public class Program
@@ -9,7 +10,10 @@ namespace Obligatorio.WebApp
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            //builder.Services.AddDbContext<ObligatorioContext>();
+
             var app = builder.Build();
+
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

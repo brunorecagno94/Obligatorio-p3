@@ -2,7 +2,7 @@
 using Obligatorio.LogicaNegocio.VO;
 namespace Obligatorio.LogicaNegocio.Entidades
 {
-    public abstract class Usuario : IEntity, IEquatable<Usuario>
+    public class Usuario : IEntity, IEquatable<Usuario>
     {
         public int Id { get; set; }
         public Nombre Nombre { get; set; }
@@ -12,6 +12,7 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public Email Email { get; set; }
         public Cedula Cedula { get; set; }
 
+        protected Usuario() { }
         public Usuario(int id,
                        Nombre nombre,
                        Apellido apellido,

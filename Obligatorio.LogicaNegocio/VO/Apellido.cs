@@ -1,4 +1,6 @@
 ﻿
+using Obligatorio.LogicaNegocio.Excepciones;
+
 namespace Obligatorio.LogicaNegocio.VO
 {
     public record Apellido

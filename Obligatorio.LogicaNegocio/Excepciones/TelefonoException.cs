@@ -1,6 +1,6 @@
 ﻿namespace Obligatorio.LogicaNegocio.Excepciones
 {
-    public class TelefonoException : LogicaNegocioExpception
+    public class TelefonoException : LogicaNegocioException
     {
         public TelefonoException() { }
         public TelefonoException(string? message) : base(message) { }
