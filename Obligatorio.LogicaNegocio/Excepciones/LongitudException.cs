@@ -1,6 +1,6 @@
 ﻿namespace Obligatorio.LogicaNegocio.Excepciones
 {
-    public class LongitudException : LogicaNegocioExpception
+    public class LongitudException : LogicaNegocioException
     {
         public LongitudException() { }
 

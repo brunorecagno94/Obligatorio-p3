@@ -12,7 +12,7 @@ namespace Obligatorio.LogicaNegocio.Entidades
                        Cliente cliente,
                        PesoPaquete pesoPaquete,
                        NumeroTracking numeroTracking,
-                       List<string> listaComentario) : base(empleado, cliente, pesoPaquete, numeroTracking, listaComentario)
+                       List<Comentario> listaComentario) : base(empleado, cliente, pesoPaquete, numeroTracking, listaComentario)
         {
             DireccionEnvio = direccionEnvio;
         }
