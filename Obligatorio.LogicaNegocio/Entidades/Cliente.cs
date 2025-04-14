@@ -4,6 +4,9 @@ namespace Obligatorio.LogicaNegocio.Entidades
 {
     public class Cliente : Usuario
     {
+
+        protected Cliente(){ }
+
         public Cliente(int id,
                        Nombre nombre,
                        Apellido apellido,
@@ -13,5 +16,6 @@ namespace Obligatorio.LogicaNegocio.Entidades
                        Cedula cedula) : base(id, nombre, apellido, contrasena,telefono, email, cedula)
         {
         }
+       
     }
 }

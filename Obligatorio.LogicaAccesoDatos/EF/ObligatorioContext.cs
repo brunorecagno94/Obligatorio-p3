@@ -5,7 +5,9 @@ namespace Obligatorio.Infraestructura.EF
 {
     public class ObligatorioContext : DbContext
     {
-        DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Empleado> Empleados { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -50,6 +52,7 @@ namespace Obligatorio.Infraestructura.EF
                 cedula.Property(c => c.Value).HasColumnName("Cedula");
             });
             #endregion
+
         }
     }
 }

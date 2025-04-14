@@ -33,5 +33,11 @@ namespace Obligatorio.LogicaNegocio.Entidades
         {
             return other != null && Id.Equals(other.Id);
         }
+
+        public void Update(Usuario obj)
+        {
+            Nombre = obj.Nombre;
+            Email = obj.Email;
+        }
     }
 }
