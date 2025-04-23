@@ -36,7 +36,7 @@ namespace Obligatorio.Infraestructura.AccesoDatos.Listas
             _usuarios.Remove(GetById(id));
         }
 
-        public void Update(Usuario usuario)
+        public void Update(int id, Usuario usuario)
         {
             Usuario usuarioEditar = GetById(usuario.Id);
             usuarioEditar.Nombre = usuario.Nombre;
