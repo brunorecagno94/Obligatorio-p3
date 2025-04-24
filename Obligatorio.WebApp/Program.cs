@@ -1,3 +1,9 @@
+using Obligatorio.Infraestructura.AccesoDatos.EF;
+using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
+using Obligatorio.LogicaAplicacion.CasosDeUso.Usuarios;
+using Obligatorio.LogicaNegocio.InterfacesRepositorios;
+using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
+
 
 namespace Obligatorio.WebApp
 {
@@ -10,10 +16,35 @@ namespace Obligatorio.WebApp
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            //builder.Services.AddDbContext<ObligatorioContext>();
+            #region Inyecciones de dependencias
+
+            #region Interfaces de Casos de Uso
+
+            #region Usuario
+            builder.Services.AddScoped<IAdd<UsuarioDTO>, AddUsuario>();
+            builder.Services.AddScoped<IGetAll<UsuarioListadoDTO>, GetAllUsuarios>();
+            builder.Services.AddScoped<IGetById<UsuarioListadoDTO>, GetByIdUsuario>();
+            builder.Services.AddScoped<IRemove, RemoveUsuario>();
+            builder.Services.AddScoped<IUpdate<UsuarioDTO>, UpdateUsuario>();
+            #endregion
+
+            #endregion
+
+            #region Repositorios
+
+            builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
+
+            #endregion
+
+            #region Context
+
+            builder.Services.AddDbContext<ObligatorioContext>();
+
+            #endregion
+
+            #endregion
 
             var app = builder.Build();
-
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
