@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Obligatorio.CasosDeUsoCompartida\Obligatorio.CasosDeUsoCompartida.csproj" />
+    <ProjectReference Include="..\Obligatorio.LogicaAccesoDatos\Obligatorio.Infraestructura.csproj" />
     <ProjectReference Include="..\Obligatorio.LogicaAplicacion\Obligatorio.LogicaAplicacion.csproj" />
   </ItemGroup>
 

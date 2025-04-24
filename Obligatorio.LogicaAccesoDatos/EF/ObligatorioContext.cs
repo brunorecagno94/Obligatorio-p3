@@ -8,6 +8,9 @@ namespace Obligatorio.Infraestructura.EF
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Empleado> Empleados { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Funcionario> Funcionario { get; set; }
+        public DbSet<Administrador> Administrador{ get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
