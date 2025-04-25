@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
-using Obligatorio.LogicaNegocio.VO;
 using Obligatorio.WebApp.Models;
 
 namespace Obligatorio.WebApp.Controllers
@@ -27,12 +26,11 @@ namespace Obligatorio.WebApp.Controllers
             _update = update;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string message)
         {
+            ViewBag.Message = message;
             return View(_getAll.Execute());
         }
-
-        [HttpGet]
 
         public IActionResult Create()
         {
@@ -44,12 +42,12 @@ namespace Obligatorio.WebApp.Controllers
         {
             try
             {
-                _add.Execute(new UsuarioDTO(usuario.Nombre.Value,
-                                            usuario.Apellido.Value,
-                                            usuario.Contrasena.Value,
-                                            usuario.Telefono.Value,
-                                            usuario.Email.Value,
-                                            usuario.Cedula.Value));
+                _add.Execute(new UsuarioDTO(usuario.Nombre,
+                                            usuario.Apellido,
+                                            usuario.Contrasena,
+                                            usuario.Telefono,
+                                            usuario.Email,
+                                            usuario.Cedula));
                 return RedirectToAction("Index", new { message = "Usuario creado exitosamente!" });
             }
 
@@ -60,6 +58,68 @@ namespace Obligatorio.WebApp.Controllers
 
             return View();
 
+        }
+
+        public IActionResult Edit(int id)
+        {
+            try
+            {
+                UsuarioListadoDTO usuarioEncontrado = _getById.Execute(id);
+                UsuarioDTO usuario = new UsuarioDTO(usuarioEncontrado.Nombre,
+                                                       usuarioEncontrado.Apellido,
+                                                       "",
+                                                       usuarioEncontrado.Telefono,
+                                                       usuarioEncontrado.Email,
+                                                       "");
+                ViewBag.Id = id;
+                return View(usuario);
+
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", new { message = e.Message });
+
+            }
+        }
+
+        [HttpPost]
+
+        public IActionResult Edit(int id, UsuarioDTO usuario)
+        {
+            try
+            {
+                _update.Execute(id, usuario);
+                return RedirectToAction("Index", new { message = "Usuario modificado exitosamente"});
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", new { message = e.Message});
+
+            }
+        }
+
+        public IActionResult Details(int id)
+        {
+            UsuarioListadoDTO usuario = _getById.Execute(id);
+
+            if (usuario == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(usuario);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                _remove.Execute(id);
+                return RedirectToAction("Index", new { message = "Usuario eliminado exitosamente" });
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("index", new { message = e.Message });
+            }
         }
     }
 }

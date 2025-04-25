@@ -22,7 +22,7 @@ namespace Obligatorio.Infraestructura.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+           
             #region Usuario
             modelBuilder.Entity<Usuario>().OwnsOne(u => u.Nombre, nombre =>
             {

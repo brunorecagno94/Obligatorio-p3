@@ -1,14 +1,13 @@
-﻿using Obligatorio.LogicaNegocio.VO;
-
+﻿
 namespace Obligatorio.WebApp.Models
 {
     public class VMUsuario
     {
-        public Nombre Nombre { get; set; }
-        public Apellido Apellido { get; set; }
-        public Contrasena Contrasena { get; set; }
-        public Telefono Telefono { get; set; }
-        public Email Email { get; set; }
-        public Cedula Cedula { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string Contrasena { get; set; }
+        public string Telefono { get; set; }
+        public string Email { get; set; }
+        public string Cedula { get; set; }
     }
 }
