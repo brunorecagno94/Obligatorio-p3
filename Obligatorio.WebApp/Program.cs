@@ -1,8 +1,9 @@
-using Obligatorio.Infraestructura.AccesoDatos.EF;
+using Infraestructura.AccesoDatos.EF;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
+using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
+using Obligatorio.Infraestructura.AccesoDatos.EF;
 using Obligatorio.LogicaAplicacion.CasosDeUso.Usuarios;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
-using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
 
 
 namespace Obligatorio.WebApp
@@ -33,6 +34,7 @@ namespace Obligatorio.WebApp
             #region Repositorios
 
             builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
+            builder.Services.AddScoped<SeedData>();
 
             #endregion
 
