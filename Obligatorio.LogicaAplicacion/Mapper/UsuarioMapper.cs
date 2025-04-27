@@ -25,7 +25,8 @@ namespace Obligatorio.LogicaAplicacion.Mapper
                                    usuario.Nombre.Value,
                                    usuario.Apellido.Value,
                                    usuario.Email.Value,
-                                   usuario.Telefono.Value);
+                                   usuario.Telefono.Value,
+                                   usuario.Cedula.Value);
 
         }
 
@@ -39,7 +40,8 @@ namespace Obligatorio.LogicaAplicacion.Mapper
                                    item.Nombre.Value,
                                    item.Apellido.Value,
                                    item.Email.Value,
-                                   item.Telefono.Value));
+                                   item.Telefono.Value,
+                                   item.Cedula.Value));
             }
             return listadoUsuariosDTO;
         }

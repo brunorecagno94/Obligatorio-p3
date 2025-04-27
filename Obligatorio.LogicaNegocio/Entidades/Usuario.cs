@@ -37,7 +37,12 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public void Update(Usuario obj)
         {
             Nombre = obj.Nombre;
+            Apellido = obj.Apellido;
+            Contrasena = obj.Contrasena;
+            Telefono = obj.Telefono;
             Email = obj.Email;
+            Cedula = obj.Cedula;
+
         }
     }
 }
