@@ -1,7 +1,7 @@
 ﻿
 namespace Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios
 {
-    public record UsuarioListadoDTO(int id,
+    public record UsuarioListadoDTO(int Id,
                                     string Nombre,
                                     string Apellido,
                                     string Email,

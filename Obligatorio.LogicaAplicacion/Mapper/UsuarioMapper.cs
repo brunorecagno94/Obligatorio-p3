@@ -21,7 +21,7 @@ namespace Obligatorio.LogicaAplicacion.Mapper
 
         public static UsuarioListadoDTO ToDTO(Usuario usuario)
         {
-            return new UsuarioListadoDTO(0,
+            return new UsuarioListadoDTO(usuario.Id,
                                    usuario.Nombre.Value,
                                    usuario.Apellido.Value,
                                    usuario.Email.Value,
@@ -35,7 +35,7 @@ namespace Obligatorio.LogicaAplicacion.Mapper
             
             foreach (var item in usuarios)
             {
-                listadoUsuariosDTO.Add(new UsuarioListadoDTO(0,
+                listadoUsuariosDTO.Add(new UsuarioListadoDTO(item.Id,
                                    item.Nombre.Value,
                                    item.Apellido.Value,
                                    item.Email.Value,

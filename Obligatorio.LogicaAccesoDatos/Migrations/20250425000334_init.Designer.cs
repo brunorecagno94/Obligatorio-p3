@@ -12,7 +12,7 @@ using Obligatorio.Infraestructura.AccesoDatos.EF;
 namespace Obligatorio.Infraestructura.Migrations
 {
     [DbContext(typeof(ObligatorioContext))]
-    [Migration("20250413235229_init")]
+    [Migration("20250425000334_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -35,8 +35,8 @@ namespace Obligatorio.Infraestructura.Migrations
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -59,6 +59,20 @@ namespace Obligatorio.Infraestructura.Migrations
                     b.HasBaseType("Obligatorio.LogicaNegocio.Entidades.Usuario");
 
                     b.HasDiscriminator().HasValue("Empleado");
+                });
+
+            modelBuilder.Entity("Obligatorio.LogicaNegocio.Entidades.Administrador", b =>
+                {
+                    b.HasBaseType("Obligatorio.LogicaNegocio.Entidades.Empleado");
+
+                    b.HasDiscriminator().HasValue("Administrador");
+                });
+
+            modelBuilder.Entity("Obligatorio.LogicaNegocio.Entidades.Funcionario", b =>
+                {
+                    b.HasBaseType("Obligatorio.LogicaNegocio.Entidades.Empleado");
+
+                    b.HasDiscriminator().HasValue("Funcionario");
                 });
 
             modelBuilder.Entity("Obligatorio.LogicaNegocio.Entidades.Usuario", b =>
