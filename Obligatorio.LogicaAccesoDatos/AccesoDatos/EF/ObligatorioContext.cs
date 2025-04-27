@@ -1,7 +1,7 @@
 ﻿using Obligatorio.LogicaNegocio.Entidades;
 using Microsoft.EntityFrameworkCore;
 
-namespace Obligatorio.Infraestructura.EF
+namespace Obligatorio.Infraestructura.AccesoDatos.EF
 {
     public class ObligatorioContext : DbContext
     {

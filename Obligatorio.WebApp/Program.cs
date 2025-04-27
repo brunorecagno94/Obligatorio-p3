@@ -1,9 +1,9 @@
-
+using Obligatorio.Infraestructura.AccesoDatos.EF;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
-using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
-using Obligatorio.Infraestructura.EF;
 using Obligatorio.LogicaAplicacion.CasosDeUso.Usuarios;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
+using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
+
 
 namespace Obligatorio.WebApp
 {
@@ -16,20 +16,33 @@ namespace Obligatorio.WebApp
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            
-            builder.Services.AddDbContext<ObligatorioContext>();
+            #region Inyecciones de dependencias
 
-            //Inyecciones para repositorios
+            #region Interfaces de Casos de Uso
 
-            builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
-
-            //Inyecciones para los casos de uso usuario
-
+            #region Usuario
             builder.Services.AddScoped<IAdd<UsuarioDTO>, AddUsuario>();
             builder.Services.AddScoped<IGetAll<UsuarioListadoDTO>, GetAllUsuarios>();
             builder.Services.AddScoped<IGetById<UsuarioListadoDTO>, GetByIdUsuario>();
-            builder.Services.AddScoped<IUpdate<UsuarioDTO>, UpdateUsuario>();
             builder.Services.AddScoped<IRemove, RemoveUsuario>();
+            builder.Services.AddScoped<IUpdate<UsuarioDTO>, UpdateUsuario>();
+            #endregion
+
+            #endregion
+
+            #region Repositorios
+
+            builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
+
+            #endregion
+
+            #region Context
+
+            builder.Services.AddDbContext<ObligatorioContext>();
+
+            #endregion
+
+            #endregion
 
             var app = builder.Build();
 
