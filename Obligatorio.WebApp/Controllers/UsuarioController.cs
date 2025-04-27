@@ -70,7 +70,7 @@ namespace Obligatorio.WebApp.Controllers
                                                        "",
                                                        usuarioEncontrado.Telefono,
                                                        usuarioEncontrado.Email,
-                                                       "");
+                                                       usuarioEncontrado.Cedula);
                 ViewBag.Id = id;
                 return View(usuario);
 

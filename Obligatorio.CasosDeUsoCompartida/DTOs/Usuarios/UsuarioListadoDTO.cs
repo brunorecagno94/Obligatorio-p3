@@ -5,7 +5,8 @@ namespace Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios
                                     string Nombre,
                                     string Apellido,
                                     string Email,
-                                    string Telefono)
+                                    string Telefono,
+                                    string Cedula)
     {
     }
 }
