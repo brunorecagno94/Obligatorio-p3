@@ -11,7 +11,8 @@ namespace Obligatorio.LogicaNegocio.Entidades
                        Contrasena contrasena,
                        Telefono telefono,
                        Email email,
-                       Cedula cedula) : base(id, nombre, apellido, contrasena, telefono, email, cedula)
+                       Cedula cedula,
+                       string discriminator) : base(id, nombre, apellido, contrasena, telefono, email, cedula, discriminator)
         {
         }
     }

@@ -15,8 +15,8 @@ namespace Obligatorio.LogicaAplicacion.Mapper
                                    new Contrasena(usuarioDTO.Contrasena),
                                    new Telefono(usuarioDTO.Telefono),
                                    new Email(usuarioDTO.Email),
-                                   new Cedula(usuarioDTO.Cedula));
-                         
+                                   new Cedula(usuarioDTO.Cedula),
+                                   "Funcionario");            
         }
 
         public static UsuarioListadoDTO ToDTO(Usuario usuario)
