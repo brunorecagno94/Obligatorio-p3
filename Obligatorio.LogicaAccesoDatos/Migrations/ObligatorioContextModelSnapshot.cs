@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Obligatorio.Infraestructura.AccesoDatos.EF;
 
-
 #nullable disable
 
 namespace Obligatorio.Infraestructura.Migrations
@@ -32,8 +31,8 @@ namespace Obligatorio.Infraestructura.Migrations
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
 
                     b.HasKey("Id");
 

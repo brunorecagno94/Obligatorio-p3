@@ -11,6 +11,7 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public Telefono Telefono { get; set; }
         public Email Email { get; set; }
         public Cedula Cedula { get; set; }
+        public string Discriminator { get; set; }
 
         protected Usuario() { }
         public Usuario(int id,
@@ -19,7 +20,8 @@ namespace Obligatorio.LogicaNegocio.Entidades
                        Contrasena contrasena,
                        Telefono telefono,
                        Email email,
-                       Cedula cedula)
+                       Cedula cedula,
+                       string discriminator)
         {
             Id = id;
             Nombre = nombre;
@@ -28,6 +30,7 @@ namespace Obligatorio.LogicaNegocio.Entidades
             Telefono = telefono;
             Email = email;
             Cedula = cedula;
+            Discriminator = discriminator;
         }
         public bool Equals(Usuario? other)
         {

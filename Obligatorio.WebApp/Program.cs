@@ -3,6 +3,7 @@ using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.LogicaAplicacion.CasosDeUso.Usuarios;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
+using Obligatorio.LogicaAplicacion.CasosDeUso.Login;
 
 
 namespace Obligatorio.WebApp
@@ -15,6 +16,7 @@ namespace Obligatorio.WebApp
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSession();
 
             #region Inyecciones de dependencias
 
@@ -24,8 +26,13 @@ namespace Obligatorio.WebApp
             builder.Services.AddScoped<IAdd<UsuarioDTO>, AddUsuario>();
             builder.Services.AddScoped<IGetAll<UsuarioListadoDTO>, GetAllUsuarios>();
             builder.Services.AddScoped<IGetById<UsuarioListadoDTO>, GetByIdUsuario>();
+            builder.Services.AddScoped<IGetByEmail<UsuarioListadoDTO>, GetByEmailUsuario>();
             builder.Services.AddScoped<IRemove, RemoveUsuario>();
             builder.Services.AddScoped<IUpdate<UsuarioDTO>, UpdateUsuario>();
+            #endregion
+
+            #region Login
+            builder.Services.AddScoped<ILoginUsuario, LoginUsuarios>();
             #endregion
 
             #endregion
@@ -58,12 +65,14 @@ namespace Obligatorio.WebApp
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Login}/{action=Index}/{id?}");
+
 
             app.Run();
         }
