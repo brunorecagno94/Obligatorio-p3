@@ -32,7 +32,6 @@ namespace Obligatorio.WebApp
             #endregion
 
             #region Repositorios
-
             builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
             builder.Services.AddScoped<SeedData>();
 
@@ -55,6 +54,18 @@ namespace Obligatorio.WebApp
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            // Configurar precarga para entorno de desarrollo
+            if (app.Environment.IsDevelopment())
+
+                using (var scope = app.Services.CreateScope())
+                {
+                    var services = scope.ServiceProvider;
+                    //var context = services.GetRequiredService<LibreriaContext>();
+                    //context.Database.Migrate(); // o EnsureCreated() según tu caso
+                    var seeder = services.GetRequiredService<SeedData>();
+                    seeder.Run();
+                }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
