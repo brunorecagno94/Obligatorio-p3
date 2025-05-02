@@ -4,6 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
+@if (Context.Session.GetString("Rol") == "Administrador"){
 <h1>Alta</h1>
 
 <hr />
@@ -54,7 +55,10 @@
 <div>
     <a href="/Usuario/index">Volver</a>
 </div>
+} else {
 
+    <h1>No tienes permiso para ver esta página</h1>
+}
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
