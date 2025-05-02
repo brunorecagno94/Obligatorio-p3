@@ -7,7 +7,8 @@ namespace Obligatorio.LogicaNegocio.InterfacesRepositorios
                     IRepositorioGetAll<Usuario>,
                     IRepositorioGetById<Usuario>,
                     IRepositorioRemove,
-                    IRepositorioUpdate<Usuario>
+                    IRepositorioUpdate<Usuario>,
+                    IRepositorioGetByEmail<Usuario>
     {
     }
 }

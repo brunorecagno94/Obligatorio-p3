@@ -39,6 +39,17 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
             return unU;
         }
 
+        public Usuario GetByEmail(string email)
+        {
+            Usuario unU = _context.Usuarios.FirstOrDefault(usuario => usuario.Email.Value == email);
+
+            if (unU == null)
+            {
+                throw new Exception("No se encontró el usuario");
+            }
+            return unU;
+        }
+
         public void Remove(int id)
         {
             Usuario unU = GetById(id);

@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
+using Obligatorio.WebApp.Filters;
 using Obligatorio.WebApp.Models;
 
 namespace Obligatorio.WebApp.Controllers
 {
+    [AdminAutorizado]
     public class UsuarioController : Controller
     {
         IGetAll<UsuarioListadoDTO> _getAll;
