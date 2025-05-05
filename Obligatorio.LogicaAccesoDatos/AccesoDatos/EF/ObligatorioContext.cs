@@ -1,5 +1,6 @@
-﻿using Obligatorio.LogicaNegocio.Entidades;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Obligatorio.Infraestructura.AccesoDatos.EF.Config;
+using Obligatorio.LogicaNegocio.Entidades;
 
 namespace Obligatorio.Infraestructura.AccesoDatos.EF
 {
@@ -9,8 +10,12 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
         public DbSet<Empleado> Empleados { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Funcionario> Funcionario { get; set; }
-        public DbSet<Administrador> Administrador{ get; set; }
+        public DbSet<Administrador> Administrador { get; set; }
 
+        public ObligatorioContext(DbContextOptions<ObligatorioContext> options)
+            : base(options)
+        {
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -22,40 +27,8 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           
-            #region Usuario
-            modelBuilder.Entity<Usuario>().OwnsOne(u => u.Nombre, nombre =>
-            {
-                nombre.Property(n => n.Value).HasColumnName("Nombre");
-            });
-
-            modelBuilder.Entity<Usuario>().OwnsOne(u => u.Apellido, apellido =>
-            {
-                apellido.Property(a => a.Value).HasColumnName("Apellido");
-            });
-
-            modelBuilder.Entity<Usuario>().OwnsOne(u => u.Contrasena, contrasena =>
-            {
-                contrasena.Property(c => c.Value).HasColumnName("Contrasena");
-            });
-
-            // TODO: Cambiar por OwnsMany
-            modelBuilder.Entity<Usuario>().OwnsOne(u => u.Telefono, telefono =>
-            {
-                telefono.Property(t => t.Value).HasColumnName("Telefono");
-            });
-
-            modelBuilder.Entity<Usuario>().OwnsOne(u => u.Email, email =>
-            {
-                email.Property(e => e.Value).HasColumnName("Email");
-            });
-
-            modelBuilder.Entity<Usuario>().OwnsOne(u => u.Cedula, cedula =>
-            {
-                cedula.Property(c => c.Value).HasColumnName("Cedula");
-            });
-            #endregion
-
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
         }
     }
 }
