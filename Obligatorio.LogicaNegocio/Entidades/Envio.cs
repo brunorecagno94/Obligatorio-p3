@@ -14,19 +14,17 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public List<Comentario> ListaComentario { get; set; }
         public DateTime FechaSalida { get; set; }
         public DateTime FechaLlegada { get; set; }
-        public Estado Estado { get; set; }
-        //public Estado Estado { get; set; } = Estado.EnProceso;
+        public Estado Estado { get; set; } = Estado.EnProceso;
 
 
-        public Envio(Empleado empleado, Cliente cliente, PesoPaquete pesoPaquete, NumeroTracking numeroTracking, List<Comentario> listaComentario)
+        public Envio(Empleado empleado, Cliente cliente, PesoPaquete pesoPaquete, NumeroTracking numeroTracking)
         {
             Empleado = empleado;
             Cliente = cliente;
             PesoPaquete = pesoPaquete;
             NumeroTracking = numeroTracking;
-            ListaComentario = listaComentario;
             FechaSalida = DateTime.Now;
-            //Estado = Estado.EnProceso;
+            Estado = Estado.EnProceso;
         }
 
         public bool Equals(Envio? obj)
