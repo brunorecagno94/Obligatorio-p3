@@ -11,20 +11,20 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public Cliente Cliente { get; set; }
         public PesoPaquete PesoPaquete { get; set; }
         public NumeroTracking NumeroTracking { get; set; }
-        public List<Comentario> ListaComentario { get; set; }
+        public Comentario Comentario { get; set; }
         public DateTime FechaSalida { get; set; }
         public DateTime FechaLlegada { get; set; }
         public Estado Estado { get; set; }
         //public Estado Estado { get; set; } = Estado.EnProceso;
 
 
-        public Envio(Empleado empleado, Cliente cliente, PesoPaquete pesoPaquete, NumeroTracking numeroTracking, List<Comentario> listaComentario)
+        public Envio(Empleado empleado, Cliente cliente, PesoPaquete pesoPaquete, NumeroTracking numeroTracking, Comentario comentario)
         {
             Empleado = empleado;
             Cliente = cliente;
             PesoPaquete = pesoPaquete;
             NumeroTracking = numeroTracking;
-            ListaComentario = listaComentario;
+            Comentario = comentario;
             FechaSalida = DateTime.Now;
             //Estado = Estado.EnProceso;
         }
