@@ -5,17 +5,19 @@ namespace Obligatorio.LogicaNegocio.VO
 {
     public record NumeroTracking
     {
-        public string Value { get; }
+        public int Value { get; }
+        private static int UltimoNumeroTracking = 1;
 
-        public NumeroTracking(string value)
+        public NumeroTracking()
         {
-            Value = value;
-            Validar();
+            Value = UltimoNumeroTracking++;            
+            //Validar();
         }
 
         public void Validar()
         {
-            if (string.IsNullOrEmpty(Value)) throw new NumeroTrackingException("Numero de tracking inválido");
+            //if (string.IsNullOrEmpty(Value)) throw new
+            //NumeroTrackingException("Numero de tracking inválido");
         }
     }
 }

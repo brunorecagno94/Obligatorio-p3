@@ -11,6 +11,10 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Funcionario> Funcionario { get; set; }
         public DbSet<Administrador> Administrador { get; set; }
+        public DbSet<Envio> Envio { get; set; }
+        public DbSet<EnvioUrgente> EnvioUrgente { get; set; }
+        public DbSet<EnvioComun> EnvioComun { get; set; }
+
 
         public ObligatorioContext(DbContextOptions<ObligatorioContext> options)
             : base(options)
@@ -29,6 +33,8 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
+            modelBuilder.ApplyConfiguration(new EnvioConfiguration());
+
         }
     }
 }
