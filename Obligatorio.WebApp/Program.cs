@@ -1,7 +1,9 @@
 using Infraestructura.AccesoDatos.EF;
+using Obligatorio.CasosDeUsoCompartida.DTOs.Envio;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
 using Obligatorio.Infraestructura.AccesoDatos.EF;
+using Obligatorio.LogicaAplicacion.CasosDeUso.Envios;
 using Obligatorio.LogicaAplicacion.CasosDeUso.Login;
 using Obligatorio.LogicaAplicacion.CasosDeUso.Usuarios;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
@@ -23,13 +25,19 @@ namespace Obligatorio.WebApp
 
             #region Interfaces de Casos de Uso
 
-            #region Usuario
+            #region Usuarios
             builder.Services.AddScoped<IAdd<UsuarioDTO>, AddUsuario>();
             builder.Services.AddScoped<IGetAll<UsuarioListadoDTO>, GetAllUsuarios>();
             builder.Services.AddScoped<IGetById<UsuarioListadoDTO>, GetByIdUsuario>();
             builder.Services.AddScoped<IGetByEmail<UsuarioListadoDTO>, GetByEmailUsuario>();
             builder.Services.AddScoped<IRemove, RemoveUsuario>();
             builder.Services.AddScoped<IUpdate<UsuarioDTO>, UpdateUsuario>();
+            #endregion
+
+            #region Envíos
+            builder.Services.AddScoped<IAdd<EnvioDTO>, AddEnvioComun>();
+            builder.Services.AddScoped<IAdd<EnvioDTO>, AddEnvioUrgente>();
+            builder.Services.AddScoped<IGetAll<EnvioListadoDTO>, GetAllEnvios>();
             #endregion
 
             #region Login

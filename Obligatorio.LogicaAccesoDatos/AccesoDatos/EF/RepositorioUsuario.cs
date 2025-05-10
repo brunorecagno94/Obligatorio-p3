@@ -34,7 +34,7 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 
             if (unU == null)
             {
-                throw new Exception("No se encontró el id");
+                throw new Exception("No se encontró el usuario");
             }
             return unU;
         }

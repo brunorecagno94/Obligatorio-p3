@@ -19,10 +19,10 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public Estado Estado { get; set; } = Estado.EnProceso;
 
         public Envio() { }
-        public Envio(Empleado empleado, Cliente cliente, PesoPaquete pesoPaquete)
+        public Envio(int empleadoId, int clienteId, PesoPaquete pesoPaquete)
         {
-            Empleado = empleado;
-            Cliente = cliente;
+            EmpleadoId = empleadoId;
+            ClienteId = clienteId;
             PesoPaquete = pesoPaquete;
             NumeroTracking = new NumeroTracking();
             FechaSalida = DateTime.Now;
@@ -32,6 +32,13 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public bool Equals(Envio? obj)
         {
             return obj != null && Id.Equals(obj.Id);
+        }
+
+        public void Update(Envio obj)
+        {
+            ListaComentario = obj.ListaComentario;
+            Estado = obj.Estado;
+            // FechaLlegada se actualiza acá?
         }
     }
 }

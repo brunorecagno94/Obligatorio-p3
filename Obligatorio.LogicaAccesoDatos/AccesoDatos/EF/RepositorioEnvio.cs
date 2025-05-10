@@ -9,24 +9,44 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
     {
         private ObligatorioContext _context;
 
+        public RepositorioEnvio(ObligatorioContext context)
+        {
+            _context = context;
+        }
+
         public void Add(Envio obj)
         {
-            throw new NotImplementedException();
+            if (obj == null)
+            {
+                throw new ArgumentNullException("Objeto vacío");
+            }
+
+            _context.Envios.Add(obj);
+            _context.SaveChanges();
         }
 
         public IEnumerable<Envio> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Envios.ToList();
         }
 
         public Envio GetById(int id)
         {
-            throw new NotImplementedException();
+            Envio unE = _context.Envios.FirstOrDefault(envio => envio.Id == id);
+
+            if (unE == null)
+            {
+                throw new Exception("No se encontró el envío");
+            }
+            return unE;
         }
 
-        public void Update(int id, Envio usuario)
+        public void Update(int id, Envio envio)
         {
-            throw new NotImplementedException();
+            Envio unE = GetById(id);
+            unE.Update(envio);
+            _context.Envios.Update(unE);
+            _context.SaveChanges();
         }
     }
 }
