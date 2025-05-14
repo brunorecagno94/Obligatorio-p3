@@ -10,7 +10,9 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF.Config
     {
         public void Configure(EntityTypeBuilder<EnvioComun> builder)
         {
-           
+            builder.HasOne(e => e.DireccionEnvio)
+                .WithMany()
+                .HasForeignKey("DireccionEnvioId");
         }
     }
 }

@@ -4,7 +4,7 @@ namespace Obligatorio.CasosDeUsoCompartida.DTOs.Envio
 {
     public record EnvioListadoDTO(int NumeroTracking,
                                   bool EsUrgente,
-                                  string EmailCliente,
+                                  int ClienteId,
                                   DateTime FechaSalida,
                                   string Estado)
     {

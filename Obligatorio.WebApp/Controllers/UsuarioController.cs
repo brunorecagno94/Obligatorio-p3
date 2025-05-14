@@ -55,7 +55,7 @@ namespace Obligatorio.WebApp.Controllers
 
             catch(ArgumentNullException)
             {
-                ViewBag.Message = "No envio datos";
+                ViewBag.Message = "Error al crear usuario";
             }
 
             return View();

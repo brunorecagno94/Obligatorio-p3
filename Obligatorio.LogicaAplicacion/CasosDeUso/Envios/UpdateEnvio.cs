@@ -14,10 +14,16 @@ namespace Obligatorio.LogicaAplicacion.CasosDeUso.Envios
             _repo = repo;
         }
 
+        void IUpdate<EnvioDTO>.Execute(int id, EnvioDTO obj)
+        {
+            throw new NotImplementedException();
+        }
+
         // TODO: resolver si separamos FromDTOEnvioComun/Urgente
         // o hacemos sólo FromDTO
-        public void Execute(int id, EnvioDTO envio)
-        {
-            _repo.Update(id, EnvioMapper.FromDTO(obj));
-        }
+        //public void Execute(int id, EnvioDTO envio)
+        //{
+        //    _repo.Update(id, EnvioMapper.FromDTO(obj));
+        //}
     }
+}

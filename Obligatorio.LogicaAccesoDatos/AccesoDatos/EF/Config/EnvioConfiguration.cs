@@ -10,6 +10,18 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF.Config
         public void Configure(EntityTypeBuilder<Envio> builder)
         {
 
+            builder
+            .HasOne(e => e.Empleado)
+            .WithMany()
+            .HasForeignKey(e => e.EmpleadoId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasOne(e => e.Cliente)
+                .WithMany()
+                .HasForeignKey(e => e.ClienteId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder.OwnsOne(e => e.PesoPaquete, pesoPaquete =>
             {
                 pesoPaquete.Property(p => p.Value).HasColumnName("PesoPaquete");

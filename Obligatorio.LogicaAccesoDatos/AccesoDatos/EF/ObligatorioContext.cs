@@ -14,6 +14,7 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
         public DbSet<Envio> Envios { get; set; }
         public DbSet<EnvioUrgente> EnviosUrgentes { get; set; }
         public DbSet<EnvioComun> EnviosComunes { get; set; }
+        public DbSet<Agencia> Agencias { get; set; }
 
 
         public ObligatorioContext(DbContextOptions<ObligatorioContext> options)
@@ -34,7 +35,9 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
             modelBuilder.ApplyConfiguration(new EnvioConfiguration());
-
+            modelBuilder.ApplyConfiguration(new EnvioUrgenteConfiguration());
+            modelBuilder.ApplyConfiguration(new EnvioComunConfiguration());
+            modelBuilder.ApplyConfiguration(new AgenciaConfiguration());
         }
     }
 }

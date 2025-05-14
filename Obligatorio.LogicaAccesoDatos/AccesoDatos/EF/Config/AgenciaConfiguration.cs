@@ -8,16 +8,22 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF.Config
     {
         public void Configure(EntityTypeBuilder<Agencia> builder)
         {
-            builder.OwnsOne(e => e.Nombre, nombre =>
+            builder.OwnsOne(a => a.Nombre, nombre =>
             {
                 nombre.Property(p => p.Value).HasColumnName("Nombre");
             });
 
-            builder.OwnsOne(e => e.Direccion, direccion=>
+            builder.OwnsOne(a => a.Direccion, direccion =>
             {
                 direccion.Property(p => p.Calle).HasColumnName("Calle");
                 direccion.Property(p => p.Numero).HasColumnName("Numero");
                 direccion.Property(p => p.CodigoPostal).HasColumnName("CodigoPostal");
+            });
+
+            builder.OwnsOne(a => a.Ubicacion, ubicacion =>
+            {
+                ubicacion.Property(p => p.Latitud).HasColumnName("Latitud");
+                ubicacion.Property(p => p.Longitud).HasColumnName("Longitud");
             });
         }
     }

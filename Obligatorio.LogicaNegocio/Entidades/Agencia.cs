@@ -12,9 +12,8 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public Ubicacion Ubicacion { get; set; }
 
         public Agencia() { }
-        public Agencia(int id, Nombre nombre, Direccion direccion, Ubicacion ubicacion)
+        public Agencia(Nombre nombre, Direccion direccion, Ubicacion ubicacion)
         {
-            Id = id;
             Nombre = nombre;
             Direccion = direccion;
             Ubicacion = ubicacion;
