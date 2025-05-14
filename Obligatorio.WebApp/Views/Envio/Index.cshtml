@@ -4,56 +4,55 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Envíos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Nuevo envío</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NumeroTracking)
+                Número de tracking
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EsUrgente)
+                Tipo de envío
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EmailCliente)
+                Email del cliente
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaSalida)
+                Fecha de salida
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Estado)
+                Estado
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumeroTracking)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EsUrgente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmailCliente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaSalida)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroTracking)
+                </td>
+                <td>@(item.EsUrgente ? "Urgente" : "Común")</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailCliente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaSalida)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
