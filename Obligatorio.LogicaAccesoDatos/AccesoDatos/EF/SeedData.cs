@@ -66,6 +66,12 @@ namespace Infraestructura.AccesoDatos.EF
             _context.Usuarios.Add(new Funcionario(0, new Nombre("Milagros"), new Apellido("Domínguez"), new Contrasena("miladomi"), new Telefono("090212345"), new Email("milagrosdominguez@mail.com"), new Cedula("49021233"), "Cliente"));
             #endregion
 
+            #region Agencias
+            _context.Agencias.Add(new Agencia(new Nombre("DAC"), new Direccion("Canelones", "1122", "11100"), new Ubicacion(-34.905f, -56.191f)));
+            _context.Agencias.Add(new Agencia(new Nombre("UES"), new Direccion("Av. Uruguay", "2391", "11100"), new Ubicacion(-34.425f, -56.481f)));
+            _context.Agencias.Add(new Agencia(new Nombre("Correo Uruguayo"), new Direccion("Av. 18 de Julio", "1122", "11100"), new Ubicacion(-34.1115f, -56.155f)));
+
+            #endregion
             _context.SaveChanges();
         }
     }

@@ -2,6 +2,6 @@
 {
     public interface IRepositorioUpdate <T>
     {
-        void Update(int id, T usuario);
+        void Update(int id, T obj);
     }
 }

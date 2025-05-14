@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Mapper\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Obligatorio.CasosDeUsoCompartida\Obligatorio.CasosDeUsoCompartida.csproj" />
     <ProjectReference Include="..\Obligatorio.LogicaNegocio\Obligatorio.LogicaNegocio.csproj" />
   </ItemGroup>
