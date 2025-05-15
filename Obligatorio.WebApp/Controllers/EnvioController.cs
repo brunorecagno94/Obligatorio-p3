@@ -34,7 +34,7 @@ namespace Obligatorio.WebApp.Controllers
             IEnumerable<EnvioListadoDTO> enviosDTO = _getAll.Execute();
             List<VMEnvioListado> enviosVM = new List<VMEnvioListado>();
 
-            foreach(var envio in enviosDTO)
+            foreach (var envio in enviosDTO)
             {
                 var cliente = _getById.Execute(envio.ClienteId);
 
@@ -44,13 +44,14 @@ namespace Obligatorio.WebApp.Controllers
                                                 envio.FechaSalida,
                                                 envio.Estado));
             }
-           
+
             return View(enviosVM);
         }
 
         public IActionResult Create()
         {
-            ViewBag.Agencias = _getAllAgencias.Execute();
+            var agencias = _getAllAgencias.Execute();
+            ViewBag.Agencias = agencias ?? new List<AgenciaListadaDTO>();
             return View();
         }
 
@@ -63,14 +64,15 @@ namespace Obligatorio.WebApp.Controllers
 
                 string empleadoId = HttpContext.Session.GetString("Id");
 
+
                 _add.Execute(new EnvioDTO(envio.EsUrgente,
-                                          int.Parse(empleadoId),
-                                          usuario.Id,
-                                          envio.PesoPaquete,
-                                          envio.CalleDireccion,
-                                          envio.NumeroDireccion,
-                                          envio.CodigoPostalDireccion,
-                                          envio.IdAgencia));
+                                           int.Parse(empleadoId),
+                                           usuario.Id,
+                                           envio.PesoPaquete,
+                                           envio.CalleDireccion,
+                                           envio.NumeroDireccion,
+                                           envio.CodigoPostalDireccion,
+                                           envio.IdAgencia));
 
                 return RedirectToAction("Index", new { message = "Envio creado exitosamente!" });
             }

@@ -63,6 +63,7 @@ namespace Obligatorio.WebApp
             builder.Services.AddScoped<SeedData>();
             builder.Services.AddScoped<IRepositorioEnvio, RepositorioEnvio>();
             builder.Services.AddScoped<IRepositorioAgencia, RepositorioAgencia>();
+            builder.Services.AddScoped<IRepositorioLogCrud, RepositorioLogCrud>();
 
             #endregion
 
