@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Obligatorio.WebApp.Models.VMEnvioListado>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Envíos</h1>
+
+<p>
+    <a asp-action="Create">Nuevo envío</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Número de tracking
+            </th>
+            <th>
+                Tipo de envío
+            </th>
+            <th>
+                Email del cliente
+            </th>
+            <th>
+                Fecha de salida
+            </th>
+            <th>
+                Estado
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroTracking)
+                </td>
+                <td>@(item.EsUrgente ? "Urgente" : "Común")</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailCliente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaSalida)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
