@@ -9,19 +9,14 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Empleado> Empleados { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
-<<<<<<< HEAD
         public DbSet<Funcionario> Funcionario { get; set; }
         public DbSet<Administrador> Administrador { get; set; }
         public DbSet<LogCrud> LogCrud { get; set; }
-=======
-        public DbSet<Funcionario> Funcionarios { get; set; }
-        public DbSet<Administrador> Administradores { get; set; }
         public DbSet<Envio> Envios { get; set; }
         public DbSet<EnvioUrgente> EnviosUrgentes { get; set; }
         public DbSet<EnvioComun> EnviosComunes { get; set; }
         public DbSet<Agencia> Agencias { get; set; }
 
->>>>>>> main
 
         public ObligatorioContext(DbContextOptions<ObligatorioContext> options)
             : base(options)
