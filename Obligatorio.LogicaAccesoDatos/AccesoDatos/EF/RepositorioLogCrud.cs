@@ -19,7 +19,8 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
                 throw new ArgumentNullException("Objeto vacío");
             }
 
-
+            _context.LogCrud.Add(obj);
+            _context.SaveChanges();
         }
     }
 }

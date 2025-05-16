@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Obligatorio.CasosDeUsoCompartida.DTOs.LogsCrud;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
-using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.WebApp.Filters;
 using Obligatorio.WebApp.Models;
 
@@ -15,7 +15,7 @@ namespace Obligatorio.WebApp.Controllers
         IRemove _remove;
         IGetById<UsuarioListadoDTO> _getById;
         IUpdate<UsuarioDTO> _update;
-        IAdd<LogCrud> _addLog;
+        IAdd<LogCrudDTO> _addLog;
         //private string _usuarioLogueado = HttpContext.Session.GetString("Nombre");
 
         public UsuarioController(IGetAll<UsuarioListadoDTO> getAll,
@@ -23,7 +23,7 @@ namespace Obligatorio.WebApp.Controllers
                                  IRemove remove,
                                  IGetById<UsuarioListadoDTO> getById,
                                  IUpdate<UsuarioDTO> update,
-                                 IAdd<LogCrud> addLog)
+                                 IAdd<LogCrudDTO> addLog)
         {
             _getAll = getAll;
             _add = add;
@@ -56,7 +56,7 @@ namespace Obligatorio.WebApp.Controllers
                                             usuario.Email,
                                             usuario.Cedula));
 
-                _addLog.Execute(new LogCrud(0,
+                _addLog.Execute(new LogCrudDTO(0,
                                             "Usuario creado",
                                             DateTime.Now,
                                             int.Parse(HttpContext.Session.GetString("Id"))));
@@ -103,7 +103,7 @@ namespace Obligatorio.WebApp.Controllers
             try
             {
                 _update.Execute(id, usuario);
-                _addLog.Execute(new LogCrud(0,
+                _addLog.Execute(new LogCrudDTO(0,
                                             "Usuario modificado",
                                             DateTime.Now,
                                             int.Parse(HttpContext.Session.GetString("Id"))));
@@ -132,7 +132,7 @@ namespace Obligatorio.WebApp.Controllers
             try
             {
                 _remove.Execute(id);
-                _addLog.Execute(new LogCrud(0,
+                _addLog.Execute(new LogCrudDTO(0,
                                             "Usuario eliminado",
                                             DateTime.Now,
                                             int.Parse(HttpContext.Session.GetString("Id"))));

@@ -1,6 +1,7 @@
 using Infraestructura.AccesoDatos.EF;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Agencias;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Envio;
+using Obligatorio.CasosDeUsoCompartida.DTOs.LogsCrud;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
 using Obligatorio.Infraestructura.AccesoDatos.EF;
@@ -9,7 +10,6 @@ using Obligatorio.LogicaAplicacion.CasosDeUso.Envios;
 using Obligatorio.LogicaAplicacion.CasosDeUso.Login;
 using Obligatorio.LogicaAplicacion.CasosDeUso.LogsCrud;
 using Obligatorio.LogicaAplicacion.CasosDeUso.Usuarios;
-using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
 
 
@@ -53,7 +53,7 @@ namespace Obligatorio.WebApp
             #endregion
 
             #region LogCrud
-            builder.Services.AddScoped<IAdd<LogCrud>, AddLogCrud>();
+            builder.Services.AddScoped<IAdd<LogCrudDTO>, AddLogCrud>();
             #endregion
 
             #endregion
@@ -63,6 +63,7 @@ namespace Obligatorio.WebApp
             builder.Services.AddScoped<SeedData>();
             builder.Services.AddScoped<IRepositorioEnvio, RepositorioEnvio>();
             builder.Services.AddScoped<IRepositorioAgencia, RepositorioAgencia>();
+            builder.Services.AddScoped<IRepositorioLogCrud, RepositorioLogCrud>();
 
             #endregion
 

@@ -1,5 +1,4 @@
-﻿
-using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
+﻿using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
 using Obligatorio.LogicaAplicacion.Mapper;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
@@ -12,7 +11,7 @@ namespace Obligatorio.LogicaAplicacion.CasosDeUso.Usuarios
 
         public AddUsuario(IRepositorioUsuario repo)
         {
-            _repo = repo;   
+            _repo = repo;
         }
 
         public void Execute(UsuarioDTO obj)
