@@ -71,10 +71,6 @@ namespace Obligatorio.WebApp
 
             builder.Services.AddDbContext<ObligatorioContext>();
 
-            #endregion
-
-            #endregion
-
             var app = builder.Build();
 
             //builder.Services.AddDbContext<ObligatorioContext>(
