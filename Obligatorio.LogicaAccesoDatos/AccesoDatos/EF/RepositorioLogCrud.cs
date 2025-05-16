@@ -1,4 +1,5 @@
-﻿using Obligatorio.LogicaNegocio.Entidades;
+﻿using Obligatorio.Infraestructura.AccesoDatos.Exceptiones;
+using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
 
 namespace Obligatorio.Infraestructura.AccesoDatos.EF
@@ -16,7 +17,7 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
         {
             if (obj == null)
             {
-                throw new ArgumentNullException("Objeto vacío");
+                throw new BadRequestException("Objeto vacío");
             }
 
 

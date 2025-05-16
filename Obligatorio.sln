@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obligatorio.CasosDeUsoCompa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obligatorio.WebApp", "Obligatorio.WebApp\Obligatorio.WebApp.csproj", "{33D2A4B7-4F63-417F-8F41-B279F951053D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obligatorio.WebAPI", "Obligatorio.WebAPI\Obligatorio.WebAPI.csproj", "{1BFCC4FB-32F9-471E-88B9-5721EC519123}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,8 +41,15 @@ Global
 		{33D2A4B7-4F63-417F-8F41-B279F951053D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33D2A4B7-4F63-417F-8F41-B279F951053D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33D2A4B7-4F63-417F-8F41-B279F951053D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BFCC4FB-32F9-471E-88B9-5721EC519123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BFCC4FB-32F9-471E-88B9-5721EC519123}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BFCC4FB-32F9-471E-88B9-5721EC519123}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BFCC4FB-32F9-471E-88B9-5721EC519123}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AC64A302-6520-428E-8779-804B1190109D}
 	EndGlobalSection
 EndGlobal
