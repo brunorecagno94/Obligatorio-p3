@@ -25,49 +25,32 @@ namespace Obligatorio.WebApp
             builder.Services.AddControllersWithViews();
             builder.Services.AddSession();
 
-            #region Inyecciones de dependencias
+            //Inyecciones de dependencias
 
-            #region Interfaces de Casos de Uso
-
-            #region Usuarios
             builder.Services.AddScoped<IAdd<UsuarioDTO>, AddUsuario>();
             builder.Services.AddScoped<IGetAll<UsuarioListadoDTO>, GetAllUsuarios>();
             builder.Services.AddScoped<IGetById<UsuarioListadoDTO>, GetByIdUsuario>();
             builder.Services.AddScoped<IGetByEmail<UsuarioListadoDTO>, GetByEmailUsuario>();
             builder.Services.AddScoped<IRemove, RemoveUsuario>();
             builder.Services.AddScoped<IUpdate<UsuarioDTO>, UpdateUsuario>();
-            #endregion
 
-            #region Envíos
             builder.Services.AddScoped<IAdd<EnvioDTO>, AddEnvioComun>();
             builder.Services.AddScoped<IAdd<EnvioDTO>, AddEnvioUrgente>();
             builder.Services.AddScoped<IGetAll<EnvioListadoDTO>, GetAllEnvios>();
-            #endregion
 
-            #region Agencias
             builder.Services.AddScoped<IGetAll<AgenciaListadaDTO>, GetAllAgencias>();
-            #endregion
 
-            #region Login
             builder.Services.AddScoped<ILoginUsuario, LoginUsuarios>();
-            #endregion
 
-            #region LogCrud
             builder.Services.AddScoped<IAdd<LogCrudDTO>, AddLogCrud>();
-            #endregion
 
-            #endregion
-
-            #region Repositorios
+            // Inyecciones repositorios
             builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
             builder.Services.AddScoped<SeedData>();
             builder.Services.AddScoped<IRepositorioEnvio, RepositorioEnvio>();
             builder.Services.AddScoped<IRepositorioAgencia, RepositorioAgencia>();
             builder.Services.AddScoped<IRepositorioLogCrud, RepositorioLogCrud>();
 
-            #endregion
-
-            #region Context
 
             builder.Services.AddDbContext<ObligatorioContext>();
 

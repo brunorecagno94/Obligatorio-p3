@@ -1,6 +1,7 @@
 using Infraestructura.AccesoDatos.EF;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Agencias;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Envio;
+using Obligatorio.CasosDeUsoCompartida.DTOs.LogsCrud;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
 using Obligatorio.Infraestructura.AccesoDatos.EF;
@@ -42,7 +43,7 @@ builder.Services.AddScoped<IGetAll<AgenciaListadaDTO>, GetAllAgencias>();
 builder.Services.AddScoped<ILoginUsuario, LoginUsuarios>();
 
 //LogCrud
-builder.Services.AddScoped<IAdd<LogCrud>, AddLogCrud>();
+builder.Services.AddScoped<IAdd<LogCrudDTO>, AddLogCrud>();
 
 //Repositorios
 builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
