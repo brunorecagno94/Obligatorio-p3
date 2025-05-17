@@ -20,7 +20,8 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
                 throw new BadRequestException("Objeto vacío");
             }
 
-
+            _context.LogCrud.Add(obj);
+            _context.SaveChanges();
         }
     }
 }

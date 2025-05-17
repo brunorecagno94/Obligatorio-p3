@@ -1,10 +1,11 @@
-﻿using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
-using Obligatorio.LogicaNegocio.Entidades;
+﻿using Obligatorio.CasosDeUsoCompartida.DTOs.LogsCrud;
+using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
+using Obligatorio.LogicaAplicacion.Mapper;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
 
 namespace Obligatorio.LogicaAplicacion.CasosDeUso.LogsCrud
 {
-    public class AddLogCrud : IAdd<LogCrud>
+    public class AddLogCrud : IAdd<LogCrudDTO>
     {
         private IRepositorioLogCrud _repo;
 
@@ -13,9 +14,9 @@ namespace Obligatorio.LogicaAplicacion.CasosDeUso.LogsCrud
             _repo = repo;
         }
 
-        public void Execute(LogCrud logCrud)
+        public void Execute(LogCrudDTO logCrud)
         {
-            _repo.Add(logCrud);
+            _repo.Add(LogCrudMapper.FromDTO(logCrud));
         }
     }
 }
