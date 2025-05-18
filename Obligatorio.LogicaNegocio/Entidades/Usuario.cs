@@ -11,6 +11,7 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public Telefono Telefono { get; set; }
         public Email Email { get; set; }
         public Cedula Cedula { get; set; }
+        public bool Activo { get; set; } = true;
         public string Discriminator { get; set; }
 
         protected Usuario() { }
@@ -46,6 +47,10 @@ namespace Obligatorio.LogicaNegocio.Entidades
             Email = obj.Email;
             Cedula = obj.Cedula;
 
+        }
+        public void BajaUsuario()
+        {
+            Activo = false;
         }
     }
 }
