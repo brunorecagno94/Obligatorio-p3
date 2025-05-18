@@ -52,5 +52,11 @@ namespace Obligatorio.LogicaNegocio.Entidades
         {
             return ListaComentario;
         }
+
+        public virtual void Finalizar(Envio obj)
+        {
+            Estado = Estado.Finalizado;
+            FechaLlegada = DateTime.Now;
+        }
     }
 }

@@ -15,5 +15,16 @@ namespace Obligatorio.LogicaNegocio.Entidades
             Direccion = direccion;
         }
 
+        public override void Finalizar(Envio obj)
+        {
+            base.Finalizar(obj);
+            EntregaEficiente = new EntregaEficiente((CalcularTiempoEnvio() < 24));
+        }
+
+        public int CalcularTiempoEnvio()
+        {
+            return (FechaLlegada - FechaSalida).Hours;
+        }
+
     }
 }
