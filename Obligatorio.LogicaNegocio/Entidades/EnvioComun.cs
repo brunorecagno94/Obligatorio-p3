@@ -5,16 +5,18 @@ namespace Obligatorio.LogicaNegocio.Entidades
 {
     public class EnvioComun : Envio
     {
-        public Agencia DireccionEnvio { get; set; }
-        public int DireccionEnvioId { get; set; }
+        public Agencia Agencia { get; set; }
+        public int AgenciaId { get; set; }
 
         public EnvioComun() { }
-        public EnvioComun(int direccionEnvioId,
+        public EnvioComun(int id,
+            int direccionEnvioId,
                        int empleadoId,
                        int clienteId,
-                       PesoPaquete pesoPaquete) : base(empleadoId, clienteId, pesoPaquete)
+                       PesoPaquete pesoPaquete, 
+                       string discriminator) : base(id, empleadoId, clienteId, pesoPaquete, discriminator)
         {
-            DireccionEnvioId = direccionEnvioId;
+            AgenciaId = direccionEnvioId;
         }
     }
 }

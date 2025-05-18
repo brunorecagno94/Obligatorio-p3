@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Envio;
-using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
+using Obligatorio.CasosDeUsoCompartida.InterfacesCU.Envio;
 using Obligatorio.Infraestructura.AccesoDatos.Exceptiones;
 
 namespace Obligatorio.WebAPI.Controllers

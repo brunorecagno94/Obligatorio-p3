@@ -17,16 +17,19 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public DateTime FechaSalida { get; set; }
         public DateTime FechaLlegada { get; set; }
         public Estado Estado { get; set; } = Estado.EnProceso;
+        public string Discriminator { get; set; }
 
         public Envio() { }
-        public Envio(int empleadoId, int clienteId, PesoPaquete pesoPaquete)
+        public Envio(int id, int empleadoId, int clienteId, PesoPaquete pesoPaquete, string discriminator)
         {
+            Id = id;
             EmpleadoId = empleadoId;
             ClienteId = clienteId;
             PesoPaquete = pesoPaquete;
             NumeroTracking = new NumeroTracking();
             FechaSalida = DateTime.Now;
             Estado = Estado.EnProceso;
+            Discriminator = discriminator;
         }
 
         public bool Equals(Envio? obj)
@@ -34,11 +37,20 @@ namespace Obligatorio.LogicaNegocio.Entidades
             return obj != null && Id.Equals(obj.Id);
         }
 
-        public void Update(Envio obj)
+        public void AgregarComentario(string textoComentario, int empleadoId, int envioId)
         {
-            ListaComentario = obj.ListaComentario;
-            Estado = obj.Estado;
-            // FechaLlegada se actualiza acá?
+
+            if (string.IsNullOrWhiteSpace(textoComentario))
+                throw new ArgumentException("El comentario no puede estar vacío");
+
+            Comentario nuevoComentario = new Comentario(textoComentario, empleadoId, envioId);
+
+            ListaComentario.Add(nuevoComentario);
+        }
+
+        public IEnumerable<Comentario> ObtenerComentarios()
+        {
+            return ListaComentario;
         }
     }
 }

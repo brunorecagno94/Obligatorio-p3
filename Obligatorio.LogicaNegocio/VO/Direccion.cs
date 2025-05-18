@@ -13,7 +13,7 @@ namespace Obligatorio.LogicaNegocio.VO
             Calle = calle;
             Numero = numero;
             CodigoPostal = codigoPostal;
-            Validar();
+            //Validar();
         }
 
         public void Validar()

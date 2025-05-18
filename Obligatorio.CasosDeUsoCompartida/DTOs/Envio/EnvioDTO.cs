@@ -1,7 +1,8 @@
 ﻿
 namespace Obligatorio.CasosDeUsoCompartida.DTOs.Envio
 {
-    public record EnvioDTO(bool EsUrgente,
+    public record EnvioDTO(int Id,
+                           bool EsUrgente,
                            int EmpleadoId,
                            int ClienteId,
                            float PesoPaquete,

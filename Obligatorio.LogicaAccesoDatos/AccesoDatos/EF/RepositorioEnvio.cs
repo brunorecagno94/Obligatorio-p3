@@ -1,8 +1,10 @@
 ﻿
 
+using Microsoft.EntityFrameworkCore;
 using Obligatorio.Infraestructura.AccesoDatos.Exceptiones;
 using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
+using Obligatorio.LogicaNegocio.VO;
 
 namespace Obligatorio.Infraestructura.AccesoDatos.EF
 {
@@ -28,25 +30,50 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 
         public IEnumerable<Envio> GetAll()
         {
-            return _context.Envios.ToList();
+            var enviosComunes = _context.Envios.OfType<EnvioComun>()
+                .Include(e => e.Agencia)
+                .ThenInclude(a => a.Direccion)
+                .Where(e => e.Estado.Value == "EnProceso")
+                .ToList<Envio>();
+
+            var enviosUrgentes = _context.Envios.OfType<EnvioUrgente>()
+                .Where(e => e.Estado.Value == "EnProceso")
+                .ToList<Envio>();
+
+            return enviosComunes.Concat(enviosUrgentes).ToList();
         }
 
         public Envio GetById(int id)
         {
-            Envio unE = _context.Envios.FirstOrDefault(envio => envio.Id == id);
+            var envio = _context.Envios
+                        .FirstOrDefault(e => e.Id == id);
 
-            if (unE == null)
+            if (envio is EnvioComun)
+            {
+                envio = _context.Envios
+                    .OfType<EnvioComun>()
+                    .Include(e => e.Agencia)
+                        .ThenInclude(a => a.Direccion)
+                    .FirstOrDefault(e => e.Id == id);
+            }
+            else if (envio is EnvioUrgente)
+            {
+                envio = _context.Envios
+                    .OfType<EnvioUrgente>()
+                    .Include(e => e.Direccion)
+                    .FirstOrDefault(e => e.Id == id);
+            }
+
+            if (envio == null)
             {
                 throw new NotFoundException("No se encontró el envío");
             }
-            return unE;
+            return envio;
         }
 
         public void Update(int id, Envio envio)
         {
-            Envio unE = GetById(id);
-            unE.Update(envio);
-            _context.Envios.Update(unE);
+            _context.Envios.Update(envio);
             _context.SaveChanges();
         }
 
@@ -59,6 +86,12 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
             }
 
             return envioEncontrado;
+        }
+
+        public IEnumerable<Comentario> GetAllComentarios(int id)
+        {
+            Envio envio = GetById(id);
+            return envio.ObtenerComentarios();
         }
     }
 }

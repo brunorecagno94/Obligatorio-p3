@@ -9,6 +9,10 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF.Config
     {
         public void Configure(EntityTypeBuilder<Envio> builder)
         {
+            builder.HasDiscriminator<string>("Discriminator")
+                .HasValue<Envio>("Envio")
+                .HasValue<EnvioComun>("EnvioComun")
+                .HasValue<EnvioUrgente>("EnvioUrgente");
 
             builder
             .HasOne(e => e.Empleado)

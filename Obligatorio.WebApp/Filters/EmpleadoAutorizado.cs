@@ -8,7 +8,7 @@ namespace Obligatorio.WebApp.Filters
         public void OnAuthorization(AuthorizationFilterContext context)
         {
 
-            if (context.HttpContext.Session.GetString("Rol") != "Administrador" ||
+            if (context.HttpContext.Session.GetString("Rol") != "Administrador" &&
                context.HttpContext.Session.GetString("Rol") != "Funcionario")
             {
                 context.Result = new RedirectResult("/Login/Index");

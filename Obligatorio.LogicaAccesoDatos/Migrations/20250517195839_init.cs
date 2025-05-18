@@ -18,9 +18,9 @@ namespace Obligatorio.Infraestructura.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Calle = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Numero = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Calle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Numero = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Latitud = table.Column<float>(type: "real", nullable: false),
                     Longitud = table.Column<float>(type: "real", nullable: false)
                 },
@@ -62,7 +62,7 @@ namespace Obligatorio.Infraestructura.Migrations
                     FechaLlegada = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Estado = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
-                    DireccionEnvioId = table.Column<int>(type: "int", nullable: true),
+                    AgenciaId = table.Column<int>(type: "int", nullable: true),
                     Calle = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Numero = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -72,11 +72,11 @@ namespace Obligatorio.Infraestructura.Migrations
                 {
                     table.PrimaryKey("PK_Envios", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Envios_Agencias_DireccionEnvioId",
-                        column: x => x.DireccionEnvioId,
+                        name: "FK_Envios_Agencias_AgenciaId",
+                        column: x => x.AgenciaId,
                         principalTable: "Agencias",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Envios_Usuarios_ClienteId",
                         column: x => x.ClienteId,
@@ -136,14 +136,14 @@ namespace Obligatorio.Infraestructura.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Envios_AgenciaId",
+                table: "Envios",
+                column: "AgenciaId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Envios_ClienteId",
                 table: "Envios",
                 column: "ClienteId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Envios_DireccionEnvioId",
-                table: "Envios",
-                column: "DireccionEnvioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Envios_EmpleadoId",
