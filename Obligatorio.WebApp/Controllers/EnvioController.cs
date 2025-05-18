@@ -187,43 +187,64 @@ namespace Obligatorio.WebApp.Controllers
             }
         }
 
-        //[HttpGet]
-        //public IActionResult FiltrarPorRangoFechas(DateTime? fechaInicio, DateTime? fechaFin)
-        //{
-        //    if (fechaInicio == null || fechaFin == null)
-        //    {
-        //        // Retornar todos si no hay fechas
-        //        var todos = _getAll.Execute();
-        //        return View("Index", todos.Select(...));
-        //    }
+        [HttpGet]
+        public IActionResult FiltrarPorRangoFechas(DateTime? fechaInicio, DateTime? fechaFin)
+        {
+            if (fechaInicio == null || fechaFin == null)
+            {
 
-        //    if (fechaInicio > fechaFin)
-        //    {
-        //        ViewBag.Mensaje = "La fecha de inicio no puede ser posterior a la fecha de fin.";
-        //        return View("Index");
-        //    }
+                IEnumerable<EnvioListadoDTO> enviosDTO = _getAll.Execute();
+                List<VMEnvioListado> enviosVM = new List<VMEnvioListado>();
+                try
+                {
+                    foreach (var envio in enviosDTO)
+                    {
+                        var cliente = _getById.Execute(envio.ClienteId);
 
-        //    var enviosFiltrados = _getAll.Execute()
-        //        .Where(e => e.FechaSalida >= fechaInicio && e.FechaSalida <= fechaFin)
-        //        .ToList();
+                        enviosVM.Add(new VMEnvioListado(
+                            envio.Id, envio.NumeroTracking,
+                                                        envio.EsUrgente,
+                                                        cliente.Email,
+                                                        envio.FechaSalida,
+                                                        envio.Estado));
+                    }
+                   
+                }
+                catch (Exception e)
+                {
+                    ViewBag.message = "Error al cargar envios";
+                }
 
-        //    if (!enviosFiltrados.Any())
-        //    {
-        //        ViewBag.Mensaje = "No se encontraron envíos en el rango seleccionado.";
-        //        return View("Index", new List<VMEnvioListado>());
-        //    }
+                return View("Index", enviosVM);
+            }
 
-        //    var resultado = enviosFiltrados.Select(e => new VMEnvioListado(
-        //        e.Id,
-        //        e.NumeroTracking,
-        //        e.EsUrgente,
-        //        _getById.Execute(e.ClienteId).Email,
-        //        e.FechaSalida,
-        //        e.Estado
-        //    )).ToList();
+            if (fechaInicio > fechaFin)
+            {
+                ViewBag.Mensaje = "La fecha de inicio no puede ser posterior a la fecha de fin.";
+                return View("Index");
+            }
 
-        //    return View("Index", resultado);
-        //}
+            var enviosFiltrados = _getAll.Execute()
+                .Where(e => e.FechaSalida >= fechaInicio && e.FechaSalida <= fechaFin)
+                .ToList();
+
+            if (!enviosFiltrados.Any())
+            {
+                ViewBag.Mensaje = "No se encontraron envíos en el rango seleccionado.";
+                return View("Index", new List<VMEnvioListado>());
+            }
+
+            var resultado = enviosFiltrados.Select(e => new VMEnvioListado(
+                e.Id,
+                e.NumeroTracking,
+                e.EsUrgente,
+                _getById.Execute(e.ClienteId).Email,
+                e.FechaSalida,
+                e.Estado
+            )).ToList();
+
+            return View("Index", resultado);
+        }
 
     }
 }
