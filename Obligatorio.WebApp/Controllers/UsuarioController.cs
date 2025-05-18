@@ -35,8 +35,15 @@ namespace Obligatorio.WebApp.Controllers
 
         public IActionResult Index(string message)
         {
-            ViewBag.Message = message;
-            return View(_getAll.Execute());
+            try
+            {
+                ViewBag.Message = message;
+                return View(_getAll.Execute());
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", new { message = "No se encontraron usuarios" });
+            }
         }
 
         public IActionResult Create()
@@ -68,6 +75,10 @@ namespace Obligatorio.WebApp.Controllers
             {
                 ViewBag.Message = "Error al crear usuario";
             }
+            catch (Exception e)
+            {
+                ViewBag.Message = "Hubo un error, intente nuevamente más tarde";
+            }
 
             return View();
 
@@ -91,7 +102,7 @@ namespace Obligatorio.WebApp.Controllers
             }
             catch (Exception e)
             {
-                return RedirectToAction("Index", new { message = e.Message });
+                return RedirectToAction("Index", new { message = "Hubo un error, intente nuevamente más tarde" });
 
             }
         }
@@ -111,20 +122,29 @@ namespace Obligatorio.WebApp.Controllers
             }
             catch (Exception e)
             {
-                return RedirectToAction("Index", new { message = e.Message });
-
+                return RedirectToAction("Index", new { message = "Hubo un error, intente nuevamente más tarde" });
             }
         }
 
         public IActionResult Details(int id)
         {
             UsuarioListadoDTO usuario = _getById.Execute(id);
-
-            if (usuario == null)
+            try
             {
-                return RedirectToAction("Index");
+                if (usuario == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                return View(usuario);
             }
-            return View(usuario);
+            catch (ArgumentNullException)
+            {
+                return RedirectToAction("Index", new { message = "No se encontró el usuario" });
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", new { message = "Hubo un error, intente nuevamente más tarde" });
+            }
         }
 
         public IActionResult Delete(int id)
@@ -140,7 +160,7 @@ namespace Obligatorio.WebApp.Controllers
             }
             catch (Exception e)
             {
-                return RedirectToAction("index", new { message = "Hubo un error, intente nuevamente" });
+                return RedirectToAction("Index", new { message = "Hubo un error, intente nuevamente más tarde" });
             }
         }
     }

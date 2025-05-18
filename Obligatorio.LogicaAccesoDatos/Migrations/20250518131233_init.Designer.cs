@@ -12,7 +12,7 @@ using Obligatorio.Infraestructura.AccesoDatos.EF;
 namespace Obligatorio.Infraestructura.Migrations
 {
     [DbContext(typeof(ObligatorioContext))]
-    [Migration("20250517195839_init")]
+    [Migration("20250518131233_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -239,7 +239,8 @@ namespace Obligatorio.Infraestructura.Migrations
                                 .HasForeignKey("AgenciaId");
                         });
 
-                    b.Navigation("Direccion");
+                    b.Navigation("Direccion")
+                        .IsRequired();
 
                     b.Navigation("Nombre")
                         .IsRequired();

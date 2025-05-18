@@ -5,29 +5,32 @@
 {
     ViewData["Title"] = "Index";
 
-    <h1>Envíos</h1>
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <form action="/Envio/BuscarPorNumeroDeTracking" class="d-flex gap-2 align-items-center">
-            <input type="text" name="numeroTracking" class="form-control form-control-sm" placeholder="Número de tracking" />
-            <button type="submit" class="btn btn-primary btn-sm">Buscar</button>
-            <a asp-action="Index" class="btn btn-secondary btn-sm">Restablecer</a>
-        </form>
-        <form asp-action="FiltrarPorRangoFechas" method="get" class="d-flex align-items-end gap-2 mb-3">
-            <div>
-                <label for="fechaInicio" class="form-label mb-0">Desde</label>
-                <input type="date" id="fechaInicio" name="fechaInicio" class="form-control form-control-sm" />
-            </div>
-            <div>
-                <label for="fechaFin" class="form-label mb-0">Hasta</label>
-                <input type="date" id="fechaFin" name="fechaFin" class="form-control form-control-sm" />
-            </div>
-            <button type="submit" class="btn btn-primary btn-sm">Filtrar</button>
-        </form>
-        <p class="mb-0">
-            <a asp-action="Create" class="btn btn-outline-primary btn-sm d-flex align-items-center gap-1">
-                <span class="fw-bold fs-5 lh-1">+</span> Nuevo envío
-            </a>
-        </p>
+<h1>Envíos</h1>
+
+@ViewBag.message
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+	<form action="/Envio/BuscarPorNumeroDeTracking" class="d-flex gap-2 align-items-center">
+		<input type="text" name="numeroTracking" class="form-control form-control-sm" placeholder="Número de tracking" />
+		<button type="submit" class="btn btn-primary btn-sm">Buscar</button>
+		<a asp-action="Index" class="btn btn-secondary btn-sm">Restablecer</a>
+	</form>
+	<form asp-action="FiltrarPorRangoFechas" method="get" class="d-flex align-items-end gap-2 mb-3">
+		<div>
+			<label for="fechaInicio" class="form-label mb-0">Desde</label>
+			<input type="date" id="fechaInicio" name="fechaInicio" class="form-control form-control-sm" />
+		</div>
+		<div>
+			<label for="fechaFin" class="form-label mb-0">Hasta</label>
+			<input type="date" id="fechaFin" name="fechaFin" class="form-control form-control-sm" />
+		</div>
+		<button type="submit" class="btn btn-primary btn-sm">Filtrar</button>
+	</form>
+	<p class="mb-0">
+		<a asp-action="Create" class="btn btn-outline-primary btn-sm d-flex align-items-center gap-1">
+			<span class="fw-bold fs-5 lh-1">+</span> Nuevo envío
+		</a>
+	</p>
 
     </div>
     @if (Model.Count() == 0)
