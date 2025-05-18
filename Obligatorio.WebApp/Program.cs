@@ -42,6 +42,8 @@ namespace Obligatorio.WebApp
             builder.Services.AddScoped<IAddComentario, AddComentario>();
             builder.Services.AddScoped<IGetById<EnvioListadoDTO>, GetByIdEnvio>();
             builder.Services.AddScoped<IGetAllComentarios<ComentarioDTO>, GetAllComentarios>();
+            builder.Services.AddScoped<IFinalizarEnvio, FinalizarEnvio>();
+            builder.Services.AddScoped<IGetByNumeroTracking<EnvioListadoDTO>, GetByNumeroTracking>();
 
             builder.Services.AddScoped<IGetAll<AgenciaListadaDTO>, GetAllAgencias>();
 

@@ -6,7 +6,7 @@ namespace Obligatorio.LogicaNegocio.VO
     public record NumeroTracking
     {
         public int Value { get; }
-        private static int UltimoNumeroTracking = 1;
+        private static int UltimoNumeroTracking = 1000;
 
         public NumeroTracking()
         {

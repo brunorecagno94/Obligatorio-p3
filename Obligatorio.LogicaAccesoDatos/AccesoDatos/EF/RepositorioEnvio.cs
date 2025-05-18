@@ -93,5 +93,13 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
             Envio envio = GetById(id);
             return envio.ObtenerComentarios();
         }
+
+        public void Finalizar(int id)
+        {
+            Envio envio = GetById(id);
+            envio.Finalizar(envio);
+            _context.Envios.Update(envio);
+            _context.SaveChanges();
+        }
     }
 }
