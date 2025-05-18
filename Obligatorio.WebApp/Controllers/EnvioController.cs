@@ -5,8 +5,6 @@ using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU.Envio;
 using Obligatorio.Infraestructura.AccesoDatos.Exceptiones;
-using Obligatorio.LogicaNegocio.Entidades;
-using Obligatorio.LogicaNegocio.VO;
 using Obligatorio.WebApp.Filters;
 using Obligatorio.WebApp.Models;
 
@@ -51,17 +49,23 @@ namespace Obligatorio.WebApp.Controllers
         {
             IEnumerable<EnvioListadoDTO> enviosDTO = _getAll.Execute();
             List<VMEnvioListado> enviosVM = new List<VMEnvioListado>();
-
-            foreach (var envio in enviosDTO)
+            try
             {
-                var cliente = _getById.Execute(envio.ClienteId);
+                foreach (var envio in enviosDTO)
+                {
+                    var cliente = _getById.Execute(envio.ClienteId);
 
-                enviosVM.Add(new VMEnvioListado(
-                    envio.Id, envio.NumeroTracking,
-                                                envio.EsUrgente,
-                                                cliente.Email,
-                                                envio.FechaSalida,
-                                                envio.Estado));
+                    enviosVM.Add(new VMEnvioListado(
+                        envio.Id, envio.NumeroTracking,
+                                                    envio.EsUrgente,
+                                                    cliente.Email,
+                                                    envio.FechaSalida,
+                                                    envio.Estado));
+                }
+            }
+            catch (Exception e)
+            {
+                ViewBag.message = "Error al cargar envios";
             }
 
             return View(enviosVM);
@@ -80,8 +84,10 @@ namespace Obligatorio.WebApp.Controllers
                                                 envio.Estado);
                 return View("Index", new List<VMEnvioListado> { VMEnvio });
 
-            } catch(NotFoundException e)
+            }
+            catch (NotFoundException e)
             {
+                ViewBag.message = "No se encontró ningún envío con ese número de tracking.";
                 return View("Index", new List<VMEnvioListado>());
             }
 

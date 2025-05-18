@@ -236,7 +236,8 @@ namespace Obligatorio.Infraestructura.Migrations
                                 .HasForeignKey("AgenciaId");
                         });
 
-                    b.Navigation("Direccion");
+                    b.Navigation("Direccion")
+                        .IsRequired();
 
                     b.Navigation("Nombre")
                         .IsRequired();
