@@ -12,7 +12,7 @@ using Obligatorio.Infraestructura.AccesoDatos.EF;
 namespace Obligatorio.Infraestructura.Migrations
 {
     [DbContext(typeof(ObligatorioContext))]
-    [Migration("20250518170437_init")]
+    [Migration("20250518210711_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -358,7 +358,8 @@ namespace Obligatorio.Infraestructura.Migrations
 
                     b.Navigation("Empleado");
 
-                    b.Navigation("Estado");
+                    b.Navigation("Estado")
+                        .IsRequired();
 
                     b.Navigation("ListaComentario");
 

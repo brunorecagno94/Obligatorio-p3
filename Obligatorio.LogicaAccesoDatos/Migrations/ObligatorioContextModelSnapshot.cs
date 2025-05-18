@@ -355,7 +355,8 @@ namespace Obligatorio.Infraestructura.Migrations
 
                     b.Navigation("Empleado");
 
-                    b.Navigation("Estado");
+                    b.Navigation("Estado")
+                        .IsRequired();
 
                     b.Navigation("ListaComentario");
 

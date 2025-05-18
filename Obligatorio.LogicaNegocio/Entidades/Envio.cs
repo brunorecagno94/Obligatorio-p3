@@ -16,10 +16,12 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public List<Comentario> ListaComentario { get; set; }
         public DateTime FechaSalida { get; set; }
         public DateTime FechaLlegada { get; set; }
-        public Estado? Estado { get; set; } = Estado.EnProceso;
+        public Estado Estado { get; set; } = new Estado("EnProceso");
         public string Discriminator { get; set; }
 
-        public Envio() { }
+        public Envio() {
+            Estado = new Estado("EnProceso");
+        }
         public Envio(int id, int empleadoId, int clienteId, PesoPaquete pesoPaquete, string discriminator)
         {
             Id = id;
@@ -28,7 +30,19 @@ namespace Obligatorio.LogicaNegocio.Entidades
             PesoPaquete = pesoPaquete;
             NumeroTracking = new NumeroTracking();
             FechaSalida = DateTime.Now;
-            Estado = Estado.EnProceso;
+            Estado = new Estado("EnProceso");
+            Discriminator = discriminator;
+        }
+
+        public Envio(int id, int empleadoId, int clienteId, PesoPaquete pesoPaquete, string discriminator, DateTime fecha, Estado estado)
+        {
+            Id = id;
+            EmpleadoId = empleadoId;
+            ClienteId = clienteId;
+            PesoPaquete = pesoPaquete;
+            NumeroTracking = new NumeroTracking();
+            FechaSalida = fecha;
+            Estado = estado;
             Discriminator = discriminator;
         }
 
@@ -55,7 +69,7 @@ namespace Obligatorio.LogicaNegocio.Entidades
 
         public virtual void Finalizar(Envio obj)
         {
-            Estado = Estado.Finalizado;
+            Estado = new Estado("Finalizado");
             FechaLlegada = DateTime.Now;
         }
     }
