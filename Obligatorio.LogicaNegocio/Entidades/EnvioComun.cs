@@ -13,8 +13,18 @@ namespace Obligatorio.LogicaNegocio.Entidades
             int direccionEnvioId,
                        int empleadoId,
                        int clienteId,
-                       PesoPaquete pesoPaquete, 
+                       PesoPaquete pesoPaquete,
                        string discriminator) : base(id, empleadoId, clienteId, pesoPaquete, discriminator)
+        {
+            AgenciaId = direccionEnvioId;
+        }
+        public EnvioComun(int id,
+            int direccionEnvioId,
+                       int empleadoId,
+                       int clienteId,
+                       PesoPaquete pesoPaquete,
+                       string discriminator,
+                       DateTime fecha, Estado estado) : base(id, empleadoId, clienteId, pesoPaquete, discriminator, fecha, estado)
         {
             AgenciaId = direccionEnvioId;
         }

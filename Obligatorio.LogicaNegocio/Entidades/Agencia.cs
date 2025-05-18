@@ -4,7 +4,7 @@ using Obligatorio.LogicaNegocio.VO;
 
 namespace Obligatorio.LogicaNegocio.Entidades
 {
-    public class Agencia: IEntity, IEquatable<Agencia>
+    public class Agencia : IEntity, IEquatable<Agencia>
     {
         public int Id { get; set; }
         public Nombre Nombre { get; set; }
@@ -12,8 +12,9 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public Ubicacion Ubicacion { get; set; }
 
         public Agencia() { }
-        public Agencia(Nombre nombre, Direccion direccion, Ubicacion ubicacion)
+        public Agencia(int id, Nombre nombre, Direccion direccion, Ubicacion ubicacion)
         {
+            Id = id;
             Nombre = nombre;
             Direccion = direccion;
             Ubicacion = ubicacion;

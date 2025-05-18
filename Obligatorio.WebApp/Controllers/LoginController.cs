@@ -30,7 +30,8 @@ namespace Obligatorio.WebApp.Controllers
                 HttpContext.Session.SetString("Id", usuarioLogueado.Id.ToString());
                 return Redirect("/Home/Index");
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 ViewBag.mensaje = e.Message;
             }
             return View("Index");
