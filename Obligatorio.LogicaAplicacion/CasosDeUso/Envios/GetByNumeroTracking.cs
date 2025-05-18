@@ -1,7 +1,7 @@
 ﻿
 
 using Obligatorio.CasosDeUsoCompartida.DTOs.Envio;
-using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
+using Obligatorio.CasosDeUsoCompartida.InterfacesCU.Envio;
 using Obligatorio.LogicaAplicacion.Mapper;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
 

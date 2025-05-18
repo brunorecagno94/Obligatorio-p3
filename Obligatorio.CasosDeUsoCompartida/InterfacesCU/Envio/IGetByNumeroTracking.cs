@@ -1,5 +1,4 @@
-﻿
-namespace Obligatorio.CasosDeUsoCompartida.InterfacesCU
+﻿namespace Obligatorio.CasosDeUsoCompartida.InterfacesCU.Envio
 {
     public interface IGetByNumeroTracking<Envio>
     {

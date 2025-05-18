@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
-using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
+using Obligatorio.CasosDeUsoCompartida.InterfacesCU.Usuario;
 
 namespace Obligatorio.WebApp.Controllers
 {

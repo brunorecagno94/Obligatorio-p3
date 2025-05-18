@@ -2,68 +2,71 @@
 @model Obligatorio.WebApp.Models.VMEnvio
 
 @{
-    ViewData["Title"] = "Create";
+	ViewData["Title"] = "Create";
 }
 
 <h1>Crear Envío</h1>
 
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group form-check">
-                <label class="form-check-label">Envío Urgente</label>
-                <input class="form-check-input" asp-for="EsUrgente" />
-            </div>
-            <div class="form-group">
-                <label asp-for="EmailCliente" class="control-label">Email del cliente:</label>
-                <input asp-for="EmailCliente" class="form-control" />
-                <span asp-validation-for="EmailCliente" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CalleDireccion" class="control-label">Calle:</label>
-                <input asp-for="CalleDireccion" class="form-control" />
-                <span asp-validation-for="CalleDireccion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NumeroDireccion" class="control-label">Número:</label>
-                <input asp-for="NumeroDireccion" class="form-control" />
-                <span asp-validation-for="NumeroDireccion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CodigoPostalDireccion" class="control-label">Código Postal:</label>
-                <input asp-for="CodigoPostalDireccion" class="form-control" />
-                <span asp-validation-for="CodigoPostalDireccion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdAgencia" class="control-label">Agencia:</label>
-                <select asp-for="IdAgencia" class="form-control">
-                    <option value="0">Seleccione una agencia</option>
-                    @foreach (AgenciaListadaDTO item in ViewBag.Agencias)
-                    {
-                        <option value="@item.Id">@item.Nombre</option>
-                    }
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="PesoPaquete" class="control-label">Peso del paquete:</label>
-                <input asp-for="PesoPaquete" class="form-control" />
-                <span asp-validation-for="PesoPaquete" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Crear" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+	<div class="col-md-4">
+		<form asp-action="Create">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group form-check">
+				<label class="form-check-label">Envío Urgente</label>
+				<input class="form-check-input" asp-for="EsUrgente" />
+			</div>
+			<div class="form-group">
+				<label asp-for="EmailCliente" class="control-label">Email del cliente:</label>
+				<input asp-for="EmailCliente" class="form-control" />
+				<span asp-validation-for="EmailCliente" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="CalleDireccion" class="control-label">Calle:</label>
+				<input asp-for="CalleDireccion" class="form-control" />
+				<span asp-validation-for="CalleDireccion" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="NumeroDireccion" class="control-label">Número:</label>
+				<input asp-for="NumeroDireccion" class="form-control" />
+				<span asp-validation-for="NumeroDireccion" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="CodigoPostalDireccion" class="control-label">Código Postal:</label>
+				<input asp-for="CodigoPostalDireccion" class="form-control" />
+				<span asp-validation-for="CodigoPostalDireccion" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="IdAgencia" class="control-label">Agencia:</label>
+				<select asp-for="IdAgencia" class="form-control">
+					<option value="0">Seleccione una agencia</option>
+					@if (ViewBag.Agencias != null)
+					{
+						@foreach (AgenciaListadaDTO item in ViewBag.Agencias)
+						{
+							<option value="@item.Id">@item.Nombre</option>
+						}
+					}
+				</select>
+			</div>
+			<div class="form-group">
+				<label asp-for="PesoPaquete" class="control-label">Peso del paquete:</label>
+				<input asp-for="PesoPaquete" class="form-control" />
+				<span asp-validation-for="PesoPaquete" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Crear" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+	<a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
 }

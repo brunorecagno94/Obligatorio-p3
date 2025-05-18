@@ -4,6 +4,8 @@ using Obligatorio.CasosDeUsoCompartida.DTOs.Envio;
 using Obligatorio.CasosDeUsoCompartida.DTOs.LogsCrud;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
+using Obligatorio.CasosDeUsoCompartida.InterfacesCU.Envio;
+using Obligatorio.CasosDeUsoCompartida.InterfacesCU.Usuario;
 using Obligatorio.Infraestructura.AccesoDatos.EF;
 using Obligatorio.LogicaAplicacion.CasosDeUso.Agencias;
 using Obligatorio.LogicaAplicacion.CasosDeUso.Envios;

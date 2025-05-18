@@ -1,4 +1,5 @@
 ﻿using Obligatorio.LogicaNegocio.Entidades;
+using Obligatorio.LogicaNegocio.VO;
 
 namespace Obligatorio.LogicaNegocio.InterfacesRepositorios
 {
@@ -6,7 +7,8 @@ namespace Obligatorio.LogicaNegocio.InterfacesRepositorios
                     IRepositorioGetAll<Envio>,
                     IRepositorioGetById<Envio>,
                     IRepositorioUpdate<Envio>,
-        IRepositorioGetByNumeroTracking<Envio>
+        IRepositorioGetByNumeroTracking<Envio>,
+        IRepositorioGetAllComentarios<Comentario>
     {
     }
 }

@@ -2,6 +2,7 @@
 {
     public class VMEnvio
     {
+        public int Id { get; set; }
         public bool EsUrgente { get; set; }
         public string EmailCliente { get; set; }
         public string? CalleDireccion { get; set; }

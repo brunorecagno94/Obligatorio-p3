@@ -4,6 +4,8 @@ using Obligatorio.CasosDeUsoCompartida.DTOs.Envio;
 using Obligatorio.CasosDeUsoCompartida.DTOs.LogsCrud;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
+using Obligatorio.CasosDeUsoCompartida.InterfacesCU.Envio;
+using Obligatorio.CasosDeUsoCompartida.InterfacesCU.Usuario;
 using Obligatorio.Infraestructura.AccesoDatos.EF;
 using Obligatorio.LogicaAplicacion.CasosDeUso.Agencias;
 using Obligatorio.LogicaAplicacion.CasosDeUso.Envios;
@@ -37,6 +39,9 @@ namespace Obligatorio.WebApp
             builder.Services.AddScoped<IAdd<EnvioDTO>, AddEnvioComun>();
             builder.Services.AddScoped<IAdd<EnvioDTO>, AddEnvioUrgente>();
             builder.Services.AddScoped<IGetAll<EnvioListadoDTO>, GetAllEnvios>();
+            builder.Services.AddScoped<IAddComentario, AddComentario>();
+            builder.Services.AddScoped<IGetById<EnvioListadoDTO>, GetByIdEnvio>();
+            builder.Services.AddScoped<IGetAllComentarios<ComentarioDTO>, GetAllComentarios>();
 
             builder.Services.AddScoped<IGetAll<AgenciaListadaDTO>, GetAllAgencias>();
 

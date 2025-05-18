@@ -17,7 +17,13 @@ namespace Obligatorio.LogicaAplicacion.CasosDeUso.Envios
 
         public void Execute(EnvioDTO obj)
         {
-            _repo.Add(EnvioMapper.FromDTOtoEnvioUrgente(obj));
+            if (obj.EsUrgente)
+            {
+                _repo.Add(EnvioMapper.FromDTOtoEnvioUrgente(obj));
+            } else
+            {
+                _repo.Add(EnvioMapper.FromDTOtoEnvioComun(obj));
+            }
         }
     }
 }

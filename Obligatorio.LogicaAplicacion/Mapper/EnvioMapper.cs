@@ -2,6 +2,7 @@
 using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.VO;
+using System.Linq;
 
 namespace Obligatorio.LogicaAplicacion.Mapper
 {
@@ -12,30 +13,47 @@ namespace Obligatorio.LogicaAplicacion.Mapper
             if (!envioDto.IdAgencia.HasValue)
                 throw new InvalidOperationException("EmpleadoId no puede ser null");
 
-            return new EnvioComun(envioDto.IdAgencia.Value,
+            return new EnvioComun(envioDto.Id,
+                                  envioDto.IdAgencia.Value,
                                   envioDto.EmpleadoId,
                                   envioDto.ClienteId,
-                                  new PesoPaquete(envioDto.PesoPaquete));
+                                  new PesoPaquete(envioDto.PesoPaquete),
+                                  "EnvioComun");
         }
 
         public static Envio FromDTOtoEnvioUrgente(EnvioDTO envioDto)
         {
-            return new EnvioUrgente(new Direccion(envioDto.CalleDireccion, envioDto.NumeroDireccion, envioDto.CodigoPostalDireccion),
+            return new EnvioUrgente(envioDto.Id,
+                                    new Direccion(envioDto.CalleDireccion, envioDto.NumeroDireccion, envioDto.CodigoPostalDireccion),
                                     envioDto.EmpleadoId,
                                     envioDto.ClienteId,
-                                    new PesoPaquete(envioDto.PesoPaquete));
+                                    new PesoPaquete(envioDto.PesoPaquete),
+                                    "EnvioUrgente");
         }
 
         public static EnvioListadoDTO ToDTO(Envio envio)
         {
             bool esUrgente = envio is EnvioUrgente;
 
-            return new EnvioListadoDTO(envio.NumeroTracking.Value,
+            return new EnvioListadoDTO(envio.Id,
+                                       envio.NumeroTracking.Value,
                                        esUrgente,
                                        envio.ClienteId,
                                        envio.FechaSalida,
                                        envio.Estado.Value);
 
+        }
+
+        public static IEnumerable<ComentarioDTO> ComentarioToDTO(IEnumerable<Comentario> comentarios)
+        {
+            return comentarios.Select(c =>
+                new ComentarioDTO(
+                    c.TextoComentario,
+                    c.IdEmpleado,
+                    c.IdEnvio,
+                    c.Fecha
+                )
+            );
         }
 
         public static IEnumerable<EnvioListadoDTO> ToListDto(IEnumerable<Envio> envios)
@@ -46,7 +64,8 @@ namespace Obligatorio.LogicaAplicacion.Mapper
             {
                 bool esUrgente = item is EnvioUrgente;
 
-                listadoEnviosDTO.Add(new EnvioListadoDTO(item.NumeroTracking.Value,
+                listadoEnviosDTO.Add(new EnvioListadoDTO(item.Id,
+                                                         item.NumeroTracking.Value,
                                                          esUrgente,
                                                          item.ClienteId,
                                                          item.FechaSalida,

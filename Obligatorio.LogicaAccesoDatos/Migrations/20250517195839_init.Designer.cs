@@ -12,7 +12,7 @@ using Obligatorio.Infraestructura.AccesoDatos.EF;
 namespace Obligatorio.Infraestructura.Migrations
 {
     [DbContext(typeof(ObligatorioContext))]
-    [Migration("20250515022038_init")]
+    [Migration("20250517195839_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -127,10 +127,10 @@ namespace Obligatorio.Infraestructura.Migrations
                 {
                     b.HasBaseType("Obligatorio.LogicaNegocio.Entidades.Envio");
 
-                    b.Property<int>("DireccionEnvioId")
+                    b.Property<int>("AgenciaId")
                         .HasColumnType("int");
 
-                    b.HasIndex("DireccionEnvioId");
+                    b.HasIndex("AgenciaId");
 
                     b.HasDiscriminator().HasValue("EnvioComun");
                 });
@@ -239,8 +239,7 @@ namespace Obligatorio.Infraestructura.Migrations
                                 .HasForeignKey("AgenciaId");
                         });
 
-                    b.Navigation("Direccion")
-                        .IsRequired();
+                    b.Navigation("Direccion");
 
                     b.Navigation("Nombre")
                         .IsRequired();
@@ -509,13 +508,13 @@ namespace Obligatorio.Infraestructura.Migrations
 
             modelBuilder.Entity("Obligatorio.LogicaNegocio.Entidades.EnvioComun", b =>
                 {
-                    b.HasOne("Obligatorio.LogicaNegocio.Entidades.Agencia", "DireccionEnvio")
+                    b.HasOne("Obligatorio.LogicaNegocio.Entidades.Agencia", "Agencia")
                         .WithMany()
-                        .HasForeignKey("DireccionEnvioId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("AgenciaId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("DireccionEnvio");
+                    b.Navigation("Agencia");
                 });
 
             modelBuilder.Entity("Obligatorio.LogicaNegocio.Entidades.EnvioUrgente", b =>
