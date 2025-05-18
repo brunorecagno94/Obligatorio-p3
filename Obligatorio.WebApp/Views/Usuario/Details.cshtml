@@ -3,7 +3,8 @@
 @{
     ViewData["Title"] = "Details";
 }
-
+@if (Context.Session.GetString("Rol") == "Administrador")
+{
 <h1>Details</h1>
 
 <div>
@@ -46,3 +47,6 @@
     @Html.ActionLink("Edit", "Edit", new {  id = Model.Id }) |
     <a asp-action="Index">Volver a la lista</a>
 </div>
+} else {
+    <h1>No tienes permiso para ver esta página.</h1>
+}

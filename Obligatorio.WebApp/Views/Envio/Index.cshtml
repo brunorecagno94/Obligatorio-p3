@@ -1,8 +1,9 @@
 ﻿@model IEnumerable<Obligatorio.WebApp.Models.VMEnvioListado>
 
-@{
-	ViewData["Title"] = "Index";
-}
+@if (Context.Session.GetString("Rol") == "Administrador" ||
+    Context.Session.GetString("Rol") == "Funcionario")
+{
+    ViewData["Title"] = "Index";
 
 <h1>Envíos</h1>
 
@@ -31,57 +32,62 @@
 		</a>
 	</p>
 
-</div>
-@if (Model.Count() == 0)
-{
-	<div class="alert alert-info">No hay envíos registrados.</div>
+    </div>
+    @if (Model.Count() == 0)
+    {
+        <div class="alert alert-info">No hay envíos registrados.</div>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Número de tracking
+                    </th>
+                    <th>
+                        Tipo de envío
+                    </th>
+                    <th>
+                        Email del cliente
+                    </th>
+                    <th>
+                        Fecha de salida
+                    </th>
+                    <th>
+                        Estado
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumeroTracking)
+                        </td>
+                        <td>@(item.EsUrgente ? "Urgente" : "Común")</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmailCliente)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaSalida)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Estado)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Detalle de comentarios", "Comentarios", new { id = item.Id })
+                            @Html.ActionLink("Finalizar envío", "FinalizarEnvio", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 }
 else
 {
-	<table class="table">
-		<thead>
-			<tr>
-				<th>
-					Número de tracking
-				</th>
-				<th>
-					Tipo de envío
-				</th>
-				<th>
-					Email del cliente
-				</th>
-				<th>
-					Fecha de salida
-				</th>
-				<th>
-					Estado
-				</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach (var item in Model)
-			{
-				<tr>
-					<td>
-						@Html.DisplayFor(modelItem => item.NumeroTracking)
-					</td>
-					<td>@(item.EsUrgente ? "Urgente" : "Común")</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.EmailCliente)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.FechaSalida)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.Estado)
-					</td>
-					<td>
-						@Html.ActionLink("Detalle de comentarios", "Comentarios", new { id = item.Id })
-						@Html.ActionLink("Finalizar envío", "FinalizarEnvio", new { id = item.Id })
-					</td>
-				</tr>
-			}
-		</tbody>
-	</table>
+    <h1>No tienes permiso para ver esta página.</h1>
 }

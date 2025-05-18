@@ -160,7 +160,7 @@ namespace Obligatorio.WebApp.Controllers
             }
             catch (Exception e)
             {
-                return RedirectToAction("index", new { message = "Hubo un error, intente nuevamente más tarde" });
+                return RedirectToAction("Index", new { message = "Hubo un error, intente nuevamente más tarde" });
             }
         }
     }

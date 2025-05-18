@@ -1,10 +1,14 @@
 ﻿@using Obligatorio.CasosDeUsoCompartida.DTOs.Agencias
 @model Obligatorio.WebApp.Models.VMEnvio
 
-<h1>Crear Envío</h1>
+@if (Context.Session.GetString("Rol") == "Administrador" ||
+   Context.Session.GetString("Rol") == "Funcionario")
+{
 
-<hr />
-<h4>Información general</h4>
+    <h1>Crear Envío</h1>
+
+    <hr />
+    <h4>Información general</h4>
 
 <div class="row">
     <div class="col-md-4">
