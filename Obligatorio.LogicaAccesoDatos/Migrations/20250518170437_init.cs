@@ -61,7 +61,7 @@ namespace Obligatorio.Infraestructura.Migrations
                     NumeroTracking = table.Column<int>(type: "int", nullable: false),
                     FechaSalida = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FechaLlegada = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Discriminator = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
                     AgenciaId = table.Column<int>(type: "int", nullable: true),
                     Calle = table.Column<string>(type: "nvarchar(max)", nullable: true),

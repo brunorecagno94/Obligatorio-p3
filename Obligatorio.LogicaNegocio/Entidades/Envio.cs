@@ -16,7 +16,7 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public List<Comentario> ListaComentario { get; set; }
         public DateTime FechaSalida { get; set; }
         public DateTime FechaLlegada { get; set; }
-        public Estado Estado { get; set; } = Estado.EnProceso;
+        public Estado? Estado { get; set; } = Estado.EnProceso;
         public string Discriminator { get; set; }
 
         public Envio() { }
