@@ -140,7 +140,7 @@ namespace Obligatorio.WebApp.Controllers
             }
             catch (Exception e)
             {
-                return RedirectToAction("index", new { message = e.Message });
+                return RedirectToAction("index", new { message = "Hubo un error, intente nuevamente" });
             }
         }
     }

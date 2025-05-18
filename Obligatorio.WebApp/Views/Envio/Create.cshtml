@@ -1,70 +1,79 @@
 ﻿@using Obligatorio.CasosDeUsoCompartida.DTOs.Agencias
 @model Obligatorio.WebApp.Models.VMEnvio
 
-<h1>Crear Envío</h1>
+@if (Context.Session.GetString("Rol") == "Administrador" ||
+   Context.Session.GetString("Rol") == "Funcionario")
+{
 
-<hr />
-<h4>Información general</h4>
+    <h1>Crear Envío</h1>
 
-<div class="row">
-	<div class="col-md-4">
-		<form asp-action="Create">
-			<div class="form-group form-check">
-				<label class="form-check-label">Envío urgente</label>
-				<input class="form-check-input" asp-for="EsUrgente" />
-			</div>
-			<div class="form-group">
-				<label asp-for="EmailCliente" class="control-label">Email del cliente:</label>
-				<input asp-for="EmailCliente" class="form-control" />
-			</div>
-			<div class="mb-2">
-				<label asp-for="PesoPaquete" class="form-label">Peso del paquete</label>
-				<input asp-for="PesoPaquete" type="number" class="form-control form-control-sm" />
-				<span asp-validation-for="PesoPaquete" class="text-danger small"></span>
-			</div>
+    <hr />
+    <h4>Información general</h4>
 
-			<hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div class="form-group form-check">
+                    <label class="form-check-label">Envío urgente</label>
+                    <input class="form-check-input" asp-for="EsUrgente" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmailCliente" class="control-label">Email del cliente:</label>
+                    <input asp-for="EmailCliente" class="form-control" />
+                </div>
+                <div class="mb-2">
+                    <label asp-for="PesoPaquete" class="form-label">Peso del paquete</label>
+                    <input asp-for="PesoPaquete" type="number" class="form-control form-control-sm" />
+                    <span asp-validation-for="PesoPaquete" class="text-danger small"></span>
+                </div>
 
-			<h4>Datos para envío urgente</h4>
-			<p class="text-muted">Complete esta sección solo si el envío **ES** urgente</p>
+                <hr />
 
-			<div class="form-group">
-				<label asp-for="CalleDireccion" class="control-label">Calle:</label>
-				<input asp-for="CalleDireccion" class="form-control" />
-			</div>
-			<div class="form-group">
-				<label asp-for="NumeroDireccion" class="control-label">Número:</label>
-				<input asp-for="NumeroDireccion" class="form-control" />
-			</div>
-			<div class="form-group">
-				<label asp-for="CodigoPostalDireccion" class="control-label">Código Postal:</label>
-				<input asp-for="CodigoPostalDireccion" class="form-control" />
-			</div>
+                <h4>Datos para envío urgente</h4>
+                <p class="text-muted">Complete esta sección solo si el envío **ES** urgente</p>
 
-			<hr />
+                <div class="form-group">
+                    <label asp-for="CalleDireccion" class="control-label">Calle:</label>
+                    <input asp-for="CalleDireccion" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="NumeroDireccion" class="control-label">Número:</label>
+                    <input asp-for="NumeroDireccion" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="CodigoPostalDireccion" class="control-label">Código Postal:</label>
+                    <input asp-for="CodigoPostalDireccion" class="form-control" />
+                </div>
 
-			<h4>Datos para envío común</h4>
-			<p class="text-muted">Complete esta sección solo si el envío **NO** es urgente</p>
+                <hr />
 
-			<div class="form-group">
-				<label asp-for="IdAgencia" class="control-label">Agencia:</label>
-				<select asp-for="IdAgencia" class="form-control">
-					<option value="0">Seleccione una agencia</option>
-					@if (ViewBag.Agencias != null)
-					{
-						foreach (AgenciaListadaDTO item in ViewBag.Agencias)
-						{
-							<option value="@item.Id">@item.Nombre</option>
-						}
-					}
-				</select>
-			</div>
-			<div class="d-flex justify-content-end mt-3">
-				<input type="submit" value="Crear" class="btn btn-primary btn-sm px-4" />
-			</div>
-			<div class="mt-2">
-				<a asp-action="Index" class="text-decoration-none small">&larr; Volver a la lista</a>
-			</div>
-		</form>
-	</div>
-</div>
+                <h4>Datos para envío común</h4>
+                <p class="text-muted">Complete esta sección solo si el envío **NO** es urgente</p>
+
+                <div class="form-group">
+                    <label asp-for="IdAgencia" class="control-label">Agencia:</label>
+                    <select asp-for="IdAgencia" class="form-control">
+                        <option value="0">Seleccione una agencia</option>
+                        @if (ViewBag.Agencias != null)
+                        {
+                            foreach (AgenciaListadaDTO item in ViewBag.Agencias)
+                            {
+                                <option value="@item.Id">@item.Nombre</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="d-flex justify-content-end mt-3">
+                    <input type="submit" value="Crear" class="btn btn-primary btn-sm px-4" />
+                </div>
+                <div class="mt-2">
+                    <a asp-action="Index" class="text-decoration-none small">&larr; Volver a la lista</a>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+else
+{
+    <h1>No tiene permisos para ver esta página.</h1>
+}

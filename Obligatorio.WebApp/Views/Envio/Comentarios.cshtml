@@ -3,83 +3,90 @@
 @{
     ViewData["Title"] = "Detalle de Envío y Comentarios";
 }
-
-<h2>Detalle del Envío</h2>
-
-
-<table class="table table-bordered">
-    <tr>
-        <th>ID</th>
-        <td>@Model.Id</td>
-    </tr>
-    <tr>
-        <th>Número de Tracking</th>
-        <td>@Model.NumeroTracking</td>
-    </tr>
-    <tr>
-        <th>Urgente</th>
-        <td>@(Model.EsUrgente ? "Sí" : "No")</td>
-    </tr>
-    <tr>
-        <th>Cliente</th>
-        <td>@Model.EmailCliente</td>
-    </tr>
-    <tr>
-        <th>Fecha de Salida</th>
-        <td>@Model.FechaSalida.ToString("dd/MM/yyyy HH:mm")</td>
-    </tr>
-    <tr>
-        <th>Estado</th>
-        <td>@Model.Estado</td>
-    </tr>
-</table>
-
-<h3>Comentarios</h3>
-
-@if (Model.Comentarios != null && Model.Comentarios.Any())
+@if (Context.Session.GetString("Rol") == "Administrador" ||
+ Context.Session.GetString("Rol") == "Funcionario")
 {
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Empleado</th>
-                <th>Comentario</th>
-                <th>Fecha</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var comentario in Model.Comentarios)
-            {
-                <tr>
-                    <td>@comentario.EmpleadoId</td>
-                    <td>@comentario.TextoComentario</td>
-                    <td>@comentario.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
-                </tr>
-            }
-        </tbody>
+    <h2>Detalle del Envío</h2>
+
+
+    <table class="table table-bordered">
+        <tr>
+            <th>ID</th>
+            <td>@Model.Id</td>
+        </tr>
+        <tr>
+            <th>Número de Tracking</th>
+            <td>@Model.NumeroTracking</td>
+        </tr>
+        <tr>
+            <th>Urgente</th>
+            <td>@(Model.EsUrgente ? "Sí" : "No")</td>
+        </tr>
+        <tr>
+            <th>Cliente</th>
+            <td>@Model.EmailCliente</td>
+        </tr>
+        <tr>
+            <th>Fecha de Salida</th>
+            <td>@Model.FechaSalida.ToString("dd/MM/yyyy HH:mm")</td>
+        </tr>
+        <tr>
+            <th>Estado</th>
+            <td>@Model.Estado</td>
+        </tr>
     </table>
+
+    <h3>Comentarios</h3>
+
+    @if (Model.Comentarios != null && Model.Comentarios.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Empleado</th>
+                    <th>Comentario</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var comentario in Model.Comentarios)
+                {
+                    <tr>
+                        <td>@comentario.EmpleadoId</td>
+                        <td>@comentario.TextoComentario</td>
+                        <td>@comentario.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No hay comentarios para este envío.</p>
+    }
+
+    <hr />
+    <h4>Agregar Comentario</h4>
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger mt-3" role="alert">
+            @ViewBag.Error
+        </div>
+    }
+
+    <form asp-action="AgregarComentario" method="post" class="mt-3">
+        <input type="hidden" name="EnvioId" value="@Model.Id" />
+        <input type="hidden" name="EmpleadoId" value="1" />
+
+        <div class="form-group">
+            <label for="TextoComentario">Comentario</label>
+            <textarea name="TextoComentario" class="form-control" rows="3" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-2">Agregar</button>
+    </form>
 }
 else
 {
-    <p>No hay comentarios para este envío.</p>
+    <h1>No tiene permisos para ver esta página.</h1>
 }
-
-<hr />
-<h4>Agregar Comentario</h4>
-@if (ViewBag.Error != null)
-{
-    <div class="alert alert-danger mt-3" role="alert">
-        @ViewBag.Error
-    </div>
-}
-
-<form asp-action="AgregarComentario" method="post" class="mt-3">
-    <input type="hidden" name="EnvioId" value="@Model.Id" />
-    <input type="hidden" name="EmpleadoId" value="1" />
-
-    <div class="form-group">
-        <label for="TextoComentario">Comentario</label>
-        <textarea name="TextoComentario" class="form-control" rows="3" required></textarea>
-    </div>
-
-    <button type="submit" class="btn btn-primary mt-2">Agregar</button>
-</form>
