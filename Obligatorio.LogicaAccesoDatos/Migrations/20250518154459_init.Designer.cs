@@ -12,7 +12,7 @@ using Obligatorio.Infraestructura.AccesoDatos.EF;
 namespace Obligatorio.Infraestructura.Migrations
 {
     [DbContext(typeof(ObligatorioContext))]
-    [Migration("20250518131233_init")]
+    [Migration("20250518154459_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -108,6 +108,9 @@ namespace Obligatorio.Infraestructura.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Discriminator")
                         .IsRequired()

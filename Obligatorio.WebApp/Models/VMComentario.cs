@@ -8,6 +8,8 @@
         public int EnvioId { get; set; }
         public DateTime Fecha { get; set; }
 
+        public VMComentario() {}
+
         public VMComentario(string textoComentario, int empleadoId, int envioId, DateTime fecha)
         {
             TextoComentario = textoComentario;

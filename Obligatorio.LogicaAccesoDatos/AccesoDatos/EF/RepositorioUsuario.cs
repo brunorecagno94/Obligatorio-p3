@@ -26,7 +26,7 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 
         public IEnumerable<Usuario> GetAll()
         {
-            return _context.Usuarios.ToList();
+            return _context.Usuarios.Where(u => u.Activo).ToList();
         }
 
         public Usuario GetById(int id)
@@ -54,7 +54,7 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
         public void Remove(int id)
         {
             Usuario unU = GetById(id);
-            _context.Usuarios.Remove(unU);
+            unU.BajaUsuario();
             _context.SaveChanges();
         }
 

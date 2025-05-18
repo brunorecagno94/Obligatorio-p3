@@ -28,7 +28,7 @@ namespace Obligatorio.WebApp.Controllers
                 HttpContext.Session.SetString("Rol", usuarioLogueado.Rol);
                 HttpContext.Session.SetString("Nombre", usuarioLogueado.Nombre);
                 HttpContext.Session.SetString("Id", usuarioLogueado.Id.ToString());
-                return Redirect("/Usuario/Index");
+                return Redirect("/Home/Index");
             }
             catch (Exception e) {
                 ViewBag.mensaje = e.Message;

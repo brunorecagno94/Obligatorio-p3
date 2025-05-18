@@ -106,6 +106,9 @@ namespace Obligatorio.Infraestructura.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("Activo")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasMaxLength(13)
