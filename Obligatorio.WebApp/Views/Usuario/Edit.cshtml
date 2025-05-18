@@ -53,12 +53,12 @@
         <a asp-action="Index">Volver a la lista</a>
     </div>
 }
-else
-{
-    <h1>No tienes permiso para ver esta página.</h1>
-}
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+}
+else
+{
+<h1>No tienes permiso para ver esta página.</h1>
 }
