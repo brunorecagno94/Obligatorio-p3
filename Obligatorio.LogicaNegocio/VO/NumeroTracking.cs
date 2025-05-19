@@ -1,5 +1,4 @@
-﻿
-using Obligatorio.LogicaNegocio.Excepciones;
+﻿using Obligatorio.LogicaNegocio.Excepciones;
 
 namespace Obligatorio.LogicaNegocio.VO
 {

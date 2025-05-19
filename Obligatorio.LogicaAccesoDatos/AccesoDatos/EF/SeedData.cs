@@ -6,7 +6,6 @@ namespace Infraestructura.AccesoDatos.EF
 {
     public class SeedData
     {
-
         private ObligatorioContext _context;
 
         public SeedData(ObligatorioContext context)

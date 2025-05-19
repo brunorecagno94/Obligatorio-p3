@@ -1,10 +1,8 @@
-﻿
-
-using Obligatorio.LogicaNegocio.Entidades;
+﻿using Obligatorio.LogicaNegocio.Entidades;
 
 namespace Obligatorio.LogicaNegocio.InterfacesRepositorios
 {
-    public interface IRepositorioAgencia: IRepositorioGetAll<Agencia>, IRepositorioAdd<Agencia>
+    public interface IRepositorioAgencia : IRepositorioGetAll<Agencia>, IRepositorioAdd<Agencia>
     {
     }
 }

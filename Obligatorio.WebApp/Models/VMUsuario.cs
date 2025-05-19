@@ -1,5 +1,4 @@
-﻿
-namespace Obligatorio.WebApp.Models
+﻿namespace Obligatorio.WebApp.Models
 {
     public class VMUsuario
     {

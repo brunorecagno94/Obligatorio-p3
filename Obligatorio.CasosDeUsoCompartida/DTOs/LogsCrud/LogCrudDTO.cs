@@ -4,5 +4,6 @@
                              string AccionRealizada,
                              DateTime FechaOperacion,
                              int UsuarioId)
-    { }
+    {
+    }
 }

@@ -1,8 +1,6 @@
 ﻿using Obligatorio.CasosDeUsoCompartida.DTOs.Envio;
-using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.VO;
-using System.Linq;
 
 namespace Obligatorio.LogicaAplicacion.Mapper
 {

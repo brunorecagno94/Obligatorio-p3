@@ -1,5 +1,4 @@
-﻿
-namespace Obligatorio.LogicaNegocio.VO
+﻿namespace Obligatorio.LogicaNegocio.VO
 {
     public record EntregaEficiente
     {

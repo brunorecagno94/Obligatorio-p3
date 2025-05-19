@@ -1,10 +1,8 @@
-﻿
-
-namespace Obligatorio.CasosDeUsoCompartida.DTOs.Envio
+﻿namespace Obligatorio.CasosDeUsoCompartida.DTOs.Envio
 {
     public record ComentarioDTO(string TextoComentario,
-                               int Empleado, 
-                               int EnvioId, 
+                               int Empleado,
+                               int EnvioId,
                                DateTime FechaComentario)
     {
     }

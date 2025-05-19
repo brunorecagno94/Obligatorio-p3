@@ -12,7 +12,6 @@ using Obligatorio.LogicaAplicacion.CasosDeUso.Envios;
 using Obligatorio.LogicaAplicacion.CasosDeUso.Login;
 using Obligatorio.LogicaAplicacion.CasosDeUso.LogsCrud;
 using Obligatorio.LogicaAplicacion.CasosDeUso.Usuarios;
-using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
 
 var builder = WebApplication.CreateBuilder(args);

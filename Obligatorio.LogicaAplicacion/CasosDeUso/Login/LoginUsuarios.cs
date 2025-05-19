@@ -1,5 +1,4 @@
-﻿
-using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
+﻿using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU.Usuario;
 using Obligatorio.LogicaNegocio.Excepciones;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;

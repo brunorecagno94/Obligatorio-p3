@@ -1,5 +1,4 @@
 ﻿
-
 namespace Obligatorio.CasosDeUsoCompartida.DTOs.Envio
 {
     public record EnvioListadoDTO(int Id,

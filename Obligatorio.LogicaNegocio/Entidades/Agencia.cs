@@ -1,5 +1,4 @@
-﻿
-using Obligatorio.LogicaNegocio.InterfacesDominio;
+﻿using Obligatorio.LogicaNegocio.InterfacesDominio;
 using Obligatorio.LogicaNegocio.VO;
 
 namespace Obligatorio.LogicaNegocio.Entidades

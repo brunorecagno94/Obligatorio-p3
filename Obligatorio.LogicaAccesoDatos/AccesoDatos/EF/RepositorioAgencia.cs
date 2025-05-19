@@ -1,5 +1,4 @@
-﻿
-using Obligatorio.Infraestructura.AccesoDatos.Exceptiones;
+﻿using Obligatorio.Infraestructura.AccesoDatos.Exceptiones;
 using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
 
