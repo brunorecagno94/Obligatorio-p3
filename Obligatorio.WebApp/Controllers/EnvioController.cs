@@ -5,6 +5,7 @@ using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU.Envio;
 using Obligatorio.Infraestructura.AccesoDatos.Exceptiones;
+using Obligatorio.LogicaNegocio.Excepciones;
 using Obligatorio.WebApp.Filters;
 using Obligatorio.WebApp.Models;
 
@@ -109,7 +110,10 @@ namespace Obligatorio.WebApp.Controllers
 
                 string empleadoId = HttpContext.Session.GetString("Id");
 
-
+                if(envio.IdAgencia == 0 && !envio.EsUrgente)
+                {
+                    throw new AgenciaNulaException();
+                }
                 _add.Execute(new EnvioDTO(envio.Id,
                                           envio.EsUrgente,
                                           int.Parse(empleadoId),
@@ -120,14 +124,38 @@ namespace Obligatorio.WebApp.Controllers
                                           envio.CodigoPostalDireccion,
                                           envio.IdAgencia));
 
-                return RedirectToAction("Index", new { message = "Envio creado exitosamente!" });
+                return RedirectToAction("Index", new { message = "Envío creado exitosamente!" });
+            }
+            catch (NotFoundException e)
+            {
+                ViewBag.Mensaje = "Error al crear envío, el mail de cliente incorrecto";
+            }
+            catch (PesoPaqueteException e)
+            {
+                ViewBag.Mensaje = "Error al crear envío, el peso del paquete debe ser mayor a 0";
+            }
+            catch (CalleException e)
+            {
+                ViewBag.Mensaje = "Error al crear envío, la calle no puede estar vacía";
+            }
+            catch (NumeroException e)
+            {
+                ViewBag.Mensaje = "Error al crear envío, el número no puede estar vacío";
+            }
+            catch (CodigoPostalException e)
+            {
+                ViewBag.Mensaje = "Error al crear envío, el código postal no puede estar vacío";
+            }
+            catch (AgenciaNulaException e)
+            {
+                ViewBag.Mensaje = "La agencia no puede ser nula si el envío no es urgente.";
             }
             catch (Exception e)
             {
-                ViewBag.Message = "Error al crear envio";
+                ViewBag.Mensaje = "Error al crear el envío";
             }
+            return View("Create", envio);
 
-            return RedirectToAction("Index");
         }
 
         private VMEnvioComentarios CargarVMEnvioComentarios(int envioId)
@@ -208,7 +236,7 @@ namespace Obligatorio.WebApp.Controllers
                                                         envio.FechaSalida,
                                                         envio.Estado));
                     }
-                   
+
                 }
                 catch (Exception e)
                 {

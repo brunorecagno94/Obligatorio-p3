@@ -147,37 +147,37 @@ namespace Infraestructura.AccesoDatos.EF
             DateTime fecha2 = new DateTime(DateTime.Now.Year, 2, 10);
             DateTime fecha3 = new DateTime(DateTime.Now.Year, 3, 5);
             DateTime fecha4 = new DateTime(DateTime.Now.Year, 4, 20);
-            DateTime fecha5 = new DateTime(DateTime.Now.Year, 5, 25);
-            DateTime fecha6 = new DateTime(DateTime.Now.Year, 6, 30);
-            DateTime fecha7 = new DateTime(DateTime.Now.Year, 7, 15);
-            DateTime fecha8 = new DateTime(DateTime.Now.Year, 8, 10);
-            DateTime fecha9 = new DateTime(DateTime.Now.Year, 9, 5);
-            DateTime fecha10 = new DateTime(DateTime.Now.Year, 10, 20);
+            DateTime fecha5 = new DateTime(DateTime.Now.Year, 5, 17);
+            DateTime fecha6 = new DateTime(DateTime.Now.Year, 3, 29);
+            DateTime fecha7 = new DateTime(DateTime.Now.Year, 4, 21);
+            DateTime fecha8 = new DateTime(DateTime.Now.Year, 5, 12);
+            DateTime fecha9 = new DateTime(DateTime.Now.Year, 5, 6);
+            DateTime fecha10 = new DateTime(DateTime.Now.Year, 5, 11);
 
-            _context.Envios.Add(new EnvioComun(0, a1.Id, f1.Id, ad1.Id, new PesoPaquete(2.5f), "EnvioComun", fecha1, new Estado("EnProceso")));
-            _context.Envios.Add(new EnvioComun(0, a2.Id, f2.Id, ad2.Id, new PesoPaquete(5.0f), "EnvioComun", fecha2, new Estado("EnProceso")));
-            _context.Envios.Add(new EnvioComun(0, a3.Id, f3.Id, ad3.Id, new PesoPaquete(3.2f), "EnvioComun", fecha3, new Estado("EnProceso")));
-            _context.Envios.Add(new EnvioComun(0, a4.Id, f4.Id, ad4.Id, new PesoPaquete(1.8f), "EnvioComun", fecha4, new Estado("EnProceso")));
-            _context.Envios.Add(new EnvioComun(0, a5.Id, f5.Id, ad5.Id, new PesoPaquete(4.4f), "EnvioComun", fecha5, new Estado("EnProceso")));
-            _context.Envios.Add(new EnvioComun(0, a6.Id, f6.Id, ad6.Id, new PesoPaquete(0.9f), "EnvioComun", fecha6, new Estado("EnProceso")));
-            _context.Envios.Add(new EnvioComun(0, a7.Id, f7.Id, ad7.Id, new PesoPaquete(6.7f), "EnvioComun", fecha7, new Estado("EnProceso")));
-            _context.Envios.Add(new EnvioComun(0, a8.Id, f8.Id, ad8.Id, new PesoPaquete(3.0f), "EnvioComun", fecha8, new Estado("EnProceso")));
-            _context.Envios.Add(new EnvioComun(0, a9.Id, f9.Id, ad9.Id, new PesoPaquete(2.2f), "EnvioComun", fecha9, new Estado("EnProceso")));
-            _context.Envios.Add(new EnvioComun(0, a10.Id, f10.Id, ad10.Id, new PesoPaquete(4.9f), "EnvioComun", fecha10, new Estado("EnProceso")));
+            _context.Envios.Add(new EnvioComun(0, a1.Id, f1.Id, ad1.Id, new PesoPaquete(2.5f), "EnvioComun", fecha1, new Estado("EN_PROCESO")));
+            _context.Envios.Add(new EnvioComun(0, a2.Id, f2.Id, ad2.Id, new PesoPaquete(5.0f), "EnvioComun", fecha2, new Estado("EN_PROCESO")));
+            _context.Envios.Add(new EnvioComun(0, a3.Id, f3.Id, ad3.Id, new PesoPaquete(3.2f), "EnvioComun", fecha3, new Estado("EN_PROCESO")));
+            _context.Envios.Add(new EnvioComun(0, a4.Id, f4.Id, ad4.Id, new PesoPaquete(1.8f), "EnvioComun", fecha4, new Estado("EN_PROCESO")));
+            _context.Envios.Add(new EnvioComun(0, a5.Id, f5.Id, ad5.Id, new PesoPaquete(4.4f), "EnvioComun", fecha5, new Estado("EN_PROCESO")));
+            _context.Envios.Add(new EnvioComun(0, a6.Id, f6.Id, ad6.Id, new PesoPaquete(0.9f), "EnvioComun", fecha6, new Estado("EN_PROCESO")));
+            _context.Envios.Add(new EnvioComun(0, a7.Id, f7.Id, ad7.Id, new PesoPaquete(6.7f), "EnvioComun", fecha7, new Estado("EN_PROCESO")));
+            _context.Envios.Add(new EnvioComun(0, a8.Id, f8.Id, ad8.Id, new PesoPaquete(3.0f), "EnvioComun", fecha8, new Estado("EN_PROCESO")));
+            _context.Envios.Add(new EnvioComun(0, a9.Id, f9.Id, ad9.Id, new PesoPaquete(2.2f), "EnvioComun", fecha9, new Estado("EN_PROCESO")));
+            _context.Envios.Add(new EnvioComun(0, a10.Id, f10.Id, ad10.Id, new PesoPaquete(4.9f), "EnvioComun", fecha10, new Estado("EN_PROCESO")));
 
             #endregion
 
             #region Envios Urgentes (10)
-            _context.Envios.Add(new EnvioUrgente(0, new Direccion("Canelones", "1122", "11100"), f1.Id, c1.Id, new PesoPaquete(2.0f), "EnvioUrgente", fecha1, new Estado("EnProceso")));
-            _context.Envios.Add(new EnvioUrgente(0, new Direccion("Av. Uruguay", "2391", "11100"), f2.Id, c2.Id, new PesoPaquete(1.5f), "EnvioUrgente", fecha2, new Estado("EnProceso")));
-            _context.Envios.Add(new EnvioUrgente(0, new Direccion("Av. 18 de Julio", "1122", "11100"), f3.Id, c3.Id, new PesoPaquete(3.1f), "EnvioUrgente", fecha3, new Estado("EnProceso")));
-            _context.Envios.Add(new EnvioUrgente(0, new Direccion("Av. Bv. Artigas", "1825", "11200"), f4.Id, c4.Id, new PesoPaquete(0.8f), "EnvioUrgente", fecha4, new Estado("EnProceso")));
-            _context.Envios.Add(new EnvioUrgente(0, new Direccion("Calle Cerrito", "550", "11000"), f5.Id, c5.Id, new PesoPaquete(4.2f), "EnvioUrgente", fecha5, new Estado("EnProceso")));
-            _context.Envios.Add(new EnvioUrgente(0, new Direccion("Calle Brasil", "1482", "50000"), f6.Id, c6.Id, new PesoPaquete(2.7f), "EnvioUrgente", fecha6, new Estado("EnProceso")));
-            _context.Envios.Add(new EnvioUrgente(0, new Direccion("Calle 27 Los Aromos", "885", "20100"), f7.Id, c7.Id, new PesoPaquete(5.5f), "EnvioUrgente", fecha7, new Estado("EnProceso")));
-            _context.Envios.Add(new EnvioUrgente(0, new Direccion("Av. Salto", "1123", "60000"), f8.Id, c8.Id, new PesoPaquete(1.1f), "EnvioUrgente", fecha8, new Estado("EnProceso")));
-            _context.Envios.Add(new EnvioUrgente(0, new Direccion("Av. Artigas", "1200", "90200"), f9.Id, c9.Id, new PesoPaquete(2.9f), "EnvioUrgente", fecha9, new Estado("EnProceso")));
-            _context.Envios.Add(new EnvioUrgente(0, new Direccion("Av. Sarandí", "1025", "40000"), f10.Id, c10.Id, new PesoPaquete(6.0f), "EnvioUrgente", fecha10, new Estado("EnProceso")));
+            _context.Envios.Add(new EnvioUrgente(0, new Direccion("Canelones", "1122", "11100"), f1.Id, c1.Id, new PesoPaquete(2.0f), "EnvioUrgente", fecha1, new Estado("EN_PROCESO")));
+            _context.Envios.Add(new EnvioUrgente(0, new Direccion("Av. Uruguay", "2391", "11100"), f2.Id, c2.Id, new PesoPaquete(1.5f), "EnvioUrgente", fecha2, new Estado("EN_PROCESO")));
+            _context.Envios.Add(new EnvioUrgente(0, new Direccion("Av. 18 de Julio", "1122", "11100"), f3.Id, c3.Id, new PesoPaquete(3.1f), "EnvioUrgente", fecha3, new Estado("EN_PROCESO")));
+            _context.Envios.Add(new EnvioUrgente(0, new Direccion("Av. Bv. Artigas", "1825", "11200"), f4.Id, c4.Id, new PesoPaquete(0.8f), "EnvioUrgente", fecha4, new Estado("EN_PROCESO")));
+            _context.Envios.Add(new EnvioUrgente(0, new Direccion("Calle Cerrito", "550", "11000"), f5.Id, c5.Id, new PesoPaquete(4.2f), "EnvioUrgente", fecha5, new Estado("EN_PROCESO")));
+            _context.Envios.Add(new EnvioUrgente(0, new Direccion("Calle Brasil", "1482", "50000"), f6.Id, c6.Id, new PesoPaquete(2.7f), "EnvioUrgente", fecha6, new Estado("EN_PROCESO")));
+            _context.Envios.Add(new EnvioUrgente(0, new Direccion("Calle 27 Los Aromos", "885", "20100"), f7.Id, c7.Id, new PesoPaquete(5.5f), "EnvioUrgente", fecha7, new Estado("EN_PROCESO")));
+            _context.Envios.Add(new EnvioUrgente(0, new Direccion("Av. Salto", "1123", "60000"), f8.Id, c8.Id, new PesoPaquete(1.1f), "EnvioUrgente", fecha8, new Estado("EN_PROCESO")));
+            _context.Envios.Add(new EnvioUrgente(0, new Direccion("Av. Artigas", "1200", "90200"), f9.Id, c9.Id, new PesoPaquete(2.9f), "EnvioUrgente", fecha9, new Estado("EN_PROCESO")));
+            _context.Envios.Add(new EnvioUrgente(0, new Direccion("Av. Sarandí", "1025", "40000"), f10.Id, c10.Id, new PesoPaquete(6.0f), "EnvioUrgente", fecha10, new Estado("EN_PROCESO")));
 
             #endregion
             _context.SaveChanges();

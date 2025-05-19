@@ -68,16 +68,16 @@ namespace Obligatorio.WebApp.Controllers
                                             DateTime.Now,
                                             int.Parse(HttpContext.Session.GetString("Id"))));
 
-                return RedirectToAction("Index", new { message = "Usuario creado exitosamente!" });
+                return RedirectToAction("Index", new { Mensaje = "Usuario creado exitosamente!" });
             }
 
             catch (ArgumentNullException)
             {
-                ViewBag.Message = "Error al crear usuario";
+                ViewBag.Mensaje = "Error al crear usuario";
             }
             catch (Exception e)
             {
-                ViewBag.Message = "Hubo un error, intente nuevamente más tarde";
+                ViewBag.Mensaje = "Hubo un error, intente nuevamente más tarde";
             }
 
             return View();

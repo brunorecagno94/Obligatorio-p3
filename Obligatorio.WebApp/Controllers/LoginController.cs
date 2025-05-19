@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU.Usuario;
+using Obligatorio.LogicaNegocio.Excepciones;
 
 namespace Obligatorio.WebApp.Controllers
 {
@@ -30,9 +31,9 @@ namespace Obligatorio.WebApp.Controllers
                 HttpContext.Session.SetString("Id", usuarioLogueado.Id.ToString());
                 return Redirect("/Home/Index");
             }
-            catch (Exception e)
+            catch (LoginErrorException e)
             {
-                ViewBag.mensaje = e.Message;
+                ViewBag.mensaje = "Ocurrió un error al intentar ingresar";
             }
             return View("Index");
         }
