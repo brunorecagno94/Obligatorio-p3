@@ -8,12 +8,14 @@ namespace Obligatorio.LogicaNegocio.VO
         public string Numero { get; }
         public string CodigoPostal { get; }
 
+        public Direccion() { }
+
         public Direccion(string calle, string numero, string codigoPostal)
         {
             Calle = calle;
             Numero = numero;
             CodigoPostal = codigoPostal;
-            //Validar();
+            Validar();
         }
 
         public void Validar()

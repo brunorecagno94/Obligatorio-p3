@@ -33,14 +33,15 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
             var enviosComunes = _context.Envios.OfType<EnvioComun>()
                 .Include(e => e.Agencia)
                 .ThenInclude(a => a.Direccion)
-                .Where(e => e.Estado.Value == "EnProceso")
+                .Where(e => e.Estado.Value == "EN_PROCESO")
                 .ToList<Envio>();
 
             var enviosUrgentes = _context.Envios.OfType<EnvioUrgente>()
-                .Where(e => e.Estado.Value == "EnProceso")
+                .Where(e => e.Estado.Value == "EN_PROCESO")
+                .Include(e => e.Direccion)
                 .ToList<Envio>();
 
-            return enviosComunes.Concat(enviosUrgentes).ToList();
+            return enviosComunes.Concat(enviosUrgentes).OrderBy(e => e.FechaSalida).ToList();
         }
 
         public Envio GetById(int id)

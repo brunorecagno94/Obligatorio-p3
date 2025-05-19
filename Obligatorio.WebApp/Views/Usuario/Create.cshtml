@@ -10,7 +10,12 @@
 
     <hr />
 
-    @ViewBag.message
+    @if (ViewBag.Mensaje != null)
+    {
+        <div class="alert alert-danger mt-3" role="alert">
+            @ViewBag.Mensaje
+        </div>
+    }
 
     <div class="row">
         <div class="col-md-4">
@@ -52,18 +57,15 @@
             </form>
         </div>
     </div>
+    <a href="/Usuario/index">Volver</a>
 
-    <div>
-        <a href="/Usuario/index">Volver</a>
-        @section Scripts {
+    @section Scripts {
         @{
-                await Html.RenderPartialAsync("_ValidationScriptsPartial");
-            }
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
         }
-    </div>
-}
-else
+    }
+ 
+} else
 {
-
     <h1>No tienes permiso para ver esta página.</h1>
 }

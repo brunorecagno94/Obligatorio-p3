@@ -1,6 +1,7 @@
 ﻿
 using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU.Usuario;
+using Obligatorio.LogicaNegocio.Excepciones;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
 
 namespace Obligatorio.LogicaAplicacion.CasosDeUso.Login
@@ -18,9 +19,9 @@ namespace Obligatorio.LogicaAplicacion.CasosDeUso.Login
         {
             var usuario = _repo.GetByEmail(credenciales.Email);
 
-            if (usuario == null || usuario.Contrasena.Value != credenciales.Contrasena)
+            if (usuario == null || usuario.Contrasena.Value != credenciales.Contrasena || usuario.Discriminator == "Cliente" || !usuario.Activo)
             {
-                throw new Exception("Email o contraseña incorrectos");
+                throw new LoginErrorException();
             }
 
             return new UsuarioAutenticadoDTO(
