@@ -64,12 +64,6 @@ namespace Obligatorio.WebApp.Controllers
             }
             try
             {
-                _getByEmail.Execute(usuario.Email);
-                ViewBag.Mensaje = "El email ya está en uso";
-                return View(usuario);
-            }
-            catch (NotFoundException)
-            {
                 {
                     _add.Execute(new UsuarioDTO(usuario.Nombre,
                                                 usuario.Apellido,
@@ -86,14 +80,46 @@ namespace Obligatorio.WebApp.Controllers
                     return RedirectToAction("Index", new { Mensaje = "Usuario creado exitosamente!" });
                 }
             }
-            catch (ArgumentNullException) { ViewBag.Mensaje = "Error al crear usuario"; }
-            catch (NombreException) { ViewBag.Mensaje = "Ingrese un nombre válido"; }
-            catch (ApellidoException) { ViewBag.Mensaje = "Ingrese un apellido válido"; }
-            catch (ContrasenaException) { ViewBag.Mensaje = "Ingrese una contraseña válida"; }
-            catch (TelefonoException) { ViewBag.Mensaje = "Ingrese un teléfono válido"; }
-            catch (EmailException) { ViewBag.Mensaje = "Ingrese un email válido"; }
-            catch (CedulaException) { ViewBag.Mensaje = "Ingrese una cédula válida"; }
-            catch (Exception e) { ViewBag.Mensaje = "Hubo un error, intente nuevamente más tarde"; }
+            catch (NotFoundException)
+            {
+                ViewBag.Mensaje = "No se encontró el usuario";
+            }
+            catch (ArgumentNullException)
+            {
+                ViewBag.Mensaje = "Error al crear usuario";
+            }
+            catch (NombreException)
+            {
+                ViewBag.Mensaje = "Ingrese un nombre válido";
+            }
+            catch (ApellidoException)
+            {
+                ViewBag.Mensaje = "Ingrese un apellido válido";
+            }
+            catch (ContrasenaException)
+            {
+                ViewBag.Mensaje = "Ingrese una contraseña válida";
+            }
+            catch (TelefonoException)
+            {
+                ViewBag.Mensaje = "Ingrese un teléfono válido";
+            }
+            catch (EmailException)
+            {
+                ViewBag.Mensaje = "Ingrese un email válido";
+            }
+            catch (EmailRepetidoException)
+            {
+                ViewBag.Mensaje = "El email ya está en uso";
+            }
+            catch (CedulaException)
+            {
+                ViewBag.Mensaje = "Ingrese una cédula válida";
+            }
+            catch (Exception e)
+            {
+                ViewBag.Mensaje = "Hubo un error, intente nuevamente más tarde";
+            }
 
             return View();
 
@@ -136,14 +162,43 @@ namespace Obligatorio.WebApp.Controllers
                 return RedirectToAction("Index", new { message = "Usuario modificado exitosamente" });
             }
 
-            catch (ArgumentNullException) { ViewBag.Mensaje = "Error al crear usuario"; }
-            catch (NombreException) { ViewBag.Mensaje = "Ingrese un nombre válido"; }
-            catch (ApellidoException) { ViewBag.Mensaje = "Ingrese un apellido válido"; }
-            catch (ContrasenaException) { ViewBag.Mensaje = "Ingrese una contraseña válida"; }
-            catch (TelefonoException) { ViewBag.Mensaje = "Ingrese un teléfono válido"; }
-            catch (EmailException) { ViewBag.Mensaje = "Ingrese un email válido"; }
-            catch (CedulaException) { ViewBag.Mensaje = "Ingrese una cédula válida"; }
-            catch (Exception e) { ViewBag.Mensaje = "Hubo un error, intente nuevamente más tarde"; }
+            catch (ArgumentNullException)
+            {
+                ViewBag.Mensaje = "Error al editar usuario";
+            }
+            catch (NombreException)
+            {
+                ViewBag.Mensaje = "Ingrese un nombre válido";
+            }
+            catch (ApellidoException)
+            {
+                ViewBag.Mensaje = "Ingrese un apellido válido";
+            }
+            catch (ContrasenaException)
+            {
+                ViewBag.Mensaje = "Ingrese una contraseña válida";
+            }
+            catch (TelefonoException)
+            {
+                ViewBag.Mensaje = "Ingrese un teléfono válido";
+            }
+            catch (EmailException)
+            {
+                ViewBag.Mensaje = "Ingrese un email válido";
+            }
+            catch (EmailRepetidoException)
+            {
+                ViewBag.Mensaje = "El email ya está en uso";
+            }
+            catch (CedulaException)
+            {
+                ViewBag.Mensaje = "Ingrese una cédula válida";
+            }
+            catch (Exception e)
+
+            {
+                ViewBag.Mensaje = "Hubo un error, intente nuevamente más tarde";
+            }
             return View();
         }
 

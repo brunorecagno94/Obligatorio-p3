@@ -1,5 +1,6 @@
 ﻿using Obligatorio.Infraestructura.AccesoDatos.Exceptiones;
 using Obligatorio.LogicaNegocio.Entidades;
+using Obligatorio.LogicaNegocio.Excepciones;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
 
 namespace Obligatorio.Infraestructura.AccesoDatos.EF
@@ -19,11 +20,10 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
             {
                 throw new BadRequestException("Objeto vacío");
             }
-            //if (GetByEmail(obj.Email.Value) != null)
-            //{
-            //    throw new ConflictException("Ya existe un usuario con ese email");
-            //}
-
+            if (_context.Usuarios.Any(u => u.Email.Value == obj.Email.Value))
+            {
+                throw new EmailRepetidoException("Ese email ya está en uso");
+            }
             _context.Usuarios.Add(obj);
             _context.SaveChanges();
         }
@@ -68,11 +68,13 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
             {
                 throw new BadRequestException("Objeto vacío");
             }
-            //if (GetByEmail(obj.Email.Value) != null)
-            //{
-            //    throw new ConflictException("Ya existe un usuario con ese email");
-            //}
+
             Usuario unU = GetById(id);
+
+            if (_context.Usuarios.Any(u => u.Email.Value == obj.Email.Value && u.Id != id))
+            {
+                throw new EmailRepetidoException("Ese email ya está en uso");
+            }
             unU.Update(obj);
             _context.Usuarios.Update(unU);
             _context.SaveChanges();

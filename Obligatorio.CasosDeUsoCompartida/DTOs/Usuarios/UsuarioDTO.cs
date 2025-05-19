@@ -8,6 +8,6 @@ namespace Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios
                              string Email,
                              string Cedula)
     {
-        
+
     }
 }
