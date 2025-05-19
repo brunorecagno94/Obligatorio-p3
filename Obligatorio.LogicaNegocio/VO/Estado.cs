@@ -1,4 +1,6 @@
-﻿namespace Obligatorio.LogicaNegocio.VO
+﻿using Obligatorio.LogicaNegocio.Excepciones;
+
+namespace Obligatorio.LogicaNegocio.VO
 {
     public record Estado
     {
@@ -8,14 +10,14 @@
         public Estado(string value)
         {
             Value = value;
-            //Validar();
+            Validar();
         }
 
 
-        //public void Validar()
-        //{
+        public void Validar()
+        {
 
-        //    if (string.IsNullOrEmpty(Value)) throw new EstadoException("Estado inválido");
-        //}
+            if (string.IsNullOrEmpty(Value)) throw new EstadoException("Estado inválido");
+        }
     }
 }

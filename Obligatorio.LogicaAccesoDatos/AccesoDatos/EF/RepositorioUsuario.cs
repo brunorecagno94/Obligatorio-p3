@@ -19,6 +19,10 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
             {
                 throw new BadRequestException("Objeto vacío");
             }
+            //if (GetByEmail(obj.Email.Value) != null)
+            //{
+            //    throw new ConflictException("Ya existe un usuario con ese email");
+            //}
 
             _context.Usuarios.Add(obj);
             _context.SaveChanges();
@@ -60,6 +64,14 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 
         public void Update(int id, Usuario obj)
         {
+            if (obj == null)
+            {
+                throw new BadRequestException("Objeto vacío");
+            }
+            //if (GetByEmail(obj.Email.Value) != null)
+            //{
+            //    throw new ConflictException("Ya existe un usuario con ese email");
+            //}
             Usuario unU = GetById(id);
             unU.Update(obj);
             _context.Usuarios.Update(unU);
@@ -67,3 +79,4 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
         }
     }
 }
+

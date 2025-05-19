@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Obligatorio.Infraestructura.AccesoDatos.EF;
+﻿using Obligatorio.Infraestructura.AccesoDatos.EF;
 using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.VO;
 
@@ -23,9 +22,9 @@ namespace Infraestructura.AccesoDatos.EF
         private void PrecargaDatos()
         {
             #region Administradores (10)
-            Administrador ad1 = new Administrador(0, new Nombre("Julieta"), new Apellido("Preliasco"), new Contrasena("bananita-bb"), new Telefono("099123456"), new Email("preliascojulieta@gmail.com"), new Cedula("42399123"), "Administrador");
-            Administrador ad2 = new Administrador(0, new Nombre("Bruno"), new Apellido("Recagno"), new Contrasena("#chorizardo"), new Telefono("099234567"), new Email("brunorecagno@gmail.com"), new Cedula("42399123"), "Administrador");
-            Administrador ad3 = new Administrador(0, new Nombre("Luis"), new Apellido("Dentone"), new Contrasena("luisd+"), new Telefono("099345678"), new Email("luisdentone@mail.com"), new Cedula("42399123"), "Administrador");
+            Administrador ad1 = new Administrador(0, new Nombre("Julieta"), new Apellido("Preliasco"), new Contrasena("bananita-bb2"), new Telefono("099123456"), new Email("preliascojulieta@gmail.com"), new Cedula("42399123"), "Administrador");
+            Administrador ad2 = new Administrador(0, new Nombre("Bruno"), new Apellido("Recagno"), new Contrasena("#chorizar2"), new Telefono("099234567"), new Email("brunorecagno@gmail.com"), new Cedula("42399123"), "Administrador");
+            Administrador ad3 = new Administrador(0, new Nombre("Luis"), new Apellido("Dentone"), new Contrasena("luisd3+"), new Telefono("099345678"), new Email("luisdentone@mail.com"), new Cedula("42399123"), "Administrador");
             Administrador ad4 = new Administrador(0, new Nombre("Andrea"), new Apellido("Giménez"), new Contrasena("andrea1+"), new Telefono("098112233"), new Email("andrea.gimenez@mail.com"), new Cedula("45299123"), "Administrador");
             Administrador ad5 = new Administrador(0, new Nombre("Marcos"), new Apellido("Pereyra"), new Contrasena("marcos9#"), new Telefono("091223344"), new Email("marcos.p@mail.com"), new Cedula("41388521"), "Administrador");
             Administrador ad6 = new Administrador(0, new Nombre("Sofía"), new Apellido("Rodríguez"), new Contrasena("sofiA7+"), new Telefono("092334455"), new Email("sofia.r@mail.com"), new Cedula("43219876"), "Administrador");
@@ -101,7 +100,7 @@ namespace Infraestructura.AccesoDatos.EF
             _context.Usuarios.Add(c10);
 
             _context.Usuarios.Add(new Cliente(0, new Nombre("Tomás"), new Apellido("Herrera"), new Contrasena("tomh+12#"), new Telefono("099223456"), new Email("tomasherrera@mail.com"), new Cedula("49122333"), "Cliente"));
-            _context.Usuarios.Add(new Cliente(0, new Nombre("Florencia"), new Apellido("Medina"), new Contrasena("flor.m+#"), new Telefono("098334567"), new Email("flormedina@mail.com"), new Cedula("49233444"), "Cliente"));
+            _context.Usuarios.Add(new Cliente(0, new Nombre("Florencia"), new Apellido("Medina"), new Contrasena("flor.m3+#"), new Telefono("098334567"), new Email("flormedina@mail.com"), new Cedula("49233444"), "Cliente"));
             _context.Usuarios.Add(new Cliente(0, new Nombre("Martín"), new Apellido("Paz"), new Contrasena("mart+pz1"), new Telefono("097445678"), new Email("martinpaz@mail.com"), new Cedula("49344555"), "Cliente"));
             _context.Usuarios.Add(new Cliente(0, new Nombre("Andrea"), new Apellido("Rojas"), new Contrasena("androj+1"), new Telefono("096556789"), new Email("andrearojas@mail.com"), new Cedula("49455666"), "Cliente"));
             _context.Usuarios.Add(new Cliente(0, new Nombre("Sebastián"), new Apellido("Luna"), new Contrasena("seba#88."), new Telefono("095667890"), new Email("sebastianluna@mail.com"), new Cedula("49566777"), "Cliente"));
