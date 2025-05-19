@@ -1,6 +1,4 @@
-﻿
-using Obligatorio.CasosDeUsoCompartida.DTOs.Agencias;
-using Obligatorio.CasosDeUsoCompartida.DTOs.Envio;
+﻿using Obligatorio.CasosDeUsoCompartida.DTOs.Agencias;
 using Obligatorio.LogicaNegocio.Entidades;
 
 namespace Obligatorio.LogicaAplicacion.Mapper

@@ -1,4 +1,5 @@
-﻿using Obligatorio.LogicaNegocio.InterfacesDominio;
+﻿using Obligatorio.LogicaNegocio.Excepciones;
+using Obligatorio.LogicaNegocio.InterfacesDominio;
 using Obligatorio.LogicaNegocio.VO;
 namespace Obligatorio.LogicaNegocio.Entidades
 {
@@ -32,6 +33,7 @@ namespace Obligatorio.LogicaNegocio.Entidades
             Email = email;
             Cedula = cedula;
             Discriminator = discriminator;
+            Validar();
         }
         public bool Equals(Usuario? other)
         {
@@ -46,11 +48,20 @@ namespace Obligatorio.LogicaNegocio.Entidades
             Telefono = obj.Telefono;
             Email = obj.Email;
             Cedula = obj.Cedula;
-
         }
         public void BajaUsuario()
         {
             Activo = false;
+        }
+
+        public void Validar()
+        {
+            if (string.IsNullOrEmpty(Nombre.Value)) throw new NombreException("Nombre inválido");
+            if (string.IsNullOrEmpty(Apellido.Value)) throw new ApellidoException("Apellido inválido");
+            if (string.IsNullOrEmpty(Contrasena.Value)) throw new ContrasenaException("Contraseña inválida");
+            if (string.IsNullOrEmpty(Telefono.Value)) throw new TelefonoException("Teléfono inválido");
+            if (string.IsNullOrEmpty(Email.Value)) throw new EmailException("Email inválido");
+            if (string.IsNullOrEmpty(Cedula.Value)) throw new CedulaException("Cédula inválida");
         }
     }
 }

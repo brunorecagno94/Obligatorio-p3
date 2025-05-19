@@ -1,5 +1,4 @@
-﻿
-namespace Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios
+﻿namespace Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios
 {
     public record UsuarioDTO(string Nombre,
                              string Apellido,
@@ -8,6 +7,5 @@ namespace Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios
                              string Email,
                              string Cedula)
     {
-        
     }
 }

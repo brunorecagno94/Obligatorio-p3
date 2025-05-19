@@ -23,7 +23,6 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF.Config
                 contrasena.Property(p => p.Value).HasColumnName("Contrasena");
             });
 
-            // TODO: Cambiar por OwnsMany
             builder.OwnsOne(u => u.Telefono, telefono =>
             {
                 telefono.Property(p => p.Value).HasColumnName("Telefono");

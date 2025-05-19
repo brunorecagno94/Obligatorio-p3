@@ -1,11 +1,10 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Obligatorio.LogicaNegocio.Entidades;
 
 namespace Obligatorio.Infraestructura.AccesoDatos.EF.Config
 {
-    public class EnvioConfiguration: IEntityTypeConfiguration<Envio>
+    public class EnvioConfiguration : IEntityTypeConfiguration<Envio>
     {
         public void Configure(EntityTypeBuilder<Envio> builder)
         {
@@ -30,7 +29,7 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF.Config
             {
                 pesoPaquete.Property(p => p.Value).HasColumnName("PesoPaquete");
             });
-            
+
             builder.OwnsOne(e => e.NumeroTracking, numeroTracking =>
             {
                 numeroTracking.Property(p => p.Value).HasColumnName("NumeroTracking");

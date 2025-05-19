@@ -2,6 +2,8 @@
 using Obligatorio.CasosDeUsoCompartida.DTOs.LogsCrud;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Usuarios;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
+using Obligatorio.Infraestructura.AccesoDatos.Exceptiones;
+using Obligatorio.LogicaNegocio.Excepciones;
 using Obligatorio.WebApp.Filters;
 using Obligatorio.WebApp.Models;
 
@@ -14,14 +16,15 @@ namespace Obligatorio.WebApp.Controllers
         IAdd<UsuarioDTO> _add;
         IRemove _remove;
         IGetById<UsuarioListadoDTO> _getById;
+        IGetByEmail<UsuarioListadoDTO> _getByEmail;
         IUpdate<UsuarioDTO> _update;
         IAdd<LogCrudDTO> _addLog;
-        //private string _usuarioLogueado = HttpContext.Session.GetString("Nombre");
 
         public UsuarioController(IGetAll<UsuarioListadoDTO> getAll,
                                  IAdd<UsuarioDTO> add,
                                  IRemove remove,
                                  IGetById<UsuarioListadoDTO> getById,
+                                 IGetByEmail<UsuarioListadoDTO> getByEmail,
                                  IUpdate<UsuarioDTO> update,
                                  IAdd<LogCrudDTO> addLog)
         {
@@ -29,6 +32,7 @@ namespace Obligatorio.WebApp.Controllers
             _add = add;
             _remove = remove;
             _getById = getById;
+            _getByEmail = getByEmail;
             _update = update;
             _addLog = addLog;
         }
@@ -54,26 +58,63 @@ namespace Obligatorio.WebApp.Controllers
         [HttpPost]
         public IActionResult Create(VMUsuario usuario)
         {
+            if (usuario == null)
+            {
+                throw new ArgumentException("Usuario vacío");
+            }
             try
             {
-                _add.Execute(new UsuarioDTO(usuario.Nombre,
-                                            usuario.Apellido,
-                                            usuario.Contrasena,
-                                            usuario.Telefono,
-                                            usuario.Email,
-                                            usuario.Cedula));
+                {
+                    _add.Execute(new UsuarioDTO(usuario.Nombre,
+                                                usuario.Apellido,
+                                                usuario.Contrasena,
+                                                usuario.Telefono,
+                                                usuario.Email,
+                                                usuario.Cedula));
 
-                _addLog.Execute(new LogCrudDTO(0,
-                                            "Usuario creado",
-                                            DateTime.Now,
-                                            int.Parse(HttpContext.Session.GetString("Id"))));
+                    _addLog.Execute(new LogCrudDTO(0,
+                                                "Usuario creado",
+                                                DateTime.Now,
+                                                int.Parse(HttpContext.Session.GetString("Id"))));
 
-                return RedirectToAction("Index", new { Mensaje = "Usuario creado exitosamente!" });
+                    return RedirectToAction("Index", new { Mensaje = "Usuario creado exitosamente!" });
+                }
             }
-
+            catch (NotFoundException)
+            {
+                ViewBag.Mensaje = "No se encontró el usuario";
+            }
             catch (ArgumentNullException)
             {
                 ViewBag.Mensaje = "Error al crear usuario";
+            }
+            catch (NombreException)
+            {
+                ViewBag.Mensaje = "Ingrese un nombre válido";
+            }
+            catch (ApellidoException)
+            {
+                ViewBag.Mensaje = "Ingrese un apellido válido";
+            }
+            catch (ContrasenaException)
+            {
+                ViewBag.Mensaje = "Ingrese una contraseña válida";
+            }
+            catch (TelefonoException)
+            {
+                ViewBag.Mensaje = "Ingrese un teléfono válido";
+            }
+            catch (EmailException)
+            {
+                ViewBag.Mensaje = "Ingrese un email válido";
+            }
+            catch (EmailRepetidoException)
+            {
+                ViewBag.Mensaje = "El email ya está en uso";
+            }
+            catch (CedulaException)
+            {
+                ViewBag.Mensaje = "Ingrese una cédula válida";
             }
             catch (Exception e)
             {
@@ -120,10 +161,45 @@ namespace Obligatorio.WebApp.Controllers
                                             int.Parse(HttpContext.Session.GetString("Id"))));
                 return RedirectToAction("Index", new { message = "Usuario modificado exitosamente" });
             }
-            catch (Exception e)
+
+            catch (ArgumentNullException)
             {
-                return RedirectToAction("Index", new { message = "Hubo un error, intente nuevamente más tarde" });
+                ViewBag.Mensaje = "Error al editar usuario";
             }
+            catch (NombreException)
+            {
+                ViewBag.Mensaje = "Ingrese un nombre válido";
+            }
+            catch (ApellidoException)
+            {
+                ViewBag.Mensaje = "Ingrese un apellido válido";
+            }
+            catch (ContrasenaException)
+            {
+                ViewBag.Mensaje = "Ingrese una contraseña válida";
+            }
+            catch (TelefonoException)
+            {
+                ViewBag.Mensaje = "Ingrese un teléfono válido";
+            }
+            catch (EmailException)
+            {
+                ViewBag.Mensaje = "Ingrese un email válido";
+            }
+            catch (EmailRepetidoException)
+            {
+                ViewBag.Mensaje = "El email ya está en uso";
+            }
+            catch (CedulaException)
+            {
+                ViewBag.Mensaje = "Ingrese una cédula válida";
+            }
+            catch (Exception e)
+
+            {
+                ViewBag.Mensaje = "Hubo un error, intente nuevamente más tarde";
+            }
+            return View();
         }
 
         public IActionResult Details(int id)

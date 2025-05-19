@@ -1,7 +1,6 @@
-﻿
-namespace Obligatorio.LogicaNegocio.Excepciones
+﻿namespace Obligatorio.LogicaNegocio.Excepciones
 {
-    public class NumeroTrackingException: LogicaNegocioException
+    public class NumeroTrackingException : LogicaNegocioException
     {
         public NumeroTrackingException()
         {

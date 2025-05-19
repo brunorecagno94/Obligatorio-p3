@@ -1,6 +1,4 @@
-﻿
-
-namespace Obligatorio.LogicaNegocio.Excepciones
+﻿namespace Obligatorio.LogicaNegocio.Excepciones
 {
     public record Error(int Code, string Message)
     {

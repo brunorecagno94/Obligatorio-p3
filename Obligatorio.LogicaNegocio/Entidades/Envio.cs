@@ -1,5 +1,4 @@
-﻿
-using Obligatorio.LogicaNegocio.InterfacesDominio;
+﻿using Obligatorio.LogicaNegocio.InterfacesDominio;
 using Obligatorio.LogicaNegocio.VO;
 
 namespace Obligatorio.LogicaNegocio.Entidades
@@ -19,7 +18,8 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public Estado Estado { get; set; } = new Estado("EN_PROCESO");
         public string Discriminator { get; set; }
 
-        public Envio() {
+        public Envio()
+        {
             Estado = new Estado("EN_PROCESO");
         }
         public Envio(int id, int empleadoId, int clienteId, PesoPaquete pesoPaquete, string discriminator)

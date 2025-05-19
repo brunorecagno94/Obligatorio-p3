@@ -7,7 +7,14 @@
 @if (Context.Session.GetString("Rol") == "Administrador")
 {
     <h1>Listado de usuarios</h1>
-    @ViewBag.message
+
+    @if (ViewBag.Mensaje != null)
+    {
+        <div class="alert alert-danger mt-3" role="alert">
+            @ViewBag.Mensaje
+        </div>
+    }
+
 
     <p>
         <a asp-action="Create">Crear nuevo usuario</a>

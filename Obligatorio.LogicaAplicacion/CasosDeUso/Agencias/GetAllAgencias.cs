@@ -1,6 +1,4 @@
-﻿
-
-using Obligatorio.CasosDeUsoCompartida.DTOs.Agencias;
+﻿using Obligatorio.CasosDeUsoCompartida.DTOs.Agencias;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
 using Obligatorio.LogicaAplicacion.Mapper;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;

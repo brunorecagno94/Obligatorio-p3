@@ -1,5 +1,4 @@
-﻿
-namespace Obligatorio.LogicaNegocio.InterfacesRepositorios
+﻿namespace Obligatorio.LogicaNegocio.InterfacesRepositorios
 {
     public interface IRepositorioFinalizarEnvio
     {

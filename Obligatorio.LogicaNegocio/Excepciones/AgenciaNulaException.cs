@@ -1,5 +1,4 @@
-﻿
-namespace Obligatorio.LogicaNegocio.Excepciones
+﻿namespace Obligatorio.LogicaNegocio.Excepciones
 {
     public class AgenciaNulaException : LogicaNegocioException
     {

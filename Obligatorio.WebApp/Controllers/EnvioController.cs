@@ -110,7 +110,7 @@ namespace Obligatorio.WebApp.Controllers
 
                 string empleadoId = HttpContext.Session.GetString("Id");
 
-                if(envio.IdAgencia == 0 && !envio.EsUrgente)
+                if (envio.IdAgencia == 0 && !envio.EsUrgente)
                 {
                     throw new AgenciaNulaException();
                 }

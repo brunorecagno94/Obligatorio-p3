@@ -1,5 +1,4 @@
-﻿
-namespace Obligatorio.CasosDeUsoCompartida.InterfacesCU.Envio
+﻿namespace Obligatorio.CasosDeUsoCompartida.InterfacesCU.Envio
 {
     public interface IGetAllComentarios<T>
     {

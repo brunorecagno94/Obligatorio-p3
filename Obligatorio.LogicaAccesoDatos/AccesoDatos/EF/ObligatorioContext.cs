@@ -17,7 +17,6 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
         public DbSet<EnvioComun> EnviosComunes { get; set; }
         public DbSet<Agencia> Agencias { get; set; }
 
-
         public ObligatorioContext(DbContextOptions<ObligatorioContext> options)
             : base(options)
         {

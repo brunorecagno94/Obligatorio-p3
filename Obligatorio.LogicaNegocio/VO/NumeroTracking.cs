@@ -1,5 +1,4 @@
-﻿
-using Obligatorio.LogicaNegocio.Excepciones;
+﻿using Obligatorio.LogicaNegocio.Excepciones;
 
 namespace Obligatorio.LogicaNegocio.VO
 {
@@ -10,14 +9,13 @@ namespace Obligatorio.LogicaNegocio.VO
 
         public NumeroTracking()
         {
-            Value = UltimoNumeroTracking++;            
-            //Validar();
+            Value = UltimoNumeroTracking++;
+            Validar();
         }
 
         public void Validar()
         {
-            //if (string.IsNullOrEmpty(Value)) throw new
-            //NumeroTrackingException("Numero de tracking inválido");
+            if (Value < 0) throw new NumeroTrackingException("Numero de tracking inválido");
         }
     }
 }
