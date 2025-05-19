@@ -128,7 +128,7 @@ namespace Obligatorio.WebApp.Controllers
             }
             catch (NotFoundException e)
             {
-                ViewBag.Mensaje = "Error al crear envío, el mail de cliente incorrecto";
+                ViewBag.Mensaje = "Error al crear envío, el mail de cliente incorrecto"; 
             }
             catch (PesoPaqueteException e)
             {
@@ -154,6 +154,8 @@ namespace Obligatorio.WebApp.Controllers
             {
                 ViewBag.Mensaje = "Error al crear el envío";
             }
+            var agencias = _getAllAgencias.Execute();
+            ViewBag.Agencias = agencias ?? new List<AgenciaListadaDTO>();
             return View("Create", envio);
 
         }
