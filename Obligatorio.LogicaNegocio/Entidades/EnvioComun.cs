@@ -7,7 +7,7 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public Agencia Agencia { get; set; }
         public int AgenciaId { get; set; }
 
-        public EnvioComun() { }
+        protected EnvioComun() { }
         public EnvioComun(int id,
             int direccionEnvioId,
                        int empleadoId,

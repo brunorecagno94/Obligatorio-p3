@@ -10,7 +10,7 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public Usuario? Usuario { get; set; }
         public int UsuarioId { get; set; }
 
-        public LogCrud() { }
+        protected LogCrud() { }
 
         public LogCrud(int id, string accionRealizada, DateTime fechaOperacion, int usuarioId)
         {

@@ -8,7 +8,7 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public Direccion Direccion { get; set; }
         public EntregaEficiente EntregaEficiente { get; set; }
 
-        public EnvioUrgente() { }
+        protected EnvioUrgente() { }
         public EnvioUrgente(int id, Direccion direccion, int empleadoId, int clienteId,
                        PesoPaquete pesoPaquete, string discriminator) : base(id, empleadoId, clienteId, pesoPaquete, discriminator)
         {

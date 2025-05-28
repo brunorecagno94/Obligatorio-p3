@@ -4,7 +4,7 @@ namespace Obligatorio.LogicaNegocio.Entidades
 {
     public abstract class Empleado : Usuario
     {
-        public Empleado() { }
+        protected Empleado() { }
         public Empleado(int id,
                        Nombre nombre,
                        Apellido apellido,
