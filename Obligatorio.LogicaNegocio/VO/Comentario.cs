@@ -4,10 +4,10 @@ namespace Obligatorio.LogicaNegocio.VO
 {
     public record Comentario
     {
-        public DateTime Fecha { get; set; }
-        public string TextoComentario { get; set; }
-        public int IdEmpleado { get; set; }
-        public int IdEnvio { get; set; }
+        public DateTime Fecha { get; }
+        public string TextoComentario { get; }
+        public int IdEmpleado { get; }
+        public int IdEnvio { get; }
 
         public Comentario(string textoComentario,
                           int idEmpleado,

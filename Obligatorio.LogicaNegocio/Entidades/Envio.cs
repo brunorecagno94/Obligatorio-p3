@@ -18,7 +18,7 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public Estado Estado { get; set; } = new Estado("EN_PROCESO");
         public string Discriminator { get; set; }
 
-        public Envio()
+        protected Envio()
         {
             Estado = new Estado("EN_PROCESO");
         }

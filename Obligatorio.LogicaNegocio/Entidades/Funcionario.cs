@@ -4,7 +4,7 @@ namespace Obligatorio.LogicaNegocio.Entidades
 {
     public class Funcionario : Empleado
     {
-        public Funcionario() { }
+        protected Funcionario() { }
         public Funcionario(int id,
                            Nombre nombre,
                            Apellido apellido,
