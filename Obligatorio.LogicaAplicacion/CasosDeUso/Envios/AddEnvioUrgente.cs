@@ -5,11 +5,11 @@ using Obligatorio.LogicaNegocio.InterfacesRepositorios;
 
 namespace Obligatorio.LogicaAplicacion.CasosDeUso.Envios
 {
-    public class AddEnvioUrgente : IAdd<EnvioDTO>
+    public class AddEnvio : IAdd<EnvioDTO>
     {
         private IRepositorioEnvio _repo;
 
-        public AddEnvioUrgente(IRepositorioEnvio repo)
+        public AddEnvio(IRepositorioEnvio repo)
         {
             _repo = repo;
         }
@@ -20,7 +20,8 @@ namespace Obligatorio.LogicaAplicacion.CasosDeUso.Envios
             if (obj.EsUrgente)
             {
                 _repo.Add(EnvioMapper.FromDTOtoEnvioUrgente(obj));
-            } else
+            }
+            else
             {
                 _repo.Add(EnvioMapper.FromDTOtoEnvioComun(obj));
             }

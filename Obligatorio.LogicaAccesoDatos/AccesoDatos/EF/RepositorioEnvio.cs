@@ -39,7 +39,7 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
                 .Include(e => e.Direccion)
                 .ToList<Envio>();
 
-            return enviosComunes.Concat(enviosUrgentes).OrderBy(e => e.FechaSalida).ToList();
+            return enviosComunes.Concat(enviosUrgentes).OrderByDescending(e => e.FechaSalida).ToList();
         }
 
         public Envio GetById(int id)
