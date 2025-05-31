@@ -76,7 +76,7 @@ Context.Session.GetString("Rol") == "Funcionario")
 
     <form asp-action="AgregarComentario" method="post" class="mt-3">
         <input type="hidden" name="EnvioId" value="@Model.Id" />
-        <input type="hidden" name="EmpleadoId" value="1" />
+        <input type="hidden" name="EmpleadoId" value="@ViewBag.Empleado" />
 
         <div class="form-group">
             <label for="TextoComentario">Comentario</label>

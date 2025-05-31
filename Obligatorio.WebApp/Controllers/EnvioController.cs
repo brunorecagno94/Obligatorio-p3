@@ -191,7 +191,8 @@ namespace Obligatorio.WebApp.Controllers
         {
             try
             {
-                _addComentario.Execute(comentario.TextoComentario, comentario.EmpleadoId, comentario.EnvioId);
+                int empleadoId = int.Parse(HttpContext.Session.GetString("Id"));
+                _addComentario.Execute(comentario.TextoComentario, empleadoId, comentario.EnvioId);
                 return RedirectToAction("Comentarios", new { id = comentario.EnvioId });
             }
             catch (Exception)
