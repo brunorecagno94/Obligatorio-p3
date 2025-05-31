@@ -126,19 +126,19 @@ namespace Obligatorio.WebApp.Controllers
 
                 return RedirectToAction("Index", new { message = "Envío creado exitosamente!" });
             }
-            catch (NotFoundException e)
+            catch (NotFoundException)
             {
-                ViewBag.Mensaje = "Error al crear envío, el mail de cliente incorrecto"; 
+                ViewBag.Mensaje = "Error al crear envío, el mail de cliente incorrecto";
             }
-            catch (PesoPaqueteException e)
+            catch (PesoPaqueteException)
             {
                 ViewBag.Mensaje = "Error al crear envío, el peso del paquete debe ser mayor a 0";
             }
-            catch (CalleException e)
+            catch (CalleException)
             {
                 ViewBag.Mensaje = "Error al crear envío, la calle no puede estar vacía";
             }
-            catch (NumeroException e)
+            catch (NumeroException)
             {
                 ViewBag.Mensaje = "Error al crear envío, el número no puede estar vacío";
             }
@@ -146,7 +146,7 @@ namespace Obligatorio.WebApp.Controllers
             {
                 ViewBag.Mensaje = "Error al crear envío, el código postal no puede estar vacío";
             }
-            catch (AgenciaNulaException e)
+            catch (AgenciaNulaException)
             {
                 ViewBag.Mensaje = "La agencia no puede ser nula si el envío no es urgente.";
             }
@@ -210,7 +210,7 @@ namespace Obligatorio.WebApp.Controllers
                 _finalizarEnvio.Execute(id);
                 return RedirectToAction("Index", new { message = "Envio finalizado exitosamente" });
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 ViewBag.Error = "Error al finalizar envio.";
                 return RedirectToAction("Index");
@@ -240,7 +240,7 @@ namespace Obligatorio.WebApp.Controllers
                     }
 
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     ViewBag.message = "Error al cargar envios";
                 }

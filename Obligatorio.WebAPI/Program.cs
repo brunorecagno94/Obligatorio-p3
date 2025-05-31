@@ -32,8 +32,7 @@ builder.Services.AddScoped<IRemove, RemoveUsuario>();
 builder.Services.AddScoped<IUpdate<UsuarioDTO>, UpdateUsuario>();
 
 //Envios
-builder.Services.AddScoped<IAdd<EnvioDTO>, AddEnvioComun>();
-builder.Services.AddScoped<IAdd<EnvioDTO>, AddEnvioUrgente>();
+builder.Services.AddScoped<IAdd<EnvioDTO>, AddEnvio>();
 builder.Services.AddScoped<IGetAll<EnvioListadoDTO>, GetAllEnvios>();
 builder.Services.AddScoped<IGetByNumeroTracking<EnvioListadoDTO>, GetByNumeroTracking>();
 

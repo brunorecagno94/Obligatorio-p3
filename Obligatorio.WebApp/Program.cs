@@ -36,8 +36,7 @@ namespace Obligatorio.WebApp
             builder.Services.AddScoped<IRemove, RemoveUsuario>();
             builder.Services.AddScoped<IUpdate<UsuarioDTO>, UpdateUsuario>();
 
-            builder.Services.AddScoped<IAdd<EnvioDTO>, AddEnvioComun>();
-            builder.Services.AddScoped<IAdd<EnvioDTO>, AddEnvioUrgente>();
+            builder.Services.AddScoped<IAdd<EnvioDTO>, AddEnvio>();
             builder.Services.AddScoped<IGetAll<EnvioListadoDTO>, GetAllEnvios>();
             builder.Services.AddScoped<IAddComentario, AddComentario>();
             builder.Services.AddScoped<IGetById<EnvioListadoDTO>, GetByIdEnvio>();
