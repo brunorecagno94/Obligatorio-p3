@@ -28,7 +28,7 @@ namespace WebClient
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Envio}/{action=Index}/{id?}");
 
             app.Run();
         }

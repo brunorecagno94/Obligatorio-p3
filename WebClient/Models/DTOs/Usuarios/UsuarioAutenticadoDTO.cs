@@ -1,4 +1,4 @@
-﻿namespace Obligatorio.WebClient.Models.DTOs.Usuarios
+﻿namespace WebClient.Models.DTOs.Usuarios
 {
     public record UsuarioAutenticadoDTO(int Id,
                                         string Email,

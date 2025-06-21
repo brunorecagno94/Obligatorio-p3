@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Obligatorio.WebClient.Models.DTOs.Usuarios;
 using RestSharp;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using WebClient.Models.DTOs.Usuarios;
 
 namespace Obligatorio.WebApp.Controllers
 {
