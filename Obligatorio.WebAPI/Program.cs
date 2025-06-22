@@ -1,4 +1,9 @@
 using Infraestructura.AccesoDatos.EF;
+using Libreria.WebApi.Services;
+using Libreria.WepApi.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Agencias;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Envio;
 using Obligatorio.CasosDeUsoCompartida.DTOs.LogsCrud;
@@ -13,15 +18,67 @@ using Obligatorio.LogicaAplicacion.CasosDeUso.Login;
 using Obligatorio.LogicaAplicacion.CasosDeUso.LogsCrud;
 using Obligatorio.LogicaAplicacion.CasosDeUso.Usuarios;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
+using System.Reflection;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+
+        Version = "v1",
+        Title = "ToDo API",
+        Description = "An ASP.NET Core Web API for managing ToDo items",
+        TermsOfService = new Uri("https://example.com/terms"),
+        Contact = new OpenApiContact
+        {
+            Name = "Shayne Boyer",
+            Email = string.Empty,
+            Url = new Uri("https://twitter.com/spboyer"),
+        },
+
+    });
+
+    // Set the comments path for the Swagger JSON and UI.
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    options.IncludeXmlComments(xmlPath);
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Ingrese el token JWT en este formato: Bearer {token}"
+    });
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                    {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                    }
+
+                            },
+                            new string[] { }
+
+                        }
+                    });
+});
+
 
 //Usuarios
 builder.Services.AddScoped<IAdd<UsuarioDTO>, AddUsuario>();
@@ -54,6 +111,37 @@ builder.Services.AddScoped<IRepositorioLogCrud, RepositorioLogCrud>();
 
 //Context
 builder.Services.AddDbContext<ObligatorioContext>();
+
+// Agrega generacion de token con JWT
+builder.Services.AddScoped<IJwtGenerator, JwtGenerator>();
+
+// Obtener configuración JWT desde appsettings
+var jwtConfig = builder.Configuration.GetSection("Jwt");
+var key = Encoding.ASCII.GetBytes(jwtConfig["Key"]);
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+           .AddJwtBearer(options =>
+           {
+               options.RequireHttpsMetadata = false; // En producción: true
+               options.SaveToken = true;
+               options.TokenValidationParameters = new TokenValidationParameters
+               {
+                   ValidateIssuerSigningKey = true,
+                   IssuerSigningKey = new SymmetricSecurityKey(key),
+                   // ValidateIssuer = true,
+                   // ValidIssuer = jwtConfig["Issuer"],
+                   // ValidateAudience = true,
+                   // ValidAudience = jwtConfig["Audience"],
+                   ValidateIssuer = false,
+                   ValidateAudience = false,
+               };
+           });
+
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
