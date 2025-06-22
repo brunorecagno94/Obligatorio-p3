@@ -3,7 +3,6 @@ using Obligatorio.CasosDeUsoCompartida.DTOs.Envio;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU.Envio;
 using Obligatorio.Infraestructura.AccesoDatos.Exceptiones;
-using Obligatorio.WebApi.Filters;
 
 namespace Obligatorio.WebAPI.Controllers
 {
@@ -64,7 +63,6 @@ namespace Obligatorio.WebAPI.Controllers
             }
         }
 
-        [ClienteAutorizado]
         [HttpGet("mis-envios/{idCliente}")]
         public IActionResult GetByUsuario(string idCliente)
         {
