@@ -1,4 +1,5 @@
-﻿using Obligatorio.WebClient.Models.DTOs.Usuarios;
+﻿
+using WebClient.Models.DTOs.Usuarios;
 
 namespace Obligatorio.CasosDeUsoCompartida.DTOs.Login
 {

@@ -25,8 +25,13 @@ namespace Libreria.WepApi.Services
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
-                new Claim(ClaimTypes.Role, usuario.Rol == "admin" ? "admin" : "usuario"), //TODO: change this
-                //new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                new Claim(ClaimTypes.Role, usuario.Rol switch
+                {
+                    "Administrador" => "Admin",
+                    "Funcionario" => "Funcionario",
+                    "Cliente" => "Cliente",
+                    _ => ""
+                })
             };
 
             var tokenDescriptor = new SecurityTokenDescriptor
