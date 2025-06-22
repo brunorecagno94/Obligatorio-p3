@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Obligatorio.CasosDeUsoCompartida.DTOs.Login;
 using Obligatorio.WebClient.Models.DTOs.Usuarios;
 using RestSharp;
+using System.Net;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
-namespace Obligatorio.WebApp.Controllers
+namespace WebClient.Controllers
 {
     public class LoginController : Controller
     {
@@ -14,53 +15,40 @@ namespace Obligatorio.WebApp.Controllers
         }
 
         [HttpPost]
-
         public IActionResult Login(UsuarioLoginDTO usuario)
         {
-
-            //try
-            //{
-            //var usuarioLogueado = null;
-            //    ViewBag.NombreUsuario = usuarioLogueado.Nombre;
-            //    HttpContext.Session.SetString("Rol", usuarioLogueado.Rol);
-            //    HttpContext.Session.SetString("Nombre", usuarioLogueado.Nombre);
-            //    HttpContext.Session.SetString("Id", usuarioLogueado.Id.ToString());
-            //    return Redirect("/Home/Index");
-            //}
-            //catch (LoginErrorException e)
-            //{
-            //    ViewBag.mensaje = "Ocurrió un error al intentar ingresar";
-            //}
             try
             {
-                var options = new RestClientOptions("https://localhost:5001/")
-                {
-                    MaxTimeout = -1,
-                };
+                var client = new RestClient("https://localhost:7113");
+                var request = new RestRequest("/api/v1/Auth/login", Method.Post);
+                request.AddHeader("Content-Type", "application/json");
 
-                var client = new RestClient(options);
-                var request = new RestRequest($"api/Usuarios/{usuario.Email}", Method.Get);
+                var body = JsonSerializer.Serialize(usuario);
+                request.AddStringBody(body, DataFormat.Json);
+
                 RestResponse response = client.Execute(request);
 
-                if ((int)response.StatusCode == 404)
-                {
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
                     throw new Exception("Credenciales inválidas");
-                }
-                var optionsJSON = new JsonSerializerOptions
+
+                var options = new JsonSerializerOptions
                 {
-                    WriteIndented = true, // Para que el JSON sea legible (formato con sangrías)
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase, // Usa camelCase para las propiedades
-                    PropertyNameCaseInsensitive = true, // Permite deserializar sin importar mayúsculas/minúsculas
-                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull // Ignora propiedades nulas
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 };
 
-                UsuarioListadoDTO usuarioLogueado = JsonSerializer.Deserialize<UsuarioListadoDTO>(response.Content, optionsJSON);
+                var loginResponse = JsonSerializer.Deserialize<LoginResponse>(response.Content, options);
+
+                HttpContext.Session.SetString("token", loginResponse.Token);
+                HttpContext.Session.SetString("Nombre", JsonSerializer.Serialize(loginResponse.Usuario.Nombre));
+                HttpContext.Session.SetString("Rol", JsonSerializer.Serialize(loginResponse.Usuario.Rol));
+
+                return Redirect("/Envio/Index");
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                ViewBag.mensaje = e.Message;
+                ViewBag.mensaje = "Ocurrió un error al iniciar sesión, intente nuevamente";
+                return View("Index");
             }
-            return Redirect("Index");
         }
 
         public IActionResult Logout()
