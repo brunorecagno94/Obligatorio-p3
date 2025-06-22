@@ -2,7 +2,6 @@
 using Obligatorio.CasosDeUsoCompartida.DTOs.Login;
 using Obligatorio.WebClient.Models.DTOs.Usuarios;
 using RestSharp;
-using System.Net;
 using System.Text.Json;
 
 namespace WebClient.Controllers

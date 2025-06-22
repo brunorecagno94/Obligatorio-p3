@@ -1,4 +1,4 @@
-﻿namespace Obligatorio.WebClient.Models.DTOs.Envio
+﻿namespace WebClient.Models.DTOs.Envio
 {
     public record EnvioListadoDTO(int Id,
                                   int NumeroTracking,

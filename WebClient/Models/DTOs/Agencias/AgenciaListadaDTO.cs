@@ -1,4 +1,4 @@
-﻿namespace Obligatorio.WebClient.Models.DTOs.Agencias
+﻿namespace WebClient.Models.DTOs.Agencias
 {
     public record AgenciaListadaDTO(string Id,
                                     string Nombre,

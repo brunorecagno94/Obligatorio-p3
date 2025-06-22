@@ -1,4 +1,4 @@
-﻿namespace Obligatorio.WebClient.Models.DTOs.LogsCrud
+﻿namespace WebClient.Models.DTOs.LogsCrud
 {
     public record LogCrudDTO(int Id,
                              string AccionRealizada,
