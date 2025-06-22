@@ -3,6 +3,7 @@ using Obligatorio.CasosDeUsoCompartida.DTOs.Envio;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU.Envio;
 using Obligatorio.Infraestructura.AccesoDatos.Exceptiones;
+using Obligatorio.WebApi.Filters;
 
 namespace Obligatorio.WebAPI.Controllers
 {
@@ -11,13 +12,16 @@ namespace Obligatorio.WebAPI.Controllers
     public class EnviosController : ControllerBase
     {
         IGetAll<EnvioListadoDTO> _getAll;
+        IGetAllById<EnvioListadoDTO> _getAllById;
         IGetByNumeroTracking<EnvioListadoDTO> _getByNumeroTrackingEnvio;
 
         public EnviosController(
             IGetAll<EnvioListadoDTO> getAll,
+            IGetAllById<EnvioListadoDTO> getAllById,
             IGetByNumeroTracking<EnvioListadoDTO> getByNumeroTrackingEnvio)
         {
             _getAll = getAll;
+            _getAllById = getAllById;
             _getByNumeroTrackingEnvio = getByNumeroTrackingEnvio;
         }
         [HttpGet]
@@ -53,6 +57,40 @@ namespace Obligatorio.WebAPI.Controllers
             catch (InfraestructuraException e)
             {
                 return StatusCode(e.statusCode(), e.Error());
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ocurrió un error inesperado, intente nuevamente más tarde");
+            }
+        }
+
+        [ClienteAutorizado]
+        [HttpGet("mis-envios/{idCliente}")]
+        public IActionResult GetByUsuario(string idCliente)
+        {
+            try
+            {
+                int idClienteInt;
+                int.TryParse(idCliente, out idClienteInt);
+                if (idClienteInt <= 0)
+                {
+                    throw new BadRequestException("Ingrese un número mayor a 0");
+                }
+
+                var envios = _getAllById.Execute(idClienteInt);
+                if (envios.Count() == 0)
+                {
+                    throw new NotFoundException("No se encontraron envíos para el usuario especificado");
+                }
+                return Ok(envios);
+            }
+            catch (InfraestructuraException e)
+            {
+                return StatusCode(e.statusCode(), e.Error());
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ocurrió un error inesperado, intente nuevamente más tarde");
             }
         }
     }
