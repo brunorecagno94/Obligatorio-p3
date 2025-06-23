@@ -33,12 +33,13 @@ namespace WebClient.Controllers
 
                 var options = new JsonSerializerOptions
                 {
+                    WriteIndented = true,
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 };
 
                 var loginResponse = JsonSerializer.Deserialize<LoginResponse>(response.Content, options);
 
-                HttpContext.Session.SetString("token", loginResponse.Token);
+                HttpContext.Session.SetString("Token", loginResponse.Token);
                 HttpContext.Session.SetString("Nombre", JsonSerializer.Serialize(loginResponse.Usuario.Nombre));
                 HttpContext.Session.SetString("Rol", JsonSerializer.Serialize(loginResponse.Usuario.Rol));
 

@@ -48,7 +48,7 @@ namespace Obligatorio.WebAPI.Controllers
             }
             catch (LoginErrorException e)
             {
-                throw new UnauthorizedException("Credenciales inválidas");
+                return StatusCode(400, "Error al iniciar sesión, inténtalo nuevamente");
             }
             catch (UnauthorizedException e)
             {
