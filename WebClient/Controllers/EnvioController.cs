@@ -24,7 +24,7 @@ namespace WebClient.Controllers
                 int.TryParse(numeroTracking, out numeroTrackingInt);
                 if (numeroTrackingInt <= 0)
                 {
-                    throw new Exception("Ingrese un número mayor a 0");
+                    throw new Exception("Ingrese un número válido");
                 }
 
                 var client = new RestClient(options);

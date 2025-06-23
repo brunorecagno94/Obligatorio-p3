@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Mis datos";
+}
+
+<h3>Cambiar contraseña</h3>
+
+@if (ViewBag.mensaje != null)
+{
+    <div class="alert alert-danger">@ViewBag.mensaje</div>
+}
+
+@if (ViewBag.exito != null)
+{
+    <div class="alert alert-success">@ViewBag.exito</div>
+}
+<form asp-controller="Usuario" asp-action="CambiarContrasena" method="post">
+    <div class="form-group">
+        <label for="ContrasenaActual">Contraseña actual</label>
+        <input type="password" class="form-control" id="ContrasenaActual" name="ContrasenaActual" required />
+    </div>
+
+    <div class="form-group mt-2">
+        <label for="ContrasenaNueva">Nueva contraseña</label>
+        <input type="password" class="form-control" id="ContrasenaNueva" name="ContrasenaNueva" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Actualizar contraseña</button>
+</form>

@@ -49,6 +49,12 @@ namespace Obligatorio.LogicaNegocio.Entidades
             Email = obj.Email;
             Cedula = obj.Cedula;
         }
+
+        public void UpdateContrasena(string nuevaContrasena)
+        {
+            Contrasena = new Contrasena(nuevaContrasena);
+        }
+
         public void BajaUsuario()
         {
             Activo = false;

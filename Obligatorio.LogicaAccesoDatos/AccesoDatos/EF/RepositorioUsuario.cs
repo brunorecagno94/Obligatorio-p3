@@ -79,6 +79,25 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
             _context.Usuarios.Update(unU);
             _context.SaveChanges();
         }
+
+        public void UpdateContrasena(int id, string contrasenaActual, string contrasenaNueva)
+        {
+            if (contrasenaNueva == null || contrasenaActual == null)
+            {
+                throw new BadRequestException("Objeto vacío");
+            }
+
+            Usuario unU = GetById(id);
+
+            if (unU.Contrasena.Value != contrasenaActual)
+            {
+                throw new ContrasenaException("La contraseña actual no coincide");
+            }
+
+            unU.UpdateContrasena(contrasenaNueva);
+            _context.Usuarios.Update(unU);
+            _context.SaveChanges();
+        }
     }
 }
 

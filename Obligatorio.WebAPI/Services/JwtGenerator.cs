@@ -25,6 +25,7 @@ namespace Libreria.WepApi.Services
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
+                new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
                 new Claim(ClaimTypes.Role, usuario.Rol switch
                 {
                     "Administrador" => "Admin",

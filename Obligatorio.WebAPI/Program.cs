@@ -87,6 +87,8 @@ builder.Services.AddScoped<IGetById<UsuarioListadoDTO>, GetByIdUsuario>();
 builder.Services.AddScoped<IGetByEmail<UsuarioListadoDTO>, GetByEmailUsuario>();
 builder.Services.AddScoped<IRemove, RemoveUsuario>();
 builder.Services.AddScoped<IUpdate<UsuarioDTO>, UpdateUsuario>();
+builder.Services.AddScoped<ICambiarContrasenaUsuario, CambiarContrasenaUsuario>();
+
 
 //Envios
 builder.Services.AddScoped<IAdd<EnvioDTO>, AddEnvio>();
@@ -164,6 +166,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
