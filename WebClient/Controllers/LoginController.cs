@@ -39,6 +39,7 @@ namespace WebClient.Controllers
                 var loginResponse = JsonSerializer.Deserialize<LoginResponse>(response.Content, options);
 
                 HttpContext.Session.SetString("token", loginResponse.Token);
+                HttpContext.Session.SetString("Id", JsonSerializer.Serialize(loginResponse.Usuario.Id));
                 HttpContext.Session.SetString("Nombre", JsonSerializer.Serialize(loginResponse.Usuario.Nombre));
                 HttpContext.Session.SetString("Rol", JsonSerializer.Serialize(loginResponse.Usuario.Rol));
 
