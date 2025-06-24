@@ -72,7 +72,7 @@ namespace Obligatorio.WebAPI.Controllers
                 var rol = User.FindFirstValue(ClaimTypes.Role);
                 if (rol != "Cliente")
                 {
-                    throw new UnauthorizedException("No tienes permisos para cambiar la contraseña.");
+                    throw new UnauthorizedException("No tienes permisos para ver los envíos.");
                 }
                 int idClienteInt;
                 int.TryParse(idCliente, out idClienteInt);
