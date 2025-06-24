@@ -122,5 +122,41 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
             _context.Envios.Update(envio);
             _context.SaveChanges();
         }
+
+        public IEnumerable<Envio> BuscarPorComentario(int idCliente, string palabraClave)
+        {
+            if (string.IsNullOrWhiteSpace(palabraClave))
+                throw new BadRequestException("La palabra clave no puede estar vacía");
+
+            palabraClave = palabraClave.ToLower();
+
+            var enviosComunes = _context.Envios.OfType<EnvioComun>()
+                .Include(e => e.ListaComentario)
+                .Include(e => e.Agencia)
+                    .ThenInclude(a => a.Direccion)
+                .Where(e => e.ClienteId == idCliente &&
+                            e.ListaComentario.Any(c => c.TextoComentario.ToLower().Contains(palabraClave)))
+                .ToList<Envio>();
+
+            var enviosUrgentes = _context.Envios.OfType<EnvioUrgente>()
+                .Include(e => e.ListaComentario)
+                .Include(e => e.Direccion)
+                .Where(e => e.ClienteId == idCliente &&
+                            e.ListaComentario.Any(c => c.TextoComentario.ToLower().Contains(palabraClave)))
+                .ToList<Envio>();
+
+            var envios = enviosComunes
+                .Concat(enviosUrgentes)
+                .OrderByDescending(e => e.FechaSalida)
+                .ToList();
+
+            if (!envios.Any())
+            {
+                throw new NotFoundException("No se encontraron envíos con esa palabra en los comentarios");
+            }
+
+            return envios;
+        }
+
     }
 }

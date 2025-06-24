@@ -14,15 +14,19 @@ namespace Obligatorio.WebAPI.Controllers
         IGetAll<EnvioListadoDTO> _getAll;
         IGetAllById<EnvioListadoDTO> _getAllById;
         IGetByNumeroTracking<EnvioListadoDTO> _getByNumeroTrackingEnvio;
+        IBuscarEnviosPorComentario<EnvioListadoDTO> _buscarEnviosPorComentario;
 
         public EnviosController(
             IGetAll<EnvioListadoDTO> getAll,
             IGetAllById<EnvioListadoDTO> getAllById,
-            IGetByNumeroTracking<EnvioListadoDTO> getByNumeroTrackingEnvio)
+            IGetByNumeroTracking<EnvioListadoDTO> getByNumeroTrackingEnvio,
+            IBuscarEnviosPorComentario<EnvioListadoDTO> buscarEnviosPorComentario)
         {
             _getAll = getAll;
             _getAllById = getAllById;
             _getByNumeroTrackingEnvio = getByNumeroTrackingEnvio;
+            _buscarEnviosPorComentario = buscarEnviosPorComentario; 
+
         }
         [HttpGet]
         public IActionResult GetAll()
@@ -97,5 +101,34 @@ namespace Obligatorio.WebAPI.Controllers
                 return StatusCode(500, "Ocurrió un error inesperado, intente nuevamente más tarde");
             }
         }
+
+        [HttpPost("mis-envios/busquedaComentario")]
+        public IActionResult GetMisEnviosPorComentario([FromBody] string palabraClave)
+        {
+            try
+            {
+                if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int idCliente))
+                    return Unauthorized("Usuario no autenticado");
+
+                var rol = User.FindFirstValue(ClaimTypes.Role);
+                if (rol != "Cliente")
+                {
+                    throw new UnauthorizedException("No tienes permisos para ver los envíos.");
+                }
+
+                var envios = _buscarEnviosPorComentario.Execute(idCliente, palabraClave);
+
+                return Ok(envios);
+            }
+            catch (InfraestructuraException e)
+            {
+                return StatusCode(e.statusCode(), e.Error());
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ocurrió un error, intente nuevamente más tarde");
+            }
+        }
+
     }
 }

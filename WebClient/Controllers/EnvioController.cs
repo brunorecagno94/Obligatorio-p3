@@ -93,5 +93,54 @@ namespace WebClient.Controllers
             }
             return View("Index");
         }
+
+        [HttpPost]
+        public IActionResult BuscarPorComentario(string palabraClave)
+        {
+            try
+            {
+                var token = HttpContext.Session.GetString("Token");
+                if (string.IsNullOrEmpty(token))
+                {
+                    throw new Exception("Token no encontrado");
+                }
+
+                var options = new RestClientOptions("https://localhost:7113")
+                {
+                    MaxTimeout = -1,
+                };
+
+                var client = new RestClient(options);
+                var request = new RestRequest("/api/v1/Envios/mis-envios/busquedaComentario", Method.Post);
+                request.AddHeader("Authorization", $"Bearer {token}");
+                request.AddHeader("Content-Type", "application/json");
+
+                var body = JsonSerializer.Serialize(palabraClave);
+                request.AddStringBody(body, DataFormat.Json);
+
+                RestResponse response = client.Execute(request);
+
+                var optionsJson = new JsonSerializerOptions
+                {
+                    WriteIndented = true,
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                };
+
+                if ((int)response.StatusCode == 404)
+                {
+                    ViewBag.Mensaje = "No se encontraron envíos que coincidan con el comentario";
+                    return View("Index");
+                }
+
+                IEnumerable<EnvioListadoDTO> envios = JsonSerializer.Deserialize<IEnumerable<EnvioListadoDTO>>(response.Content, optionsJson);
+
+                return View("Index", envios);
+            }
+            catch (Exception)
+            {
+                ViewBag.Mensaje = "Hubo un error, intente nuevamente";
+                return View("Index");
+            }
+        }
     }
 }
