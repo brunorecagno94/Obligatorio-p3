@@ -18,7 +18,7 @@ namespace Obligatorio.LogicaAplicacion.CasosDeUso.Login
         {
             var usuario = _repo.GetByEmail(credenciales.Email);
 
-            if (usuario == null || usuario.Contrasena.Value != credenciales.Contrasena || usuario.Discriminator == "Cliente" || !usuario.Activo)
+            if (usuario == null || usuario.Contrasena.Value != credenciales.Contrasena || usuario.Discriminator != "Cliente" || !usuario.Activo)
             {
                 throw new LoginErrorException();
             }
