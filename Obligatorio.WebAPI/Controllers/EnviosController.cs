@@ -3,6 +3,7 @@ using Obligatorio.CasosDeUsoCompartida.DTOs.Envio;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU.Envio;
 using Obligatorio.Infraestructura.AccesoDatos.Exceptiones;
+using System.Security.Claims;
 
 namespace Obligatorio.WebAPI.Controllers
 {
@@ -68,6 +69,11 @@ namespace Obligatorio.WebAPI.Controllers
         {
             try
             {
+                var rol = User.FindFirstValue(ClaimTypes.Role);
+                if (rol != "Cliente")
+                {
+                    throw new UnauthorizedException("No tienes permisos para ver los envíos.");
+                }
                 int idClienteInt;
                 int.TryParse(idCliente, out idClienteInt);
                 if (idClienteInt <= 0)

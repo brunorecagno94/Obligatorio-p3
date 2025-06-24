@@ -29,13 +29,17 @@ namespace Obligatorio.WebAPI.Controllers
             {
                 if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int idUsuario))
                 {
-                    return Unauthorized("Usuario no autenticado");
+                    throw new UnauthorizedException("Usuario no autenticado");
                 }
 
                 var usuario = _getById.Execute(idUsuario);
                 return Ok(usuario);
             }
             catch (NotFoundException e)
+            {
+                return StatusCode(e.statusCode(), e.Error());
+            }
+            catch (UnauthorizedException e)
             {
                 return StatusCode(e.statusCode(), e.Error());
             }
@@ -53,7 +57,13 @@ namespace Obligatorio.WebAPI.Controllers
             {
                 if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int idUsuario))
                 {
-                    return Unauthorized("Usuario no autenticado");
+                    throw new UnauthorizedException("Usuario no autenticado");
+                }
+
+                var rol = User.FindFirstValue(ClaimTypes.Role);
+                if (rol != "Cliente")
+                {
+                    throw new UnauthorizedException("No tienes permisos para cambiar la contraseña.");
                 }
 
                 _cambiarContrasena.Execute(idUsuario, dto);
@@ -63,11 +73,7 @@ namespace Obligatorio.WebAPI.Controllers
             {
                return StatusCode(400, e.Message);
             }
-            catch (BadRequestException e)
-            {
-                return StatusCode(e.statusCode(), e.Error());
-            }
-            catch (NotFoundException e)
+            catch (InfraestructuraException e)
             {
                 return StatusCode(e.statusCode(), e.Error());
             }
