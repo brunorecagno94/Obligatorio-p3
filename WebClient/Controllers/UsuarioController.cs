@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using Obligatorio.CasosDeUsoCompartida.DTOs.Login;
 using RestSharp;
 using System.Net;
 using System.Text.Json;

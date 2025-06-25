@@ -45,6 +45,10 @@ namespace Obligatorio.WebAPI.Controllers
 
                 return Ok(response);
             }
+            catch (ContrasenaException e)
+            {
+                return StatusCode(400, "Error al iniciar sesión, inténtalo nuevamente");
+            }
             catch (LoginErrorException e)
             {
                 return StatusCode(400, "Error al iniciar sesión, inténtalo nuevamente");
