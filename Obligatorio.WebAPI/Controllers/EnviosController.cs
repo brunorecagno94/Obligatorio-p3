@@ -15,18 +15,20 @@ namespace Obligatorio.WebAPI.Controllers
         IGetAllById<EnvioCompletoListado> _getAllById;
         IGetByNumeroTracking<EnvioCompletoListado> _getByNumeroTrackingEnvio;
         IBuscarEnviosPorComentario<EnvioCompletoListado> _buscarEnviosPorComentario;
+        IFiltrarPorFechaYEstado<EnvioListadoDTO> _filtrarPorFechaYEstado;
 
         public EnviosController(
             IGetAll<EnvioListadoDTO> getAll,
             IGetAllById<EnvioCompletoListado> getAllById,
             IGetByNumeroTracking<EnvioCompletoListado> getByNumeroTrackingEnvio,
-            IBuscarEnviosPorComentario<EnvioCompletoListado> buscarEnviosPorComentario)
+            IBuscarEnviosPorComentario<EnvioCompletoListado> buscarEnviosPorComentario,
+            IFiltrarPorFechaYEstado<EnvioListadoDTO> filtrarPorFechaYEstado)
         {
             _getAll = getAll;
             _getAllById = getAllById;
             _getByNumeroTrackingEnvio = getByNumeroTrackingEnvio;
-            _buscarEnviosPorComentario = buscarEnviosPorComentario; 
-
+            _buscarEnviosPorComentario = buscarEnviosPorComentario;
+            _filtrarPorFechaYEstado = filtrarPorFechaYEstado;
         }
         [HttpGet]
         public IActionResult GetAll()
@@ -124,6 +126,37 @@ namespace Obligatorio.WebAPI.Controllers
             catch (Exception)
             {
                 return StatusCode(500, "Ocurrió un error, intente nuevamente más tarde");
+            }
+        }
+
+        [HttpPost("buscar-fecha")]
+        public IActionResult FiltrarPorFechaYEstado([FromBody] FiltroFechaDTO fechas, [FromBody] string estado)
+        {
+            if (fechas.fechaInicio == null || fechas.fechaFin == null)
+            {
+                try
+                {
+                    IEnumerable<EnvioListadoDTO> enviosDTO = _getAll.Execute();
+                    return Ok(enviosDTO);
+                }
+                catch (Exception)
+                {
+                    return StatusCode(500, "Error al cargar envios");
+                }
+            }
+
+            try
+            {
+                var resultado = _filtrarPorFechaYEstado.Execute(fechas.fechaInicio, fechas.fechaFin, estado);
+                if (resultado == null)
+                {
+                    throw new NotFoundException("No se encontraron envíos en el rango de fechas especificado.");
+                }
+                return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Error al cargar envíos");
             }
         }
 

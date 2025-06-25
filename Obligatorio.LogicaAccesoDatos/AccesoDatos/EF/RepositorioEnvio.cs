@@ -179,5 +179,31 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
             return envios;
         }
 
+        public IEnumerable<Envio> FiltrarPorFechaYEstado(DateTime fechaInicio, DateTime fechaFin, string? estado)
+        {
+            if (fechaInicio == null || fechaFin == null)
+            {
+                throw new BadRequestException("Las fechas no pueden ser nulas");
+            }
+            if (fechaInicio > fechaFin)
+            {
+                throw new BadRequestException("La fecha de inicio no puede ser posterior a la fecha de fin");
+            }
+
+            var enviosResult = _context.Envios.AsQueryable()
+                 .Where(e => e.FechaSalida >= fechaInicio && e.FechaSalida <= fechaFin);
+
+            if (!string.IsNullOrEmpty(estado))
+            {
+                enviosResult = enviosResult.Where(e => e.Estado.Value == estado);
+            }
+
+            if (!enviosResult.Any())
+            {
+                throw new NotFoundException("No se encontraron envíos en el rango seleccionado");
+            }
+
+            return enviosResult.OrderBy(e => e.NumeroTracking).ToList();
+        }
     }
 }

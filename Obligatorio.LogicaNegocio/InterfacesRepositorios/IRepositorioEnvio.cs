@@ -11,7 +11,8 @@ namespace Obligatorio.LogicaNegocio.InterfacesRepositorios
                     IRepositorioGetByNumeroTracking<Envio>,
                     IRepositorioGetAllComentarios<Comentario>,
                     IRepositorioFinalizarEnvio,
-                    IRepositorioBuscarPorComentario
+                    IRepositorioBuscarPorComentario,
+                    IRepositorioFiltrarPorFechaYEstado<Envio>
     {
     }
 }
