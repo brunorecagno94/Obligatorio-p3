@@ -61,17 +61,19 @@ namespace WebClient.Controllers
                 {
                     MaxTimeout = -1,
                 };
-                int idUsuarioInt;
-                int.TryParse(HttpContext.Session.GetString("Id"), out idUsuarioInt);
-                if (idUsuarioInt <= 0)
+
+                var token = HttpContext.Session.GetString("Token");
+                if (string.IsNullOrEmpty(token))
                 {
-                    throw new Exception("Ingrese un número mayor a 0");
+                    throw new Exception("Token no encontrado");
                 }
-                ViewBag.IdUsuario = idUsuarioInt;
 
                 var client = new RestClient(options);
-                var request = new RestRequest($"/api/v1/Envios/mis-envios/{idUsuarioInt}", Method.Get);
+                var request = new RestRequest($"/api/v1/Envios/mis-envios", Method.Get);
+                request.AddHeader("Authorization", $"Bearer {token}");
+
                 RestResponse response = client.Execute(request);
+
                 var optionsJson = new JsonSerializerOptions
                 {
                     WriteIndented = true,
@@ -83,7 +85,7 @@ namespace WebClient.Controllers
                     ViewBag.Mensaje = "No se encontró ningún envío";
                     return View("Index");
                 }
-                IEnumerable<EnvioListadoDTO> envios = JsonSerializer.Deserialize<IEnumerable<EnvioListadoDTO>>(response.Content, optionsJson);
+                IEnumerable<EnvioCompletoListadoDTO> envios = JsonSerializer.Deserialize<IEnumerable<EnvioCompletoListadoDTO>>(response.Content, optionsJson);
 
                 return View(envios);
             }
@@ -96,7 +98,7 @@ namespace WebClient.Controllers
 
         public IActionResult BuscarPorComentario()
         {
-            var listaVacia = new List<EnvioComentarioListadoDTO>();
+            var listaVacia = new List<EnvioCompletoListadoDTO>();
             return View(listaVacia);
         }
 
@@ -138,7 +140,7 @@ namespace WebClient.Controllers
                     return View();
                 }
 
-                IEnumerable<EnvioComentarioListadoDTO> envios = JsonSerializer.Deserialize<IEnumerable<EnvioComentarioListadoDTO>>(response.Content, optionsJson);
+                IEnumerable<EnvioCompletoListadoDTO> envios = JsonSerializer.Deserialize<IEnumerable<EnvioCompletoListadoDTO>>(response.Content, optionsJson);
 
                 return View("BuscarPorComentario", envios);
             }

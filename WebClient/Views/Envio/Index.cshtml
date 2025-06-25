@@ -55,9 +55,6 @@ else
                 <td>
                     @(Model.Estado == "EN_PROCESO" ? "En proceso" : "Finalizado")
                 </td>
-                <td>
-                    @Html.ActionLink("Detalle de comentarios", "Comentarios", new { id = Model.Id })
-                </td>
             </tr>
         </tbody>
     </table>

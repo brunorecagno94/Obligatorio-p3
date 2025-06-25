@@ -1,7 +1,7 @@
 ﻿
 namespace WebClient.Models.DTOs.Envio
 {
-    public record EnvioComentarioListadoDTO(int Id,
+    public record EnvioCompletoListadoDTO(int Id,
                                            int NumeroTracking,
                                            bool EsUrgente,
                                            int ClienteId,

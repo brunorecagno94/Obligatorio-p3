@@ -1,7 +1,7 @@
 ﻿
 namespace Obligatorio.CasosDeUsoCompartida.DTOs.Envio
 {
-    public record EnvioComentarioListadoDTO(int Id,
+    public record EnvioCompletoListado(int Id,
                                            int NumeroTracking,
                                            bool EsUrgente,
                                            int ClienteId,
