@@ -5,16 +5,16 @@ using Obligatorio.LogicaNegocio.InterfacesRepositorios;
 
 namespace Obligatorio.LogicaAplicacion.CasosDeUso.Envios
 {
-    public class GetByNumeroTracking : IGetByNumeroTracking<EnvioListadoDTO>
+    public class GetByNumeroTracking : IGetByNumeroTracking<EnvioCompletoListado>
     {
         private IRepositorioEnvio _repo;
         public GetByNumeroTracking(IRepositorioEnvio repo)
         {
             _repo = repo;
         }
-        public EnvioListadoDTO Execute(int numeroTracking)
+        public EnvioCompletoListado Execute(int numeroTracking)
         {
-            return EnvioMapper.ToDTO(_repo.GetByNumeroTracking(numeroTracking));
+            return EnvioMapper.ToDTOCompleto(_repo.GetByNumeroTracking(numeroTracking));
         }
     }
 }

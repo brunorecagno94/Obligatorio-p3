@@ -107,13 +107,24 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 
         public Envio GetByNumeroTracking(int numeroTracking)
         {
-            Envio envioEncontrado = _context.Envios.FirstOrDefault(envio => envio.NumeroTracking.Value == numeroTracking);
-            if (envioEncontrado == null)
-            {
-                throw new NotFoundException("No se encontró el envío");
-            }
+            var envioComun = _context.Envios.OfType<EnvioComun>()
+                .Include(e => e.ListaComentario)
+                .Include(e => e.Agencia)
+                    .ThenInclude(a => a.Direccion)
+                .FirstOrDefault(e => e.NumeroTracking.Value == numeroTracking);
 
-            return envioEncontrado;
+            if (envioComun != null)
+                return envioComun;
+
+            var envioUrgente = _context.Envios.OfType<EnvioUrgente>()
+                .Include(e => e.ListaComentario)
+                .Include(e => e.Direccion)
+                .FirstOrDefault(e => e.NumeroTracking.Value == numeroTracking);
+
+            if (envioUrgente != null)
+                return envioUrgente;
+
+            throw new NotFoundException("No se encontró el envío");
         }
 
         public IEnumerable<Comentario> GetAllComentarios(int id)

@@ -1,5 +1,5 @@
 ﻿@using WebClient.Models.DTOs.Envio
-@model EnvioListadoDTO
+@model EnvioCompletoListadoDTO
 
 <h1>Envíos</h1>
 
@@ -9,10 +9,6 @@
         <button type="submit" class="btn btn-primary btn-sm">Buscar</button>
     </form>
 </div>
-<div class="d-flex justify-content-between align-items-center mb-3">
-    @Html.ActionLink("Ver mis envíos", "GetByUsuario", new { id = ViewBag.IdUsuario })
-</div>
-
 
 @if (Model == null)
 {
@@ -28,34 +24,47 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>
-                    Número de tracking
-                </th>
-                <th>
-                    Tipo de envío
-                </th>
-                <th>
-                    Fecha de salida
-                </th>
-                <th>
-                    Estado
-                </th>
-                <th></th>
+                <th>Número de tracking</th>
+                <th>Tipo de envío</th>
+                <th>Fecha de salida</th>
+                <th>Estado</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>
-                    @Model.NumeroTracking
-                </td>
+                <td>@Model.NumeroTracking</td>
                 <td>@(Model.EsUrgente ? "Urgente" : "Común")</td>
-                <td>
-                    @Model.FechaSalida
-                </td>
-                <td>
-                    @(Model.Estado == "EN_PROCESO" ? "En proceso" : "Finalizado")
-                </td>
+                <td>@Model.Fecha.ToShortDateString()</td>
+                <td>@(Model.Estado == "EN_PROCESO" ? "En proceso" : "Finalizado")</td>
             </tr>
         </tbody>
     </table>
+
+    <h4>Comentarios</h4>
+    @if (Model.Comentarios != null && Model.Comentarios.Any())
+    {
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Comentario</th>
+                    <th>Empleado ID</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var comentario in Model.Comentarios)
+                {
+                    <tr>
+                        <td>@comentario.TextoComentario</td>
+                        <td>@comentario.Empleado</td>
+                        <td>@comentario.FechaComentario.ToString("dd/MM/yyyy HH:mm")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p><em>Este envío no tiene comentarios.</em></p>
+    }
 }

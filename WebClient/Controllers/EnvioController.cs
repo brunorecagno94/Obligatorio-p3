@@ -41,7 +41,7 @@ namespace WebClient.Controllers
                     ViewBag.Mensaje = "No se encontró ningún envío con ese número de tracking";
                     return View("Index");
                 }
-                EnvioListadoDTO envio = JsonSerializer.Deserialize<EnvioListadoDTO>(response.Content, optionsJson);
+                EnvioCompletoListadoDTO envio = JsonSerializer.Deserialize<EnvioCompletoListadoDTO>(response.Content, optionsJson);
 
                 return View("Index", envio);
             }
@@ -83,7 +83,7 @@ namespace WebClient.Controllers
                 if ((int)response.StatusCode == 404)
                 {
                     ViewBag.Mensaje = "No se encontró ningún envío";
-                    return View("Index");
+                    return View();
                 }
                 IEnumerable<EnvioCompletoListadoDTO> envios = JsonSerializer.Deserialize<IEnumerable<EnvioCompletoListadoDTO>>(response.Content, optionsJson);
 
@@ -91,9 +91,8 @@ namespace WebClient.Controllers
             }
             catch (Exception)
             {
-                ViewBag.Mensaje = "Hubo un error, intente nuevamente";
+                return View();
             }
-            return View("Index");
         }
 
         public IActionResult BuscarPorComentario()

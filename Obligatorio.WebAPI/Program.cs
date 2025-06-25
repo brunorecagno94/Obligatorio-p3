@@ -93,7 +93,7 @@ builder.Services.AddScoped<ICambiarContrasenaUsuario, CambiarContrasenaUsuario>(
 //Envios
 builder.Services.AddScoped<IAdd<EnvioDTO>, AddEnvio>();
 builder.Services.AddScoped<IGetAll<EnvioListadoDTO>, GetAllEnvios>();
-builder.Services.AddScoped<IGetByNumeroTracking<EnvioListadoDTO>, GetByNumeroTracking>();
+builder.Services.AddScoped<IGetByNumeroTracking<EnvioCompletoListado>, GetByNumeroTracking>();
 builder.Services.AddScoped<IGetAllById<EnvioCompletoListado>, GetAllById>();
 builder.Services.AddScoped<IBuscarEnviosPorComentario<EnvioCompletoListado>, BuscarEnviosPorComentario>();
 

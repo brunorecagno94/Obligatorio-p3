@@ -13,13 +13,13 @@ namespace Obligatorio.WebAPI.Controllers
     {
         IGetAll<EnvioListadoDTO> _getAll;
         IGetAllById<EnvioCompletoListado> _getAllById;
-        IGetByNumeroTracking<EnvioListadoDTO> _getByNumeroTrackingEnvio;
+        IGetByNumeroTracking<EnvioCompletoListado> _getByNumeroTrackingEnvio;
         IBuscarEnviosPorComentario<EnvioCompletoListado> _buscarEnviosPorComentario;
 
         public EnviosController(
             IGetAll<EnvioListadoDTO> getAll,
             IGetAllById<EnvioCompletoListado> getAllById,
-            IGetByNumeroTracking<EnvioListadoDTO> getByNumeroTrackingEnvio,
+            IGetByNumeroTracking<EnvioCompletoListado> getByNumeroTrackingEnvio,
             IBuscarEnviosPorComentario<EnvioCompletoListado> buscarEnviosPorComentario)
         {
             _getAll = getAll;
