@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebClient.Models.DTOs.Envio.EnvioComentarioListadoDTO>?
+
+@{
+    ViewData["Title"] = "Buscar Envíos por Comentario";
+}
+
+<h2>Buscar Envíos por Comentario</h2>
+
+<form asp-action="BuscarPorComentario" method="post">
+    <div class="form-group">
+        <label for="palabraClave">Palabra Clave</label>
+        <input type="text" class="form-control" id="palabraClave" name="palabraClave" required />
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Buscar</button>
+</form>
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-warning mt-3">@ViewBag.Mensaje</div>
+}
+else if (Model != null && Model.Any())
+{
+    <hr />
+    <h4>Resultados</h4>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tracking</th>
+                <th>Urgente</th>
+                <th>Cliente</th>
+                <th>Fecha Salida</th>
+                <th>Estado</th>
+                <th>Comentarios</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var envio in Model)
+            {
+                <tr>
+                    <td>@envio.Id</td>
+                    <td>@envio.NumeroTracking</td>
+                    <td>@(envio.EsUrgente ? "Sí" : "No")</td>
+                    <td>@envio.ClienteId</td>
+                    <td>@envio.Fecha.ToShortDateString()</td>
+                    <td>@envio.Estado</td>
+                    <td>
+                        @if (envio.Comentarios != null && envio.Comentarios.Any())
+                        {
+                            <ul class="mb-0">
+                                @foreach (var comentario in envio.Comentarios)
+                                {
+                                    <li><small><strong>@comentario.FechaComentario.ToShortDateString():</strong> @comentario.TextoComentario</small></li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <em>Sin comentarios</em>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

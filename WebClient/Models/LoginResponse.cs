@@ -1,11 +1,10 @@
-﻿
-using WebClient.Models.DTOs.Usuarios;
+﻿using WebClient.Models.DTOs.Usuarios;
 
 namespace Obligatorio.CasosDeUsoCompartida.DTOs.Login
 {
-    public class LoginResponse
+    public record LoginResponse
     {
-        public string Token { get; set; }
-        public UsuarioAutenticadoDTO Usuario { get; set; }
+        public string Token { get; init; }
+        public UsuarioAutenticadoDTO Usuario { get; init; }
     }
 }

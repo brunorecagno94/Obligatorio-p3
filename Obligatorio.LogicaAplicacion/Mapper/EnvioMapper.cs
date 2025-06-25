@@ -71,5 +71,32 @@ namespace Obligatorio.LogicaAplicacion.Mapper
             }
             return listadoEnviosDTO;
         }
+
+        public static IEnumerable<EnvioComentarioListadoDTO> ToListDtoCompleto(IEnumerable<Envio> envios)
+        {
+            List<EnvioComentarioListadoDTO> listadoEnviosDTO = new List<EnvioComentarioListadoDTO>();
+
+            foreach (var item in envios)
+            {
+                bool esUrgente = item is EnvioUrgente;
+
+                var comentariosDTO = item.ListaComentario
+                    .Select(c => new ComentarioDTO(c.TextoComentario, c.IdEmpleado, c.IdEnvio, c.Fecha))
+                    .ToList();
+
+                listadoEnviosDTO.Add(new EnvioComentarioListadoDTO(
+                    item.Id,
+                    item.NumeroTracking.Value,
+                    esUrgente,
+                    item.ClienteId,
+                    item.FechaSalida,
+                    item.Estado.Value,
+                    comentariosDTO
+                ));
+            }
+
+            return listadoEnviosDTO;
+        }
+
     }
 }

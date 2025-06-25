@@ -94,6 +94,12 @@ namespace WebClient.Controllers
             return View("Index");
         }
 
+        public IActionResult BuscarPorComentario()
+        {
+            var listaVacia = new List<EnvioComentarioListadoDTO>();
+            return View(listaVacia);
+        }
+
         [HttpPost]
         public IActionResult BuscarPorComentario(string palabraClave)
         {
@@ -129,17 +135,17 @@ namespace WebClient.Controllers
                 if ((int)response.StatusCode == 404)
                 {
                     ViewBag.Mensaje = "No se encontraron envíos que coincidan con el comentario";
-                    return View("Index");
+                    return View();
                 }
 
-                IEnumerable<EnvioListadoDTO> envios = JsonSerializer.Deserialize<IEnumerable<EnvioListadoDTO>>(response.Content, optionsJson);
+                IEnumerable<EnvioComentarioListadoDTO> envios = JsonSerializer.Deserialize<IEnumerable<EnvioComentarioListadoDTO>>(response.Content, optionsJson);
 
-                return View("Index", envios);
+                return View("BuscarPorComentario", envios);
             }
             catch (Exception)
             {
                 ViewBag.Mensaje = "Hubo un error, intente nuevamente";
-                return View("Index");
+                return View();
             }
         }
     }

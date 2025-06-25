@@ -128,6 +128,9 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
             if (string.IsNullOrWhiteSpace(palabraClave))
                 throw new BadRequestException("La palabra clave no puede estar vacía");
 
+            if (int.TryParse(palabraClave, out _))
+                throw new BadRequestException("La palabra clave no puede ser numérica");
+
             palabraClave = palabraClave.ToLower();
 
             var enviosComunes = _context.Envios.OfType<EnvioComun>()

@@ -95,7 +95,7 @@ builder.Services.AddScoped<IAdd<EnvioDTO>, AddEnvio>();
 builder.Services.AddScoped<IGetAll<EnvioListadoDTO>, GetAllEnvios>();
 builder.Services.AddScoped<IGetByNumeroTracking<EnvioListadoDTO>, GetByNumeroTracking>();
 builder.Services.AddScoped<IGetAllById<EnvioListadoDTO>, GetAllById>();
-builder.Services.AddScoped<IBuscarEnviosPorComentario<EnvioListadoDTO>, BuscarEnviosPorComentario>();
+builder.Services.AddScoped<IBuscarEnviosPorComentario<EnvioComentarioListadoDTO>, BuscarEnviosPorComentario>();
 
 //Agencias
 builder.Services.AddScoped<IGetAll<AgenciaListadaDTO>, GetAllAgencias>();
