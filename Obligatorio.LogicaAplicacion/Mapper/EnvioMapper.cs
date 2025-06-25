@@ -42,6 +42,25 @@ namespace Obligatorio.LogicaAplicacion.Mapper
 
         }
 
+        public static EnvioCompletoListado ToDTOCompleto(Envio envio)
+        {
+            bool esUrgente = envio is EnvioUrgente;
+
+            var comentariosDTO = envio.ListaComentario
+                .Select(c => new ComentarioDTO(c.TextoComentario, c.IdEmpleado, c.IdEnvio, c.Fecha))
+                .ToList();
+
+            return new EnvioCompletoListado(
+                envio.Id,
+                envio.NumeroTracking.Value,
+                esUrgente,
+                envio.ClienteId,
+                envio.FechaSalida,
+                envio.Estado.Value,
+                comentariosDTO
+            );
+        }
+
         public static IEnumerable<ComentarioDTO> ComentarioToDTO(IEnumerable<Comentario> comentarios)
         {
             return comentarios.Select(c =>
@@ -72,9 +91,9 @@ namespace Obligatorio.LogicaAplicacion.Mapper
             return listadoEnviosDTO;
         }
 
-        public static IEnumerable<EnvioComentarioListadoDTO> ToListDtoCompleto(IEnumerable<Envio> envios)
+        public static IEnumerable<EnvioCompletoListado> ToListDtoCompleto(IEnumerable<Envio> envios)
         {
-            List<EnvioComentarioListadoDTO> listadoEnviosDTO = new List<EnvioComentarioListadoDTO>();
+            List<EnvioCompletoListado> listadoEnviosDTO = new List<EnvioCompletoListado>();
 
             foreach (var item in envios)
             {
@@ -84,7 +103,7 @@ namespace Obligatorio.LogicaAplicacion.Mapper
                     .Select(c => new ComentarioDTO(c.TextoComentario, c.IdEmpleado, c.IdEnvio, c.Fecha))
                     .ToList();
 
-                listadoEnviosDTO.Add(new EnvioComentarioListadoDTO(
+                listadoEnviosDTO.Add(new EnvioCompletoListado(
                     item.Id,
                     item.NumeroTracking.Value,
                     esUrgente,

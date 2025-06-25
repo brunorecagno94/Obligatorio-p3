@@ -12,15 +12,15 @@ namespace Obligatorio.WebAPI.Controllers
     public class EnviosController : ControllerBase
     {
         IGetAll<EnvioListadoDTO> _getAll;
-        IGetAllById<EnvioListadoDTO> _getAllById;
+        IGetAllById<EnvioCompletoListado> _getAllById;
         IGetByNumeroTracking<EnvioListadoDTO> _getByNumeroTrackingEnvio;
-        IBuscarEnviosPorComentario<EnvioComentarioListadoDTO> _buscarEnviosPorComentario;
+        IBuscarEnviosPorComentario<EnvioCompletoListado> _buscarEnviosPorComentario;
 
         public EnviosController(
             IGetAll<EnvioListadoDTO> getAll,
-            IGetAllById<EnvioListadoDTO> getAllById,
+            IGetAllById<EnvioCompletoListado> getAllById,
             IGetByNumeroTracking<EnvioListadoDTO> getByNumeroTrackingEnvio,
-            IBuscarEnviosPorComentario<EnvioComentarioListadoDTO> buscarEnviosPorComentario)
+            IBuscarEnviosPorComentario<EnvioCompletoListado> buscarEnviosPorComentario)
         {
             _getAll = getAll;
             _getAllById = getAllById;
@@ -68,24 +68,21 @@ namespace Obligatorio.WebAPI.Controllers
             }
         }
 
-        [HttpGet("mis-envios/{idCliente}")]
-        public IActionResult GetByUsuario(string idCliente)
+        [HttpGet("mis-envios")]
+        public IActionResult GetByUsuario()
         {
             try
             {
+                if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int idCliente))
+                    return Unauthorized("Usuario no autenticado");
+
                 var rol = User.FindFirstValue(ClaimTypes.Role);
                 if (rol != "Cliente")
                 {
                     throw new UnauthorizedException("No tienes permisos para ver los envíos.");
                 }
-                int idClienteInt;
-                int.TryParse(idCliente, out idClienteInt);
-                if (idClienteInt <= 0)
-                {
-                    throw new BadRequestException("Ingrese un número mayor a 0");
-                }
 
-                var envios = _getAllById.Execute(idClienteInt);
+                var envios = _getAllById.Execute(idCliente);
                 if (envios.Count() == 0)
                 {
                     throw new NotFoundException("No se encontraron envíos para el usuario especificado");

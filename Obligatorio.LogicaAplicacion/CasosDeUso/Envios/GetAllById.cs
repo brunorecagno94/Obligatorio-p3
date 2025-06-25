@@ -5,7 +5,7 @@ using Obligatorio.LogicaNegocio.InterfacesRepositorios;
 
 namespace Obligatorio.LogicaAplicacion.CasosDeUso.Envios
 {
-    public class GetAllById : IGetAllById<EnvioListadoDTO>
+    public class GetAllById : IGetAllById<EnvioCompletoListado>
     {
         IRepositorioEnvio _repo;
 
@@ -14,9 +14,9 @@ namespace Obligatorio.LogicaAplicacion.CasosDeUso.Envios
             _repo = repo;
         }
 
-        public IEnumerable<EnvioListadoDTO> Execute(int id)
+        public IEnumerable<EnvioCompletoListado> Execute(int id)
         {
-            return EnvioMapper.ToListDto(_repo.GetAllById(id));
+            return EnvioMapper.ToListDtoCompleto(_repo.GetAllById(id));
         }
     }
 }

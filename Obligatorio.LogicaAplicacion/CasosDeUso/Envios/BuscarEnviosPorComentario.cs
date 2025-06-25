@@ -8,7 +8,7 @@ using Obligatorio.LogicaNegocio.InterfacesRepositorios;
 
 namespace Obligatorio.LogicaAplicacion.CasosDeUso.Envios
 {
-    public class BuscarEnviosPorComentario: IBuscarEnviosPorComentario<EnvioComentarioListadoDTO>
+    public class BuscarEnviosPorComentario: IBuscarEnviosPorComentario<EnvioCompletoListado>
     {
         IRepositorioEnvio _repo;
 
@@ -17,7 +17,7 @@ namespace Obligatorio.LogicaAplicacion.CasosDeUso.Envios
             _repo = repo;
         }
 
-        public IEnumerable<EnvioComentarioListadoDTO> Execute(int id, string palabraClave)
+        public IEnumerable<EnvioCompletoListado> Execute(int id, string palabraClave)
         {
             var envios = _repo.BuscarPorComentario(id, palabraClave);
             return EnvioMapper.ToListDtoCompleto(envios).ToList();

@@ -74,23 +74,30 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
         {
             var enviosComunes = _context.Envios.OfType<EnvioComun>()
                 .Include(e => e.Agencia)
-                .ThenInclude(a => a.Direccion)
+                    .ThenInclude(a => a.Direccion)
+                .Include(e => e.ListaComentario)
                 .Where(e => e.ClienteId == idUsuario)
                 .ToList<Envio>();
 
             var enviosUrgentes = _context.Envios.OfType<EnvioUrgente>()
-                .Where(e => e.ClienteId == idUsuario)
                 .Include(e => e.Direccion)
+                .Include(e => e.ListaComentario)
+                .Where(e => e.ClienteId == idUsuario)
                 .ToList<Envio>();
 
-            var envios = enviosComunes.Concat(enviosUrgentes).OrderByDescending(e => e.FechaSalida).ToList();
+            var envios = enviosComunes
+                .Concat(enviosUrgentes)
+                .OrderByDescending(e => e.FechaSalida)
+                .ToList();
 
-            if (envios == null || !envios.Any())
+            if (!envios.Any())
             {
                 throw new NotFoundException("No se encontraron envíos para el usuario especificado");
             }
+
             return envios;
         }
+
 
         public void Update(int id, Envio envio)
         {
