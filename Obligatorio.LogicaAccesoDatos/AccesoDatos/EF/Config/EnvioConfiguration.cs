@@ -43,10 +43,10 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF.Config
                 listaComentario.Property(p => p.IdEnvio).HasColumnName("IdEnvio");
             });
 
-            builder.OwnsOne(e => e.Estado, estado =>
-            {
-                estado.Property(p => p.Value).HasColumnName("Estado");
-            });
+            //builder.OwnsOne(e => e.Estado, estado =>
+            //{
+            //    estado.Property(p => p.Value).HasColumnName("Estado");
+            //});
         }
     }
 }

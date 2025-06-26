@@ -31,11 +31,11 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
             var enviosComunes = _context.Envios.OfType<EnvioComun>()
                 .Include(e => e.Agencia)
                 .ThenInclude(a => a.Direccion)
-                .Where(e => e.Estado.Value == "EN_PROCESO")
+                .Where(e => e.Estado == "EN_PROCESO")
                 .ToList<Envio>();
 
             var enviosUrgentes = _context.Envios.OfType<EnvioUrgente>()
-                .Where(e => e.Estado.Value == "EN_PROCESO")
+                .Where(e => e.Estado == "EN_PROCESO")
                 .Include(e => e.Direccion)
                 .ToList<Envio>();
 
@@ -195,7 +195,7 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
 
             if (!string.IsNullOrEmpty(estado))
             {
-                enviosResult = enviosResult.Where(e => e.Estado.Value == estado);
+                enviosResult = enviosResult.Where(e => e.Estado == estado);
             }
 
             if (!enviosResult.Any())
@@ -203,7 +203,7 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
                 throw new NotFoundException("No se encontraron envíos en el rango seleccionado");
             }
 
-            return enviosResult.OrderBy(e => e.NumeroTracking).ToList();
+            return enviosResult.OrderBy(e => e.NumeroTracking.Value).ToList();
         }
     }
 }

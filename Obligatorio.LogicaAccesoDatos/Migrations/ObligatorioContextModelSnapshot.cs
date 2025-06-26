@@ -54,6 +54,10 @@ namespace Obligatorio.Infraestructura.Migrations
                     b.Property<int>("EmpleadoId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("FechaLlegada")
                         .HasColumnType("datetime2");
 
@@ -299,24 +303,6 @@ namespace Obligatorio.Infraestructura.Migrations
                                 .HasForeignKey("EnvioId");
                         });
 
-                    b.OwnsOne("Obligatorio.LogicaNegocio.VO.Estado", "Estado", b1 =>
-                        {
-                            b1.Property<int>("EnvioId")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)")
-                                .HasColumnName("Estado");
-
-                            b1.HasKey("EnvioId");
-
-                            b1.ToTable("Envios");
-
-                            b1.WithOwner()
-                                .HasForeignKey("EnvioId");
-                        });
-
                     b.OwnsOne("Obligatorio.LogicaNegocio.VO.NumeroTracking", "NumeroTracking", b1 =>
                         {
                             b1.Property<int>("EnvioId")
@@ -354,9 +340,6 @@ namespace Obligatorio.Infraestructura.Migrations
                     b.Navigation("Cliente");
 
                     b.Navigation("Empleado");
-
-                    b.Navigation("Estado")
-                        .IsRequired();
 
                     b.Navigation("ListaComentario");
 

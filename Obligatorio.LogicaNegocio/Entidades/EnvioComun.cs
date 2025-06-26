@@ -23,7 +23,7 @@ namespace Obligatorio.LogicaNegocio.Entidades
                        int clienteId,
                        PesoPaquete pesoPaquete,
                        string discriminator,
-                       DateTime fecha, Estado estado) : base(id, empleadoId, clienteId, pesoPaquete, discriminator, fecha, estado)
+                       DateTime fecha, string estado) : base(id, empleadoId, clienteId, pesoPaquete, discriminator, fecha, estado)
         {
             AgenciaId = direccionEnvioId;
         }

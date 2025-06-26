@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Envio;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU.Envio;
@@ -129,10 +130,10 @@ namespace Obligatorio.WebAPI.Controllers
             }
         }
 
-        [HttpPost("buscar-fecha")]
-        public IActionResult FiltrarPorFechaYEstado([FromBody] FiltroFechaDTO fechas, [FromBody] string estado)
+        [HttpGet("buscar-fecha/{fecha1}/{fecha2}/{estado}")]
+        public IActionResult FiltrarPorFechaYEstado(string fecha1, string fecha2, string? estado)
         {
-            if (fechas.fechaInicio == null || fechas.fechaFin == null)
+            if (fecha1.IsNullOrEmpty() || fecha2.IsNullOrEmpty())
             {
                 try
                 {
@@ -145,9 +146,18 @@ namespace Obligatorio.WebAPI.Controllers
                 }
             }
 
+            if (!DateTime.TryParse(fecha1, out DateTime fechaInicio) || !DateTime.TryParse(fecha2, out DateTime fechaFin))
+            {
+                return StatusCode(400, "Las fechas proporcionadas no son válidas.");
+            }
+
+            if (fechaInicio > fechaFin)
+            {
+                return StatusCode(400, "La fecha de inicio no puede ser posterior a la fecha de fin.");
+            }
             try
             {
-                var resultado = _filtrarPorFechaYEstado.Execute(fechas.fechaInicio, fechas.fechaFin, estado);
+                var resultado = _filtrarPorFechaYEstado.Execute(fechaInicio, fechaFin, estado);
                 if (resultado == null)
                 {
                     throw new NotFoundException("No se encontraron envíos en el rango de fechas especificado.");

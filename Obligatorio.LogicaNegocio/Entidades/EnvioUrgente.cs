@@ -16,7 +16,7 @@ namespace Obligatorio.LogicaNegocio.Entidades
         }
 
         public EnvioUrgente(int id, Direccion direccion, int empleadoId, int clienteId,
-                      PesoPaquete pesoPaquete, string discriminator, DateTime fecha, Estado estado) : base(id, empleadoId, clienteId, pesoPaquete, discriminator, fecha, estado)
+                      PesoPaquete pesoPaquete, string discriminator, DateTime fecha, string estado) : base(id, empleadoId, clienteId, pesoPaquete, discriminator, fecha, estado)
         {
             Direccion = direccion;
         }
