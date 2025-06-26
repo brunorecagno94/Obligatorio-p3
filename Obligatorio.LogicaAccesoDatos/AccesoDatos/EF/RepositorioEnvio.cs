@@ -179,7 +179,7 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
             return envios;
         }
 
-        public IEnumerable<Envio> FiltrarPorFechaYEstado(DateTime fechaInicio, DateTime fechaFin, string? estado)
+        public IEnumerable<Envio> FiltrarPorFechaYEstado(int idUsuario, DateTime fechaInicio, DateTime fechaFin, string? estado)
         {
             if (fechaInicio == null || fechaFin == null)
             {
@@ -191,7 +191,8 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
             }
 
             var enviosResult = _context.Envios.AsQueryable()
-                 .Where(e => e.FechaSalida >= fechaInicio && e.FechaSalida <= fechaFin);
+                 .Where(e => e.FechaSalida >= fechaInicio && e.FechaSalida <= fechaFin)
+                 .Where(e => e.ClienteId == idUsuario);
 
             if (!string.IsNullOrEmpty(estado))
             {

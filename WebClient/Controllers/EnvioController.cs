@@ -161,40 +161,48 @@ namespace WebClient.Controllers
         {
             try
             {
-                var options = new RestClientOptions("https://localhost:7113")
+                var token = HttpContext.Session.GetString("Token");
+                if (string.IsNullOrEmpty(token))
                 {
-                    MaxTimeout = -1,
-                };
-
-                var client = new RestClient(options);
-                var request = new RestRequest($"/api/v1/Envios/buscar-fecha/{fecha1}/{fecha2}/{estado}", Method.Post);
-                request.AddHeader("Content-Type", "application/json");
-
-                //Definir body para la petición
-                FechaYEstadoDTO bodyDTO = new FechaYEstadoDTO(fecha1, fecha2, estado);
-                ;
-
-                var body = JsonSerializer.Serialize(bodyDTO);
-                request.AddStringBody(body, DataFormat.Json);
-
-                RestResponse response = client.Execute(request);
-
-                if ((int)response.StatusCode == 404)
-                {
-                    ViewBag.Mensaje = "No se encontraron envíos dentro de esas fechas";
-                    return View();
+                    throw new Exception("Token no encontrado");
                 }
-
-                var optionsJson = new JsonSerializerOptions
                 {
-                    WriteIndented = true,
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                };
+                    var options = new RestClientOptions("https://localhost:7113")
+                    {
+                        MaxTimeout = -1,
+                    };
+
+                    var client = new RestClient(options);
+                    var request = new RestRequest($"/api/v1/Envios/buscar-fecha/{fecha1}/{fecha2}/{estado}", Method.Get);
+                    request.AddHeader("Authorization", $"Bearer {token}");
+                    request.AddHeader("Content-Type", "application/json");
+
+                    //Definir body para la petición
+                    FechaYEstadoDTO bodyDTO = new FechaYEstadoDTO(fecha1, fecha2, estado);
+                    ;
+
+                    var body = JsonSerializer.Serialize(bodyDTO);
+                    request.AddStringBody(body, DataFormat.Json);
+
+                    RestResponse response = client.Execute(request);
+
+                    if ((int)response.StatusCode == 404)
+                    {
+                        ViewBag.Mensaje = "No se encontraron envíos dentro de esas fechas";
+                        return View();
+                    }
+
+                    var optionsJson = new JsonSerializerOptions
+                    {
+                        WriteIndented = true,
+                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                    };
 
 
-                IEnumerable<EnvioCompletoListadoDTO> envios = JsonSerializer.Deserialize<IEnumerable<EnvioCompletoListadoDTO>>(response.Content, optionsJson);
+                    IEnumerable<EnvioCompletoListadoDTO> envios = JsonSerializer.Deserialize<IEnumerable<EnvioCompletoListadoDTO>>(response.Content, optionsJson);
 
-                return View("BuscarPorFechaYEstado", envios);
+                    return View("BuscarPorFechaYEstado", envios);
+                }
             }
             catch (Exception)
             {

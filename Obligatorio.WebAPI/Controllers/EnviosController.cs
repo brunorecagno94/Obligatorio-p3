@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Envio;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
@@ -130,9 +131,14 @@ namespace Obligatorio.WebAPI.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("buscar-fecha/{fecha1}/{fecha2}/{estado}")]
         public IActionResult FiltrarPorFechaYEstado(string fecha1, string fecha2, string? estado)
         {
+
+            if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int idCliente))
+                return Unauthorized("Usuario no autenticado");
+
             if (fecha1.IsNullOrEmpty() || fecha2.IsNullOrEmpty())
             {
                 try
@@ -157,7 +163,7 @@ namespace Obligatorio.WebAPI.Controllers
             }
             try
             {
-                var resultado = _filtrarPorFechaYEstado.Execute(fechaInicio, fechaFin, estado);
+                var resultado = _filtrarPorFechaYEstado.Execute(idCliente, fechaInicio, fechaFin, estado);
                 if (resultado == null)
                 {
                     throw new NotFoundException("No se encontraron envíos en el rango de fechas especificado.");

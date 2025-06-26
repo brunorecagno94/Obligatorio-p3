@@ -14,9 +14,9 @@ namespace Obligatorio.LogicaAplicacion.CasosDeUso.Envios
             _repo = repo;
         }
 
-        public IEnumerable<EnvioListadoDTO> Execute(DateTime fechaInicio, DateTime fechaFin, string estado)
+        public IEnumerable<EnvioListadoDTO> Execute(int idUsuario, DateTime fechaInicio, DateTime fechaFin, string estado)
         {
-            return EnvioMapper.ToListDto(_repo.FiltrarPorFechaYEstado(fechaInicio, fechaFin, estado));
+            return EnvioMapper.ToListDto(_repo.FiltrarPorFechaYEstado(idUsuario, fechaInicio, fechaFin, estado));
         }
     }
 }

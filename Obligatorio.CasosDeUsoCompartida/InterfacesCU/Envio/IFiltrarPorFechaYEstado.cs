@@ -2,6 +2,6 @@
 {
     public interface IFiltrarPorFechaYEstado<T>
     {
-        IEnumerable<T> Execute(DateTime fechaInicio, DateTime fechaFin, string estado);
+        IEnumerable<T> Execute(int idUsuario, DateTime fechaInicio, DateTime fechaFin, string estado);
     }
 }

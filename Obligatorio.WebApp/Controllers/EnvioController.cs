@@ -23,7 +23,7 @@ namespace Obligatorio.WebApp.Controllers
         IAddComentario _addComentario;
         IGetAllComentarios<ComentarioDTO> _getAllComentarios;
         IFinalizarEnvio _finalizarEnvio;
-        IGetByNumeroTracking<EnvioListadoDTO> _getByNumeroTracking;
+        //IGetByNumeroTracking<EnvioListadoDTO> _getByNumeroTracking;
         public EnvioController(IGetByEmail<UsuarioListadoDTO> getByEmail,
                                IAdd<EnvioDTO> add,
                                IGetAll<EnvioListadoDTO> getAll,
@@ -32,8 +32,8 @@ namespace Obligatorio.WebApp.Controllers
                                IAddComentario addCommentario,
                                IGetById<EnvioListadoDTO> getByIdEnvio,
                                IGetAllComentarios<ComentarioDTO> getAllComentarios,
-                               IFinalizarEnvio finalizarEnvio,
-                               IGetByNumeroTracking<EnvioListadoDTO> getByNumeroTracking)
+                               IFinalizarEnvio finalizarEnvio)
+        //IGetByNumeroTracking<EnvioListadoDTO> getByNumeroTracking)
         {
             _getByEmail = getByEmail;
             _add = add;
@@ -44,7 +44,7 @@ namespace Obligatorio.WebApp.Controllers
             _getByIdEnvio = getByIdEnvio;
             _getAllComentarios = getAllComentarios;
             _finalizarEnvio = finalizarEnvio;
-            _getByNumeroTracking = getByNumeroTracking;
+            //_getByNumeroTracking = getByNumeroTracking;
         }
         public IActionResult Index()
         {
@@ -72,27 +72,27 @@ namespace Obligatorio.WebApp.Controllers
             return View(enviosVM);
         }
 
-        public IActionResult BuscarPorNumeroDeTracking(int numeroTracking)
-        {
-            try
-            {
-                EnvioListadoDTO envio = _getByNumeroTracking.Execute(numeroTracking);
-                var cliente = _getById.Execute(envio.ClienteId);
-                VMEnvioListado VMEnvio = new VMEnvioListado(envio.Id, envio.NumeroTracking,
-                                                envio.EsUrgente,
-                                                cliente.Email,
-                                                envio.FechaSalida,
-                                                envio.Estado);
-                return View("Index", new List<VMEnvioListado> { VMEnvio });
+        //public IActionResult BuscarPorNumeroDeTracking(int numeroTracking)
+        //{
+        //    try
+        //    {
+        //        EnvioListadoDTO envio = _getByNumeroTracking.Execute(numeroTracking);
+        //        var cliente = _getById.Execute(envio.ClienteId);
+        //        VMEnvioListado VMEnvio = new VMEnvioListado(envio.Id, envio.NumeroTracking,
+        //                                        envio.EsUrgente,
+        //                                        cliente.Email,
+        //                                        envio.FechaSalida,
+        //                                        envio.Estado);
+        //        return View("Index", new List<VMEnvioListado> { VMEnvio });
 
-            }
-            catch (NotFoundException e)
-            {
-                ViewBag.message = "No se encontró ningún envío con ese número de tracking.";
-                return View("Index", new List<VMEnvioListado>());
-            }
+        //    }
+        //    catch (NotFoundException e)
+        //    {
+        //        ViewBag.message = "No se encontró ningún envío con ese número de tracking.";
+        //        return View("Index", new List<VMEnvioListado>());
+        //    }
 
-        }
+        //}
 
         public IActionResult Create()
         {
