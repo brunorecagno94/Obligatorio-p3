@@ -38,7 +38,7 @@ namespace Obligatorio.LogicaAplicacion.Mapper
                                        esUrgente,
                                        envio.ClienteId,
                                        envio.FechaSalida,
-                                       envio.Estado.Value);
+                                       envio.Estado);
 
         }
 
@@ -56,7 +56,7 @@ namespace Obligatorio.LogicaAplicacion.Mapper
                 esUrgente,
                 envio.ClienteId,
                 envio.FechaSalida,
-                envio.Estado.Value,
+                envio.Estado,
                 comentariosDTO
             );
         }
@@ -86,7 +86,7 @@ namespace Obligatorio.LogicaAplicacion.Mapper
                                                          esUrgente,
                                                          item.ClienteId,
                                                          item.FechaSalida,
-                                                         item.Estado.Value));
+                                                         item.Estado));
             }
             return listadoEnviosDTO;
         }
@@ -109,7 +109,7 @@ namespace Obligatorio.LogicaAplicacion.Mapper
                     esUrgente,
                     item.ClienteId,
                     item.FechaSalida,
-                    item.Estado.Value,
+                    item.Estado,
                     comentariosDTO
                 ));
             }

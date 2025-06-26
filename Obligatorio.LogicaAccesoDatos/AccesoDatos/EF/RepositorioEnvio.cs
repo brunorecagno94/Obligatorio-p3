@@ -31,11 +31,11 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
             var enviosComunes = _context.Envios.OfType<EnvioComun>()
                 .Include(e => e.Agencia)
                 .ThenInclude(a => a.Direccion)
-                .Where(e => e.Estado.Value == "EN_PROCESO")
+                .Where(e => e.Estado == "EN_PROCESO")
                 .ToList<Envio>();
 
             var enviosUrgentes = _context.Envios.OfType<EnvioUrgente>()
-                .Where(e => e.Estado.Value == "EN_PROCESO")
+                .Where(e => e.Estado == "EN_PROCESO")
                 .Include(e => e.Direccion)
                 .ToList<Envio>();
 
@@ -179,5 +179,32 @@ namespace Obligatorio.Infraestructura.AccesoDatos.EF
             return envios;
         }
 
+        public IEnumerable<Envio> FiltrarPorFechaYEstado(int idUsuario, DateTime fechaInicio, DateTime fechaFin, string? estado)
+        {
+            if (fechaInicio == null || fechaFin == null)
+            {
+                throw new BadRequestException("Las fechas no pueden ser nulas");
+            }
+            if (fechaInicio > fechaFin)
+            {
+                throw new BadRequestException("La fecha de inicio no puede ser posterior a la fecha de fin");
+            }
+
+            var enviosResult = _context.Envios.AsQueryable()
+                 .Where(e => e.FechaSalida >= fechaInicio && e.FechaSalida <= fechaFin)
+                 .Where(e => e.ClienteId == idUsuario);
+
+            if (!string.IsNullOrEmpty(estado))
+            {
+                enviosResult = enviosResult.Where(e => e.Estado == estado);
+            }
+
+            if (!enviosResult.Any())
+            {
+                throw new NotFoundException("No se encontraron envíos en el rango seleccionado");
+            }
+
+            return enviosResult.OrderBy(e => e.NumeroTracking.Value).ToList();
+        }
     }
 }

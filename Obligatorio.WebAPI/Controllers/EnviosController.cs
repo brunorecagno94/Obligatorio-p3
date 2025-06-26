@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Obligatorio.CasosDeUsoCompartida.DTOs.Envio;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU;
 using Obligatorio.CasosDeUsoCompartida.InterfacesCU.Envio;
@@ -15,18 +17,20 @@ namespace Obligatorio.WebAPI.Controllers
         IGetAllById<EnvioCompletoListado> _getAllById;
         IGetByNumeroTracking<EnvioCompletoListado> _getByNumeroTrackingEnvio;
         IBuscarEnviosPorComentario<EnvioCompletoListado> _buscarEnviosPorComentario;
+        IFiltrarPorFechaYEstado<EnvioListadoDTO> _filtrarPorFechaYEstado;
 
         public EnviosController(
             IGetAll<EnvioListadoDTO> getAll,
             IGetAllById<EnvioCompletoListado> getAllById,
             IGetByNumeroTracking<EnvioCompletoListado> getByNumeroTrackingEnvio,
-            IBuscarEnviosPorComentario<EnvioCompletoListado> buscarEnviosPorComentario)
+            IBuscarEnviosPorComentario<EnvioCompletoListado> buscarEnviosPorComentario,
+            IFiltrarPorFechaYEstado<EnvioListadoDTO> filtrarPorFechaYEstado)
         {
             _getAll = getAll;
             _getAllById = getAllById;
             _getByNumeroTrackingEnvio = getByNumeroTrackingEnvio;
-            _buscarEnviosPorComentario = buscarEnviosPorComentario; 
-
+            _buscarEnviosPorComentario = buscarEnviosPorComentario;
+            _filtrarPorFechaYEstado = filtrarPorFechaYEstado;
         }
         [HttpGet]
         public IActionResult GetAll()
@@ -124,6 +128,51 @@ namespace Obligatorio.WebAPI.Controllers
             catch (Exception)
             {
                 return StatusCode(500, "Ocurrió un error, intente nuevamente más tarde");
+            }
+        }
+
+        [Authorize]
+        [HttpGet("buscar-fecha/{fecha1}/{fecha2}/{estado}")]
+        public IActionResult FiltrarPorFechaYEstado(string fecha1, string fecha2, string? estado)
+        {
+
+            if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int idCliente))
+                return Unauthorized("Usuario no autenticado");
+
+            if (fecha1.IsNullOrEmpty() || fecha2.IsNullOrEmpty())
+            {
+                try
+                {
+                    IEnumerable<EnvioListadoDTO> enviosDTO = _getAll.Execute();
+                    return Ok(enviosDTO);
+                }
+                catch (Exception)
+                {
+                    return StatusCode(500, "Error al cargar envios");
+                }
+            }
+
+            if (!DateTime.TryParse(fecha1, out DateTime fechaInicio) || !DateTime.TryParse(fecha2, out DateTime fechaFin))
+            {
+                return StatusCode(400, "Las fechas proporcionadas no son válidas.");
+            }
+
+            if (fechaInicio > fechaFin)
+            {
+                return StatusCode(400, "La fecha de inicio no puede ser posterior a la fecha de fin.");
+            }
+            try
+            {
+                var resultado = _filtrarPorFechaYEstado.Execute(idCliente, fechaInicio, fechaFin, estado);
+                if (resultado == null)
+                {
+                    throw new NotFoundException("No se encontraron envíos en el rango de fechas especificado.");
+                }
+                return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Error al cargar envíos");
             }
         }
 

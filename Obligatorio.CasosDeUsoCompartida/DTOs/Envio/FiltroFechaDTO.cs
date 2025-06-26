@@ -1,0 +1,1 @@
+﻿public record FiltroFechaDTO(DateTime fechaInicio, DateTime fechaFin, string estado) { }
